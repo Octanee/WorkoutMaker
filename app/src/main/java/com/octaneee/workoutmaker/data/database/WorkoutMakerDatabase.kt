@@ -33,7 +33,7 @@ import com.octaneee.workoutmaker.logic.utility.DATABASE_NAME
         ExerciseNoteCrossRef::class,
         TrainingSetCrossRef::class
     ],
-    version = 5,
+    version = 10,
     exportSchema = false
 )
 @TypeConverters(Converter::class)

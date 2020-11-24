@@ -15,7 +15,8 @@ import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
             onDelete = ForeignKey.SET_NULL
         )]
 )
-data class User(val name: String, val height: Int, var macrocycleId: Long = 0) : BaseEntity {
+data class User(val name: String, val height: Int) : BaseEntity {
     @PrimaryKey(autoGenerate = true)
     var userId: Long = 0
+    var macrocycleId: Long? = null
 }

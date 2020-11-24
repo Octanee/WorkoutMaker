@@ -8,7 +8,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.data.model.entity.User
 import com.octaneee.workoutmaker.ui.activity.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,8 +19,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupBottomNavigationView()
-
-        viewModel.insertUser(User("Test User", 180))
     }
 
     private fun setupBottomNavigationView() {
