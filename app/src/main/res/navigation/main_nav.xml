@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/workoutFragment">
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/bodyFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.body.BodyFragment"
+        android:label="Body"
+        tools:layout="@layout/fragment_body" />
+    <fragment
+        android:id="@+id/workoutFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.workout.WorkoutFragment"
+        android:label="Workout"
+        tools:layout="@layout/fragment_workout" />
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.stats.StatsFragment"
+        android:label="Stats"
+        tools:layout="@layout/fragment_stats" />
+    <fragment
+        android:id="@+id/createExerciseFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.exercise.create.CreateExerciseFragment"
+        android:label="fragment_create_exercise"
+        tools:layout="@layout/fragment_create_exercise" />
+    <fragment
+        android:id="@+id/exerciseListFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.exercise.list.ExerciseListFragment"
+        android:label="fragment_exercise_list"
+        tools:layout="@layout/fragment_exercise_list" />
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.PlanFragment"
+        android:label="Plan"
+        tools:layout="@layout/fragment_plan" />
+</navigation>

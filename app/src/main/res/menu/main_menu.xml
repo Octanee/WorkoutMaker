@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@id/planFragment"
+        android:icon="@drawable/ic_block"
+        android:title="Plan"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@id/bodyFragment"
+        android:icon="@drawable/ic_body"
+        android:title="Body"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@id/workoutFragment"
+        android:icon="@drawable/ic_gym"
+        android:title="Workout"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@id/statsFragment"
+        android:icon="@drawable/ic_chart"
+        android:title="Stats"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings"
+        app:showAsAction="ifRoom" />
+</menu>
