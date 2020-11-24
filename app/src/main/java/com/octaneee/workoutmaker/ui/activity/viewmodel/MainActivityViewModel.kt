@@ -14,9 +14,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     private val userRepository =
         UserRepository(WorkoutMakerDatabase.getDatabase(application).getUserDao())
 
-    fun getUser(): User {
-        return userRepository.getUser()
-    }
+    val user = userRepository.getUser()
 
     fun insertUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
