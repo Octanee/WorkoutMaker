@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class PlanFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
-    lateinit var macrocycle: Macrocycle
+     var macrocycle: Macrocycle? = null
 
     private val macrocycleRepository =
         MacrocycleRepository(WorkoutMakerDatabase.getDatabase(application).getMacrocycleDao())

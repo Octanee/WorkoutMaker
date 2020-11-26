@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.plan.PlanFragment">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/planFragmentCurrentMacrocycleConstraintLayout"
         android:layout_width="match_parent"

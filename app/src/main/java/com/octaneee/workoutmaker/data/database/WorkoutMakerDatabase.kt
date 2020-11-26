@@ -55,7 +55,6 @@ abstract class WorkoutMakerDatabase : RoomDatabase(), WorkoutMakerDatabaseDao {
                 WorkoutMakerDatabase::class.java,
                 DATABASE_NAME
             )
-                .fallbackToDestructiveMigration()
                 .build()
         }
     }
