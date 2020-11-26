@@ -23,6 +23,7 @@ import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
         )]
 )
 data class Mesocycle(
+    val name: String,
     val mesocycleTypeId: Long,
     val macrocycleId: Long
 ) : BaseEntity {
