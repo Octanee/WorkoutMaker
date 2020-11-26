@@ -39,5 +39,38 @@
         android:id="@+id/planFragment"
         android:name="com.octaneee.workoutmaker.ui.fragment.plan.PlanFragment"
         android:label="Plan"
-        tools:layout="@layout/fragment_plan" />
+        tools:layout="@layout/fragment_plan">
+        <action
+            android:id="@+id/action_planFragment_to_createMacrocycleFragment"
+            app:destination="@id/createMacrocycleFragment" />
+        <action
+            android:id="@+id/action_planFragment_to_macrocycleListFragment"
+            app:destination="@id/macrocycleListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createMacrocycleFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.createmacrocycle.CreateMacrocycleFragment"
+        android:label="Create Macrocycle"
+        tools:layout="@layout/fragment_create_macrocycle">
+        <action
+            android:id="@+id/action_createMacrocycleFragment_to_planFragment"
+            app:destination="@id/planFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_createMacrocycleFragment_to_macrocycleListFragment"
+            app:destination="@id/macrocycleListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/macrocycleListFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.macrocyclelist.MacrocycleListFragment"
+        android:label="Macrocycle list"
+        tools:layout="@layout/fragment_macrocycle_list">
+        <action
+            android:id="@+id/action_macrocycleListFragment_to_planFragment"
+            app:destination="@id/planFragment" />
+        <action
+            android:id="@+id/action_macrocycleListFragment_to_createMacrocycleFragment"
+            app:destination="@id/createMacrocycleFragment" />
+    </fragment>
 </navigation>

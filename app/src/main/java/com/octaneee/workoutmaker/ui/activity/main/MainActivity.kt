@@ -1,4 +1,4 @@
-package com.octaneee.workoutmaker.ui.activity
+package com.octaneee.workoutmaker.ui.activity.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -8,7 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.ui.activity.viewmodel.MainActivityViewModel
+import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,5 +36,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottomNavigationView.setupWithNavController(navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.navHostFragment)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

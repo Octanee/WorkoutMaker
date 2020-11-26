@@ -1,4 +1,4 @@
-package com.octaneee.workoutmaker.ui.activity.viewmodel
+package com.octaneee.workoutmaker.ui.activity.main.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -14,7 +14,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     private val userRepository =
         UserRepository(WorkoutMakerDatabase.getDatabase(application).getUserDao())
 
-    val user = userRepository.getUser()
+    val userAndMicrocycle = userRepository.getUserAndMicrocycle()
 
     fun insertUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
