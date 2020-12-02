@@ -1,9 +1,11 @@
 package com.octaneee.workoutmaker.data.model.entity
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
+import kotlinx.android.parcel.Parcelize
 
 @Entity(
     tableName = "user_table",
@@ -15,7 +17,8 @@ import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
             onDelete = ForeignKey.SET_NULL
         )]
 )
-data class User(val name: String, val height: Int) : BaseEntity {
+@Parcelize
+data class User(val name: String, val height: Int) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var userId: Long = 0
     var macrocycleId: Long? = null

@@ -31,7 +31,7 @@
             android:backgroundTint="@color/paradise_pink"
             android:ems="10"
             android:hint="Enter Name"
-            android:inputType="textShortMessage|textPersonName"
+            android:inputType="textShortMessage"
             android:singleLine="false"
             android:textColor="@color/cultured"
             android:textColorHighlight="@color/paradise_pink"
@@ -44,13 +44,14 @@
             app:layout_constraintTop_toBottomOf="@+id/createMacrocycleFragmentName" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/createMacrocycleFragmentFAB"
+            android:id="@+id/createMacrocycleFragmentNewMesocycleFAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/paradise_pink"
             android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/ic_add"
             app:borderWidth="0dp"
             app:fabSize="normal"
@@ -69,13 +70,14 @@
             app:layout_constraintTop_toBottomOf="@+id/createMacrocycleFragmentEditText">
 
             <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
-                android:id="@+id/createMacrocycleFragmentList"
+                android:id="@+id/createMacrocycleFragmentRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:behind_swiped_item_bg_color="#F44336"
+                app:behind_swiped_item_bg_color_secondary="#03A9F4"
                 app:behind_swiped_item_icon="@drawable/ic_delete"
                 app:behind_swiped_item_icon_margin="16dp"
-                app:divider="@drawable/divider"
+                app:behind_swiped_item_icon_secondary="@drawable/ic_edit"
                 app:item_layout="@layout/item_mesocycle" />
         </LinearLayout>
 

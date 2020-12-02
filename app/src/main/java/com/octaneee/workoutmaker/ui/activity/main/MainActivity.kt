@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupBottomNavigationView()
-        viewModel.prePopulate()
+        //viewModel.prePopulate()
+        //viewModel.fakeMuscle()
     }
 
     private fun setupBottomNavigationView() {

@@ -1,9 +1,11 @@
 package com.octaneee.workoutmaker.data.model.entity
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
+import kotlinx.android.parcel.Parcelize
 
 @Entity(
     tableName = "training_table",
@@ -16,11 +18,12 @@ import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
         )
     ]
 )
+@Parcelize
 data class Training(
     val name: String,
     val microcycleId: Long,
     val dayOfMicrocycle: Int
-) : BaseEntity {
+) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var trainingId: Long = 0
 }

@@ -1,9 +1,346 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.exercise.create.CreateExerciseFragment">
+    tools:context=".ui.fragment.plan.createexercise.CreateExerciseFragment">
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/createExerciseFragmentNestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/createExerciseFragmentNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Exercise name:"
+                    android:textColor="@color/cultured"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@+id/createExerciseFragmentNameEditText"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/createExerciseFragmentNameEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/paradise_pink"
+                    android:hint="Enter Name"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:singleLine="false"
+                    android:textColor="@color/cultured"
+                    android:textColorHighlight="@color/paradise_pink"
+                    android:textColorLink="@color/paradise_pink"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/createExerciseFragmentNameTextView" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/xiketic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/createExerciseFragmentNameEditText" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/createExerciseFragmentPrimaryMuscleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/createExerciseFragmentPrimaryMuscleTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Primary muscle group:"
+                    android:textColor="@color/cultured"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/createExerciseFragmentPrimaryMuscleButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/createExerciseFragmentPrimaryMuscleNameTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/cultured"
+                    android:textSize="24sp"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="@+id/createExerciseFragmentPrimaryMuscleTextView"
+                    app:layout_constraintStart_toStartOf="@id/createExerciseFragmentPrimaryMuscleTextView"
+                    app:layout_constraintTop_toBottomOf="@id/createExerciseFragmentPrimaryMuscleTextView" />
+
+                <Button
+                    android:id="@+id/createExerciseFragmentPrimaryMuscleButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/paradise_pink"
+                    android:text="PICK"
+                    android:textColor="@color/cultured"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/createExerciseFragmentPrimaryMuscleNameTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/createExerciseFragmentPrimaryMuscleTextView" />
+
+                <View
+                    android:id="@+id/createExerciseFragmentPrimaryMuscleDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/xiketic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/createExerciseFragmentPrimaryMuscleNameTextView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/createExerciseFragmentAdditionalMusclesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/createExerciseFragmentAdditionalMusclesTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Additional muscle groups:"
+                    android:textColor="@color/cultured"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/createExerciseFragmentAdditionalMusclesButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/createExerciseFragmentAdditionalMusclesNumberTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    app:layout_constraintEnd_toEndOf="@+id/createExerciseFragmentAdditionalMusclesTextView"
+                    app:layout_constraintStart_toStartOf="@+id/createExerciseFragmentAdditionalMusclesTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/createExerciseFragmentAdditionalMusclesTextView" />
+
+                <Button
+                    android:id="@+id/createExerciseFragmentAdditionalMusclesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/paradise_pink"
+                    android:text="PICK"
+                    android:textColor="@color/cultured"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/createExerciseFragmentAdditionalMusclesNumberTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/createExerciseFragmentAdditionalMusclesTextView" />
+
+                <View
+                    android:id="@+id/createExerciseFragmentAdditionalMusclesDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/xiketic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/createExerciseFragmentAdditionalMusclesNumberTextView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/createExerciseFragmentExerciseTypeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/createExerciseFragmentExerciseTypeTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Exercise type:"
+                    android:textColor="@color/cultured"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/createExerciseFragmentExerciseTypeButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/createExerciseFragmentExerciseTypeNameTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/cultured"
+                    android:textSize="24sp"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="@+id/createExerciseFragmentExerciseTypeTextView"
+                    app:layout_constraintStart_toStartOf="@id/createExerciseFragmentExerciseTypeTextView"
+                    app:layout_constraintTop_toBottomOf="@id/createExerciseFragmentExerciseTypeTextView" />
+
+                <Button
+                    android:id="@+id/createExerciseFragmentExerciseTypeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/paradise_pink"
+                    android:text="PICK"
+                    android:textColor="@color/cultured"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/createExerciseFragmentExerciseTypeNameTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/createExerciseFragmentExerciseTypeTextView" />
+
+                <View
+                    android:id="@+id/createExerciseFragmentExerciseTypeDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/xiketic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/createExerciseFragmentExerciseTypeNameTextView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/createExerciseFragmentEquipmentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/createExerciseFragmentEquipmentTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Equipment:"
+                    android:textColor="@color/cultured"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@+id/createExerciseFragmentEquipmentButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/createExerciseFragmentEquipmentNameTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/cultured"
+                    android:textSize="24sp"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="@+id/createExerciseFragmentEquipmentTextView"
+                    app:layout_constraintStart_toStartOf="@id/createExerciseFragmentEquipmentTextView"
+                    app:layout_constraintTop_toBottomOf="@id/createExerciseFragmentEquipmentTextView" />
+
+                <Button
+                    android:id="@+id/createExerciseFragmentEquipmentButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/paradise_pink"
+                    android:text="PICK"
+                    android:textColor="@color/cultured"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/createExerciseFragmentEquipmentNameTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/createExerciseFragmentEquipmentTextView" />
+
+                <View
+                    android:id="@+id/createExerciseFragmentEquipmentDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/xiketic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/createExerciseFragmentEquipmentNameTextView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/createExerciseFragmentNoteLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+                    android:id="@+id/createExerciseFragmentNoteListRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    app:behind_swiped_item_bg_color="#F44336"
+                    app:behind_swiped_item_bg_color_secondary="#03A9F4"
+                    app:behind_swiped_item_icon="@drawable/ic_delete"
+                    app:behind_swiped_item_icon_margin="16dp"
+                    app:behind_swiped_item_icon_secondary="@drawable/ic_edit"
+                    app:item_layout="@layout/item_note"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/createExerciseFragmentAddNoteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/ic_add"
+                    android:text="NOTE"
+                    android:textColor="@color/cultured"
+                    android:textSize="18sp"
+                    app:backgroundTint="@color/paradise_pink"
+                    app:borderWidth="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/createExerciseFragmentNoteListRecyclerView"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:tint="@color/cultured" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

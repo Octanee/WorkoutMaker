@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.octaneee.workoutmaker.data.database.WorkoutMakerDatabase
-import com.octaneee.workoutmaker.data.model.entity.User
+import com.octaneee.workoutmaker.data.model.entity.*
+import com.octaneee.workoutmaker.data.model.entity.Set
 import com.octaneee.workoutmaker.logic.repository.*
-import com.octaneee.workoutmaker.logic.repository.crossref.TrainingSetCrossRefRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -14,51 +14,71 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     private val userRepository =
         UserRepository(WorkoutMakerDatabase.getDatabase(application).getUserDao())
+    private val macrocycleRepository =
+        MacrocycleRepository(WorkoutMakerDatabase.getDatabase(application).getMacrocycleDao())
     private val mesocycleTypeRepository =
         MesocycleTypeRepository(WorkoutMakerDatabase.getDatabase(application).getMesocycleTypeDao())
-    private val setTypeRepository =
-        SetTypeRepository(WorkoutMakerDatabase.getDatabase(application).getSetTypeDao())
-    private val trainingSetCrossRefRepository = TrainingSetCrossRefRepository(
-        WorkoutMakerDatabase.getDatabase(application).getTrainingSetCrossRefDao()
-    )
-    private val trainingRepository =
-        TrainingRepository(WorkoutMakerDatabase.getDatabase(application).getTrainingDao())
+    private val mesocycleRepository =
+        MesocycleRepository(WorkoutMakerDatabase.getDatabase(application).getMesocycleDao())
     private val microcycleRepository =
         MicrocycleRepository(WorkoutMakerDatabase.getDatabase(application).getMicrocycleDao())
+    private val trainingRepository =
+        TrainingRepository(WorkoutMakerDatabase.getDatabase(application).getTrainingDao())
+    private val exerciseTypeRepository =
+        ExerciseTypeRepository(WorkoutMakerDatabase.getDatabase(application).getExerciseTypeDao())
+    private val equipmentRepository =
+        EquipmentRepository(WorkoutMakerDatabase.getDatabase(application).getEquipmentDao())
+    private val muscleRepository =
+        MuscleRepository(WorkoutMakerDatabase.getDatabase(application).getMuscleDao())
+    private val exerciseRepository =
+        ExerciseRepository(WorkoutMakerDatabase.getDatabase(application).getExerciseDao())
+    private val setTypeRepository =
+        SetTypeRepository(WorkoutMakerDatabase.getDatabase(application).getSetTypeDao())
+    private val setRepository =
+        SetRepository(WorkoutMakerDatabase.getDatabase(application).getSetDao())
 
+    val userAndMacrocycle = userRepository.getUser(1)
 
-    val userAndMicrocycle = userRepository.getUserAndMicrocycle()
-
-    fun insertUser(user: User) {
+    fun prePopulate() {
         viewModelScope.launch(Dispatchers.IO) {
+            val macrocycleId = macrocycleRepository.insert(Macrocycle("Test Macrocycle"))
+            val mesocycleTypeId =
+                mesocycleTypeRepository.insert(MesocycleType("Test Mesocycle Type"))
+            val mesocycleId = mesocycleRepository.insert(
+                Mesocycle(
+                    "Test Mesocycle",
+                    mesocycleTypeId,
+                    macrocycleId
+                )
+            )
+            val microcycleId = microcycleRepository.insert(Microcycle(mesocycleId, 6))
+            val trainingId = trainingRepository.insert(Training("Test Training", microcycleId, 1))
+            val exerciseTypeId = exerciseTypeRepository.insert(ExerciseType("Test Exercise Type"))
+            val equipmentId = equipmentRepository.insert(Equipment("Test Equipment"))
+            val muscleId = muscleRepository.insert(Muscle("Test muscle"))
+            val exerciseId =
+                exerciseRepository.insert(
+                    Exercise(
+                        "Test Exercise",
+                        exerciseTypeId,
+                        equipmentId,
+                        muscleId
+                    )
+                )
+            val setTypeId = setTypeRepository.insert(SetType("Test Set Type"))
+            val setId = setRepository.insert(Set(trainingId, setTypeId, exerciseId, 6, 8))
+
+            val user = User("Test User", 180)
+            user.macrocycleId = macrocycleId
             userRepository.insert(user)
         }
     }
 
-    fun updateUser(user: User) {
+    fun fakeMuscle() {
         viewModelScope.launch(Dispatchers.IO) {
-            userRepository.update(user)
-        }
-    }
-
-    fun prePopulate() {
-        viewModelScope.launch(Dispatchers.IO) {
-            //Types
-//            mesocycleTypeRepository.insert(MesocycleType("Test Mesocycle Type"))
-//            setTypeRepository.insert(SetType("Test Set Type"))
-
-//            trainingSetCrossRefRepository.insert(
-//                TrainingSetCrossRef(
-//                    trainingRepository.insert(
-//                        Training(
-//                            "Test Training",
-//
-//                        )
-//                    )
-//                )
-//            )
-
-            //userRepository.insert(User("Test User", 180))
+            for (i in 1..20) {
+                val muscleId = muscleRepository.insert(Muscle("Test muscle $i"))
+            }
         }
     }
 }

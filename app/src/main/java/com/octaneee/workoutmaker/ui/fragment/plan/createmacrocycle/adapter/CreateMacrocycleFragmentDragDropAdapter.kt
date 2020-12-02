@@ -7,14 +7,13 @@ import android.widget.TextView
 import android.widget.Toast
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleType
+import com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles
 import com.octaneee.workoutmaker.logic.utility.TAG
 
-class DragDropAdapter(dataSet: List<MesocycleAndMesocycleType>) :
-    DragDropSwipeAdapter<MesocycleAndMesocycleType, DragDropAdapter.ViewHolder>(dataSet) {
-
-    private var list: List<MesocycleAndMesocycleType> = dataSet
-
+class CreateMacrocycleFragmentDragDropAdapter(dataSet: List<MesocycleAndMesocycleTypeWithMicrocycles>) :
+    DragDropSwipeAdapter<MesocycleAndMesocycleTypeWithMicrocycles, CreateMacrocycleFragmentDragDropAdapter.ViewHolder>(
+        dataSet
+    ) {
 
     inner class ViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
         val itemName: TextView = itemView.findViewById(R.id.itemMesocycleName)
@@ -36,29 +35,27 @@ class DragDropAdapter(dataSet: List<MesocycleAndMesocycleType>) :
     override fun getViewHolder(itemView: View) = ViewHolder(itemView)
 
     override fun getViewToTouchToStartDraggingItem(
-        item: MesocycleAndMesocycleType,
-        viewHolder: DragDropAdapter.ViewHolder,
+        item: MesocycleAndMesocycleTypeWithMicrocycles,
+        viewHolder: CreateMacrocycleFragmentDragDropAdapter.ViewHolder,
         position: Int
-    ): View? {
+    ): View {
         return viewHolder.dragIcon
     }
 
     override fun onBindViewHolder(
-        item: MesocycleAndMesocycleType,
-        viewHolder: DragDropAdapter.ViewHolder,
+        item: MesocycleAndMesocycleTypeWithMicrocycles,
+        viewHolder: CreateMacrocycleFragmentDragDropAdapter.ViewHolder,
         position: Int
     ) {
         viewHolder.itemName.text = dataSet[position].mesocycle.name
         viewHolder.itemTypeName.text = dataSet[position].mesocycleType.name
     }
 
-    override fun onDragFinished(item: MesocycleAndMesocycleType, viewHolder: ViewHolder) {
+    override fun onDragFinished(
+        item: MesocycleAndMesocycleTypeWithMicrocycles,
+        viewHolder: ViewHolder
+    ) {
         super.onDragFinished(item, viewHolder)
         Log.d(TAG, "onDragFinished: $dataSet")
-    }
-
-    fun setData(newList: List<MesocycleAndMesocycleType>) {
-        list = newList
-        notifyDataSetChanged()
     }
 }

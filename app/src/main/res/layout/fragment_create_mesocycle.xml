@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.plan.createmesocycle.CreateMesocycleFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/createMesocycleFragmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Mesocycle name:"
+            android:textColor="@color/cultured"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/createMesocycleFragmentEditText"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/createMesocycleFragmentEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/paradise_pink"
+            android:ems="10"
+            android:hint="Enter Name"
+            android:inputType="textShortMessage"
+            android:singleLine="false"
+            android:textColor="@color/cultured"
+            android:textColorHighlight="@color/paradise_pink"
+            android:textColorLink="@color/paradise_pink"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createMesocycleFragmentName" />
+
+        <TextView
+            android:id="@+id/createMesocycleFragmentMesocycleType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Mesocycle type:"
+            android:textColor="@color/cultured"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/createMesocycleFragmentEditText"
+            app:layout_constraintTop_toBottomOf="@id/createMesocycleFragmentEditText" />
+
+        <TextView
+            android:id="@+id/createMesocycleFragmentMesocycleTypeName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/cultured"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toStartOf="@+id/createMesocycleFragmentPickMesocycleTypeButton"
+            app:layout_constraintStart_toStartOf="@+id/createMesocycleFragmentEditText"
+            app:layout_constraintTop_toBottomOf="@id/createMesocycleFragmentMesocycleType"
+            tools:text="Pick a type" />
+
+        <Button
+            android:id="@+id/createMesocycleFragmentPickMesocycleTypeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Pick"
+            android:textColor="@color/cultured"
+            android:textSize="18sp"
+            app:backgroundTint="@color/paradise_pink"
+            app:layout_constraintBottom_toBottomOf="@id/createMesocycleFragmentMesocycleTypeName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/createMesocycleFragmentMesocycleType" />
+
+        <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+            android:id="@+id/createMesocycleFragmentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:behind_swiped_item_bg_color="#F44336"
+            app:behind_swiped_item_bg_color_secondary="#03A9F4"
+            app:behind_swiped_item_icon="@drawable/ic_delete"
+            app:behind_swiped_item_icon_margin="16dp"
+            app:behind_swiped_item_icon_secondary="@drawable/ic_edit"
+            app:item_layout="@layout/item_mesocycle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createMesocycleFragmentMesocycleTypeName" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/createMesocycleFragmentNewTrainingFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/paradise_pink"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_add"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/cultured" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

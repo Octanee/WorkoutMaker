@@ -1,12 +1,14 @@
 package com.octaneee.workoutmaker.data.model.relation
 
+import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.octaneee.workoutmaker.data.model.entity.Microcycle
 import com.octaneee.workoutmaker.data.model.entity.Training
-import com.octaneee.workoutmaker.data.model.entity.crossref.TrainingSetCrossRef
+import kotlinx.android.parcel.Parcelize
 
-data class MicrocycleWithTrainingSetCrossRef(
+@Parcelize
+data class MicrocycleWithTrainings(
     @Embedded
     val microcycle: Microcycle,
     @Relation(
@@ -14,5 +16,5 @@ data class MicrocycleWithTrainingSetCrossRef(
         entity = Training::class,
         entityColumn = "microcycleId"
     )
-    val trainingSets: List<TrainingSetCrossRef>
-)
+    val trainings: List<TrainingWithSets>?
+) : Parcelable

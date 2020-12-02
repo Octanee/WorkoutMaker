@@ -1,6 +1,10 @@
 <resources>
-    <!-- Base application theme. -->
+
     <style name="Theme.WorkoutMaker" parent="Theme.MaterialComponents">
         <item name="colorPrimary">@color/xiketic</item>
+        <item name="colorSecondary">@color/oxford_blue</item>
+        <item name="colorAccent">@color/paradise_pink</item>
+        <item name="android:textColor">@color/cultured</item>
     </style>
+
 </resources>

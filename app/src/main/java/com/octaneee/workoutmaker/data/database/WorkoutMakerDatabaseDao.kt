@@ -3,7 +3,6 @@ package com.octaneee.workoutmaker.data.database
 import com.octaneee.workoutmaker.data.dao.*
 import com.octaneee.workoutmaker.data.dao.crossref.ExerciseMuscleCrossRefDao
 import com.octaneee.workoutmaker.data.dao.crossref.ExerciseNoteCrossRefDao
-import com.octaneee.workoutmaker.data.dao.crossref.TrainingSetCrossRefDao
 
 interface WorkoutMakerDatabaseDao {
 
@@ -23,5 +22,4 @@ interface WorkoutMakerDatabaseDao {
     fun getUserDao(): UserDao
     fun getExerciseMuscleCrossRefDao(): ExerciseMuscleCrossRefDao
     fun getExerciseNoteCrossRefDao(): ExerciseNoteCrossRefDao
-    fun getTrainingSetCrossRefDao(): TrainingSetCrossRefDao
 }

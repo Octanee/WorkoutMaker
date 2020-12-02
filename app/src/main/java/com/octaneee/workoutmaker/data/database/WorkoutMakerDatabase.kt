@@ -10,7 +10,6 @@ import com.octaneee.workoutmaker.data.model.entity.*
 import com.octaneee.workoutmaker.data.model.entity.Set
 import com.octaneee.workoutmaker.data.model.entity.crossref.ExerciseMuscleCrossRef
 import com.octaneee.workoutmaker.data.model.entity.crossref.ExerciseNoteCrossRef
-import com.octaneee.workoutmaker.data.model.entity.crossref.TrainingSetCrossRef
 import com.octaneee.workoutmaker.logic.utility.DATABASE_NAME
 
 @Database(
@@ -31,9 +30,8 @@ import com.octaneee.workoutmaker.logic.utility.DATABASE_NAME
         User::class,
         ExerciseMuscleCrossRef::class,
         ExerciseNoteCrossRef::class,
-        TrainingSetCrossRef::class
     ],
-    version = 11,
+    version = 13,
     exportSchema = false
 )
 @TypeConverters(Converter::class)
@@ -55,6 +53,7 @@ abstract class WorkoutMakerDatabase : RoomDatabase(), WorkoutMakerDatabaseDao {
                 WorkoutMakerDatabase::class.java,
                 DATABASE_NAME
             )
+                .fallbackToDestructiveMigration()
                 .build()
         }
     }
