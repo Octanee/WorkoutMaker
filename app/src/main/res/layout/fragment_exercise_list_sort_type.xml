@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.plan.editmacrocycle.EditMacrocycleFragment">
+    tools:context=".ui.fragment.plan.exerciselistsorttype.ExerciseListSortTypeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exerciseListSortTypeFragmentRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:listitem="@layout/item_exercise_list_sort_type" />
 
 </FrameLayout>

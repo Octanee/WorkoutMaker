@@ -16,5 +16,5 @@ data class TrainingWithSets(
         entity = Set::class,
         entityColumn = "trainingId"
     )
-    val sets: List<SetTypeAndSet>?
+    val sets: List<SetTypeAndSet> = listOf()
 ) : Parcelable

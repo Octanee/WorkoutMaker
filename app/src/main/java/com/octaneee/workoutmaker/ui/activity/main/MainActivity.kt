@@ -1,6 +1,7 @@
 package com.octaneee.workoutmaker.ui.activity.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -15,15 +16,20 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels()
 
+    companion object {
+        const val TAG = "MainActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate: ")
         setContentView(R.layout.activity_main)
         setupBottomNavigationView()
-        //viewModel.prePopulate()
-        //viewModel.fakeMuscle()
+        //viewModel.prePopulate(applicationContext)
     }
 
     private fun setupBottomNavigationView() {
+        Log.d(TAG, "setupBottomNavigationView: ")
         val navController = findNavController(R.id.navHostFragment)
 
         val appBarConfiguration = AppBarConfiguration(

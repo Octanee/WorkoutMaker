@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -24,6 +25,7 @@ import com.octaneee.workoutmaker.logic.utility.notifyObserver
 import com.octaneee.workoutmaker.ui.fragment.plan.createexercise.adapter.CreateExerciseFragmentDragDropAdapter
 import com.octaneee.workoutmaker.ui.fragment.plan.createexercise.viewmodel.CreateExerciseFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_create_exercise.*
+import kotlinx.android.synthetic.main.fragment_create_exercise.view.*
 
 class CreateExerciseFragment : Fragment() {
 
@@ -39,24 +41,20 @@ class CreateExerciseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_create_exercise, container, false)
 
-        return inflater.inflate(R.layout.fragment_create_exercise, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setUpCreateExerciseFragmentNameEditText()
-        setUpCreateExerciseFragmentPrimaryMuscleButton()
-        setUpCreateExerciseFragmentAdditionalMusclesButton()
-        setUpCreateExerciseFragmentExerciseTypeButton()
-        setUpCreateExerciseFragmentEquipmentButton()
-        setUpCreateExerciseFragmentNoteListRecyclerView()
-        setUpCreateExerciseFragmentAddNoteButton()
+        setUpCreateExerciseFragmentNameEditText(view.createExerciseFragmentNameEditText)
+        setUpCreateExerciseFragmentPrimaryMuscleButton(view.createExerciseFragmentPrimaryMuscleButton)
+        setUpCreateExerciseFragmentAdditionalMusclesButton(view.createExerciseFragmentAdditionalMusclesButton)
+        setUpCreateExerciseFragmentExerciseTypeButton(view.createExerciseFragmentExerciseTypeButton)
+        setUpCreateExerciseFragmentEquipmentButton(view.createExerciseFragmentEquipmentButton)
+        setUpCreateExerciseFragmentNoteListRecyclerView(view.createExerciseFragmentNoteListRecyclerView)
+        setUpCreateExerciseFragmentAddNoteButton(view.createExerciseFragmentAddNoteButton)
 
         viewModel.noteList.observe(viewLifecycleOwner, {
             createExerciseFragmentDragDropAdapter.updateDataSet(it)
         })
+        return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -74,6 +72,12 @@ class CreateExerciseFragment : Fragment() {
     private fun menuSave() {
         if (validation()) {
             viewModel.saveExercise(createExerciseFragmentDragDropAdapter.dataSet)
+//            val action =
+//                CreateExerciseFragmentDirections.actionCreateExerciseFragmentToExerciseListFragment(
+//                    null,
+//                    null,
+//                    null
+//                )
             findNavController().navigate(R.id.action_createExerciseFragment_to_exerciseListFragment)
         }
     }
@@ -118,8 +122,8 @@ class CreateExerciseFragment : Fragment() {
         }
     }
 
-    private fun setUpCreateExerciseFragmentNameEditText() {
-        createExerciseFragmentNameEditText.addTextChangedListener(object : TextWatcher {
+    private fun setUpCreateExerciseFragmentNameEditText(editText: EditText) {
+        editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -139,10 +143,9 @@ class CreateExerciseFragment : Fragment() {
 
     }
 
-    private fun setUpCreateExerciseFragmentPrimaryMuscleButton() {
+    private fun setUpCreateExerciseFragmentPrimaryMuscleButton(button: Button) {
         viewModel.muscleList.observe(viewLifecycleOwner, { muscleList ->
-
-            createExerciseFragmentPrimaryMuscleButton.setOnClickListener {
+            button.setOnClickListener {
                 createExerciseFragmentPrimaryMuscleButtonOnClick(muscleList)
             }
         })
@@ -189,10 +192,9 @@ class CreateExerciseFragment : Fragment() {
             }
     }
 
-    private fun setUpCreateExerciseFragmentAdditionalMusclesButton() {
+    private fun setUpCreateExerciseFragmentAdditionalMusclesButton(button: Button) {
         viewModel.muscleList.observe(viewLifecycleOwner, { muscleList ->
-
-            createExerciseFragmentAdditionalMusclesButton.setOnClickListener {
+            button.setOnClickListener {
                 createExerciseFragmentAdditionalMusclesButtonOnClick(muscleList)
             }
         })
@@ -256,9 +258,9 @@ class CreateExerciseFragment : Fragment() {
         dialog.show()
     }
 
-    private fun setUpCreateExerciseFragmentExerciseTypeButton() {
+    private fun setUpCreateExerciseFragmentExerciseTypeButton(button: Button) {
         viewModel.exerciseTypeList.observe(viewLifecycleOwner, { exerciseTypeList ->
-            createExerciseFragmentExerciseTypeButton.setOnClickListener {
+            button.setOnClickListener {
                 createExerciseFragmentExerciseTypeButtonOnClick(exerciseTypeList)
             }
         })
@@ -269,7 +271,7 @@ class CreateExerciseFragment : Fragment() {
         val builder = AlertDialog.Builder(context)
         val names = mutableListOf<String>()
         for (exerciseType in list) {
-            names.add(exerciseType.type)
+            names.add(exerciseType.name)
         }
         val checkedIndex =
             if (viewModel.exerciseType != null) list.indexOf(viewModel.exerciseType) else -1
@@ -283,7 +285,7 @@ class CreateExerciseFragment : Fragment() {
                     val selectedItem = list[position]
                     viewModel.exerciseType = selectedItem
                     createExerciseFragmentExerciseTypeNameTextView.text =
-                        selectedItem.type
+                        selectedItem.name
                 }
             }
             setNegativeButton("Cancel", null)
@@ -299,9 +301,9 @@ class CreateExerciseFragment : Fragment() {
             }
     }
 
-    private fun setUpCreateExerciseFragmentEquipmentButton() {
+    private fun setUpCreateExerciseFragmentEquipmentButton(button: Button) {
         viewModel.equipmentList.observe(viewLifecycleOwner, { equipmentList ->
-            createExerciseFragmentEquipmentButton.setOnClickListener {
+            button.setOnClickListener {
                 createExerciseFragmentEquipmentButtonOnClick(equipmentList)
             }
         })
@@ -312,7 +314,7 @@ class CreateExerciseFragment : Fragment() {
         val builder = AlertDialog.Builder(context)
         val names = mutableListOf<String>()
         for (equipment in list) {
-            names.add(equipment.equipment)
+            names.add(equipment.name)
         }
         val checkedIndex =
             if (viewModel.equipment != null) list.indexOf(viewModel.equipment) else -1
@@ -326,7 +328,7 @@ class CreateExerciseFragment : Fragment() {
                     val selectedItem = list[position]
                     viewModel.equipment = selectedItem
                     createExerciseFragmentEquipmentNameTextView.text =
-                        selectedItem.equipment
+                        selectedItem.name
                 }
             }
             setNegativeButton("Cancel", null)
@@ -342,8 +344,8 @@ class CreateExerciseFragment : Fragment() {
             }
     }
 
-    private fun setUpCreateExerciseFragmentAddNoteButton() {
-        createExerciseFragmentAddNoteButton.setOnClickListener {
+    private fun setUpCreateExerciseFragmentAddNoteButton(button: Button) {
+        button.setOnClickListener {
             createExerciseFragmentAddNoteButtonOnClick()
         }
     }
@@ -372,11 +374,9 @@ class CreateExerciseFragment : Fragment() {
         dialog.show()
     }
 
-    private fun setUpCreateExerciseFragmentNoteListRecyclerView() {
+    private fun setUpCreateExerciseFragmentNoteListRecyclerView(recyclerView: DragDropSwipeRecyclerView) {
         createExerciseFragmentDragDropAdapter =
             CreateExerciseFragmentDragDropAdapter(viewModel.noteList.value!!.toList())
-
-        val recyclerView = createExerciseFragmentNoteListRecyclerView
 
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)

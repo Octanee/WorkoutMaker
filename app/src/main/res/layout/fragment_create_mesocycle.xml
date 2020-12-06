@@ -18,11 +18,11 @@
             android:text="Mesocycle name:"
             android:textColor="@color/cultured"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/createMesocycleFragmentEditText"
+            app:layout_constraintStart_toStartOf="@+id/createMesocycleFragmentNameEditText"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/createMesocycleFragmentEditText"
+            android:id="@+id/createMesocycleFragmentNameEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -39,7 +39,6 @@
             android:textCursorDrawable="@drawable/cursor_color"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/createMesocycleFragmentName" />
 
@@ -51,18 +50,19 @@
             android:text="Mesocycle type:"
             android:textColor="@color/cultured"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/createMesocycleFragmentEditText"
-            app:layout_constraintTop_toBottomOf="@id/createMesocycleFragmentEditText" />
+            app:layout_constraintStart_toStartOf="@+id/createMesocycleFragmentNameEditText"
+            app:layout_constraintTop_toBottomOf="@id/createMesocycleFragmentNameEditText" />
 
         <TextView
             android:id="@+id/createMesocycleFragmentMesocycleTypeName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/cultured"
             android:textSize="28sp"
             app:layout_constraintEnd_toStartOf="@+id/createMesocycleFragmentPickMesocycleTypeButton"
-            app:layout_constraintStart_toStartOf="@+id/createMesocycleFragmentEditText"
+            app:layout_constraintStart_toStartOf="@+id/createMesocycleFragmentNameEditText"
             app:layout_constraintTop_toBottomOf="@id/createMesocycleFragmentMesocycleType"
             tools:text="Pick a type" />
 
@@ -89,6 +89,7 @@
             app:behind_swiped_item_icon="@drawable/ic_delete"
             app:behind_swiped_item_icon_margin="16dp"
             app:behind_swiped_item_icon_secondary="@drawable/ic_edit"
+            app:divider="@drawable/divider"
             app:item_layout="@layout/item_mesocycle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

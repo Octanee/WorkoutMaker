@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="figure_back"
+    android:width="156dp"
+    android:height="304dp"
+    android:viewportWidth="156"
+    android:viewportHeight="304">
+
+    <group android:name="oblique_back">
+        <path
+            android:name="path522"
+            android:fillColor="#b9b9b9"
+            android:pathData="M 59.1,119.98425 c -1.5,-4.7 -3,-9.2 -4.6,-13.7 -0.1,0.1 -0.2,0.1 -0.3,0.2 -0.2,5 -0.5,10 -0.7,15.2 1.8,-0.7 3.4,-1.1 5.6,-1.7 z" />
+        <path
+            android:name="path524"
+            android:fillColor="#b9b9b9"
+            android:pathData="M 99.3,121.48425 c -0.4,-5.1 -0.7,-9.6 -1,-14.3 -0.2,0 -0.4,0 -0.6,-0.1 -1.3,4.3 -2.6,8.5 -4,12.9 2.3,0.7 3.8,1 5.6,1.5 z" />
+    </group>
+</vector>

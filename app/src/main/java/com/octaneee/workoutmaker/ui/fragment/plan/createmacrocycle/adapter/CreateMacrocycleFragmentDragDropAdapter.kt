@@ -1,6 +1,5 @@
 package com.octaneee.workoutmaker.ui.fragment.plan.createmacrocycle.adapter
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,7 +7,6 @@ import android.widget.Toast
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.octaneee.workoutmaker.R
 import com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles
-import com.octaneee.workoutmaker.logic.utility.TAG
 
 class CreateMacrocycleFragmentDragDropAdapter(dataSet: List<MesocycleAndMesocycleTypeWithMicrocycles>) :
     DragDropSwipeAdapter<MesocycleAndMesocycleTypeWithMicrocycles, CreateMacrocycleFragmentDragDropAdapter.ViewHolder>(
@@ -51,11 +49,8 @@ class CreateMacrocycleFragmentDragDropAdapter(dataSet: List<MesocycleAndMesocycl
         viewHolder.itemTypeName.text = dataSet[position].mesocycleType.name
     }
 
-    override fun onDragFinished(
-        item: MesocycleAndMesocycleTypeWithMicrocycles,
-        viewHolder: ViewHolder
-    ) {
-        super.onDragFinished(item, viewHolder)
-        Log.d(TAG, "onDragFinished: $dataSet")
+    fun updateDataSet(newDataSet: List<MesocycleAndMesocycleTypeWithMicrocycles>) {
+        dataSet = newDataSet
+        notifyDataSetChanged()
     }
 }

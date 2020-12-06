@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/createTrainingFragmentAddExerciseToTrainingFAB"
             android:layout_width="wrap_content"
@@ -24,6 +25,7 @@
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="AddExercise"
             app:tint="@color/cultured" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

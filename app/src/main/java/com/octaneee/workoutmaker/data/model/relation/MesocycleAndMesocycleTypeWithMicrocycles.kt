@@ -17,11 +17,11 @@ data class MesocycleAndMesocycleTypeWithMicrocycles(
         entity = MesocycleType::class,
         entityColumn = "mesocycleTypeId"
     )
-    val mesocycleType: MesocycleType,
+    var mesocycleType: MesocycleType,
     @Relation(
         parentColumn = "mesocycleId",
         entity = Microcycle::class,
         entityColumn = "mesocycleId"
     )
-    val microcycles: List<MicrocycleWithTrainings>?
+    var microcycles: List<MicrocycleWithTrainings> = listOf()
 ) : Parcelable

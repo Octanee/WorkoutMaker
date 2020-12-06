@@ -18,11 +18,11 @@
             android:text="Macrocycle name:"
             android:textColor="@color/cultured"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/createMacrocycleFragmentEditText"
+            app:layout_constraintStart_toStartOf="@+id/createMacrocycleFragmentNameEditText"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/createMacrocycleFragmentEditText"
+            android:id="@+id/createMacrocycleFragmentNameEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -59,27 +59,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/cultured" />
 
-        <LinearLayout
+
+        <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+            android:id="@+id/createMacrocycleFragmentRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            app:behind_swiped_item_bg_color="@color/swipe_delete"
+            app:behind_swiped_item_bg_color_secondary="@color/swipe_edit"
+            app:behind_swiped_item_icon="@drawable/ic_delete"
+            app:behind_swiped_item_icon_margin="16dp"
+            app:behind_swiped_item_icon_secondary="@drawable/ic_edit"
+            app:divider="@drawable/divider"
+            app:item_layout="@layout/item_mesocycle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createMacrocycleFragmentEditText">
-
-            <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
-                android:id="@+id/createMacrocycleFragmentRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:behind_swiped_item_bg_color="#F44336"
-                app:behind_swiped_item_bg_color_secondary="#03A9F4"
-                app:behind_swiped_item_icon="@drawable/ic_delete"
-                app:behind_swiped_item_icon_margin="16dp"
-                app:behind_swiped_item_icon_secondary="@drawable/ic_edit"
-                app:item_layout="@layout/item_mesocycle" />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/createMacrocycleFragmentNameEditText" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -71,7 +71,7 @@ class PlanFragment : Fragment() {
             return
         }
         val action =
-            PlanFragmentDirections.actionPlanFragmentToEditMacrocycleFragment(viewModel.macrocycleWithMesocycles!!)
+            PlanFragmentDirections.actionPlanFragmentToCreateMacrocycleFragment(viewModel.macrocycleWithMesocycles!!)
         findNavController().navigate(action)
 
     }

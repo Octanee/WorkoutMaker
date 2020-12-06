@@ -16,5 +16,5 @@ data class MicrocycleWithTrainings(
         entity = Training::class,
         entityColumn = "microcycleId"
     )
-    val trainings: List<TrainingWithSets>?
+    var trainings: List<TrainingWithSets> = listOf()
 ) : Parcelable

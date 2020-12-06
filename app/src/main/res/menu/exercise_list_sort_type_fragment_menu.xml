@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/exerciseListSortTypeFragmentMenuMuscle"
+        android:title="Muscle" />
+    <item
+        android:id="@+id/exerciseListSortTypeFragmentMenuExerciseType"
+        android:title="Exercise type" />
+    <item
+        android:id="@+id/exerciseListSortTypeFragmentMenuEquipment"
+        android:title="Equipment" />
+</menu>

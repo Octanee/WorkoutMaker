@@ -4,4 +4,14 @@
     <color name="paradise_pink">#E94560</color>
     <color name="oxford_blue">#16213E</color>
     <color name="xiketic">#1A1A2E</color>
+    <color name="background">#141414</color>
+    <color name="swipe_delete">#F44336</color>
+    <color name="swipe_edit">#03A9F4</color>
+
+    <color name="muscle_basic">#bdbdbd</color>
+    <color name="muscle_fatigue_5">#e81919</color>
+    <color name="muscle_fatigue_4">#df3232</color>
+    <color name="muscle_fatigue_3">#d95353</color>
+    <color name="muscle_fatigue_2">#d36a6a</color>
+    <color name="muscle_fatigue_1">#cc8686</color>
 </resources>

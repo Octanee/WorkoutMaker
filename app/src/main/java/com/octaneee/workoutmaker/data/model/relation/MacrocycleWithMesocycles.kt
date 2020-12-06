@@ -16,6 +16,6 @@ data class MacrocycleWithMesocycles(
         entity = Mesocycle::class,
         entityColumn = "macrocycleId"
     )
-    val mesocycles: List<MesocycleAndMesocycleTypeWithMicrocycles>? = null
+    var mesocycles: List<MesocycleAndMesocycleTypeWithMicrocycles> = listOf()
 ) : Parcelable
 

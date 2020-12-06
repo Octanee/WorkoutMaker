@@ -26,9 +26,9 @@ import kotlinx.android.parcel.Parcelize
 )
 @Parcelize
 data class Mesocycle(
-    val name: String,
+    var name: String,
     val mesocycleTypeId: Long,
-    val macrocycleId: Long
+    var macrocycleId: Long
 ) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var mesocycleId: Long = 0

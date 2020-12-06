@@ -1,8 +1,10 @@
 package com.octaneee.workoutmaker.ui.activity.main.viewmodel
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.octaneee.workoutmaker.R
 import com.octaneee.workoutmaker.data.database.WorkoutMakerDatabase
 import com.octaneee.workoutmaker.data.model.entity.*
 import com.octaneee.workoutmaker.data.model.entity.Set
@@ -39,7 +41,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     val userAndMacrocycle = userRepository.getUser(1)
 
-    fun prePopulate() {
+    fun prePopulate(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             val macrocycleId = macrocycleRepository.insert(Macrocycle("Test Macrocycle"))
             val mesocycleTypeId =
@@ -53,9 +55,25 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             )
             val microcycleId = microcycleRepository.insert(Microcycle(mesocycleId, 6))
             val trainingId = trainingRepository.insert(Training("Test Training", microcycleId, 1))
-            val exerciseTypeId = exerciseTypeRepository.insert(ExerciseType("Test Exercise Type"))
-            val equipmentId = equipmentRepository.insert(Equipment("Test Equipment"))
-            val muscleId = muscleRepository.insert(Muscle("Test muscle"))
+            val exerciseTypeId = exerciseTypeRepository.insert(
+                ExerciseType(
+                    "Test Exercise Type",
+                    context.resources.getResourceEntryName(R.drawable.ic_body)
+                )
+            )
+            val equipmentId = equipmentRepository.insert(
+                Equipment(
+                    "Test Equipment",
+                    context.resources.getResourceEntryName(R.drawable.ic_gym)
+                )
+            )
+            val muscleId =
+                muscleRepository.insert(
+                    Muscle(
+                        "Test muscle",
+                        context.resources.getResourceEntryName(R.drawable.man_figure_front_chest)
+                    )
+                )
             val exerciseId =
                 exerciseRepository.insert(
                     Exercise(
@@ -71,14 +89,6 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             val user = User("Test User", 180)
             user.macrocycleId = macrocycleId
             userRepository.insert(user)
-        }
-    }
-
-    fun fakeMuscle() {
-        viewModelScope.launch(Dispatchers.IO) {
-            for (i in 1..20) {
-                val muscleId = muscleRepository.insert(Muscle("Test muscle $i"))
-            }
         }
     }
 }

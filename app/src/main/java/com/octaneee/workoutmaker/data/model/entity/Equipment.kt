@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "equipment_table")
 @Parcelize
-data class Equipment(val equipment: String) : BaseEntity, Parcelable {
+data class Equipment(val name: String, val drawable: String) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var equipmentId: Long = 0
 }
