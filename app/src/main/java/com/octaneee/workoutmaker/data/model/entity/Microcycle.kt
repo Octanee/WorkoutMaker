@@ -20,9 +20,12 @@ import kotlinx.android.parcel.Parcelize
 )
 @Parcelize
 data class Microcycle(
-    var mesocycleId: Long,
+    var microcycleName: String,
+    var mesocycleId: Long?,
     var numberOfDays: Int
 ) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var microcycleId: Long = 0
+
+    override fun toString(): String = "($mesocycleId) $microcycleName"
 }

@@ -110,12 +110,12 @@ class ExerciseListFragment : Fragment() {
     }
 
     private fun exerciseListRecyclerViewSwipeRightToLeft(item: ExerciseHolder) {
-        Toast.makeText(context, "Delete ${item.exercise.name}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Delete ${item.exercise.exerciseName}", Toast.LENGTH_SHORT).show()
         //viewModel.exerciseList.value?.remove(item)
         //viewModel.exerciseList.notifyObserver()
     }
 
     private fun exerciseListRecyclerViewSwipeLeftToRight(item: ExerciseHolder, position: Int) {
-        Toast.makeText(context, "Edit ${item.exercise.name}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Edit ${item.exercise.exerciseName}", Toast.LENGTH_SHORT).show()
     }
 }

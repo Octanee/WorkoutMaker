@@ -23,5 +23,10 @@ data class MesocycleAndMesocycleTypeWithMicrocycles(
         entity = Microcycle::class,
         entityColumn = "mesocycleId"
     )
-    var microcycles: List<MicrocycleWithTrainings> = listOf()
-) : Parcelable
+    var microcycleWithTrainings: MutableList<MicrocycleWithTrainings> = mutableListOf()
+) : Parcelable {
+
+    override fun toString(): String {
+        return "$mesocycle $microcycleWithTrainings"
+    }
+}

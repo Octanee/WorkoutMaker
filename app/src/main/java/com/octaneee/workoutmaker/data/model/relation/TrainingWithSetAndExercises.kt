@@ -8,13 +8,18 @@ import com.octaneee.workoutmaker.data.model.entity.Training
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class TrainingWithSets(
+data class TrainingWithSetAndExercises(
     @Embedded
     val training: Training,
     @Relation(
         parentColumn = "trainingId",
-        entity = Set::class,
-        entityColumn = "trainingId"
+        entityColumn = "trainingId",
+        entity = Set::class
     )
-    val sets: List<SetTypeAndSet> = listOf()
-) : Parcelable
+    val setAndExercises: MutableList<SetAndExercise> = mutableListOf()
+) : Parcelable {
+
+    override fun toString(): String {
+        return "$training $setAndExercises"
+    }
+}

@@ -10,16 +10,20 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.octaneee.workoutmaker.R
+import com.octaneee.workoutmaker.data.model.entity.Mesocycle
+import com.octaneee.workoutmaker.data.model.entity.MesocycleType
+import com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles
 import com.octaneee.workoutmaker.data.model.relation.MicrocycleWithTrainings
+import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
 import com.octaneee.workoutmaker.ui.fragment.plan.createmesocycle.adapter.CreateMesocycleFragmentDragDropAdapter
 import com.octaneee.workoutmaker.ui.fragment.plan.createmesocycle.viewmodel.CreateMesocycleFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_create_mesocycle.*
@@ -28,9 +32,13 @@ import kotlinx.android.synthetic.main.fragment_create_mesocycle.view.*
 
 class CreateMesocycleFragment : Fragment() {
 
-    private val args: CreateMesocycleFragmentArgs by navArgs()
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
     private val viewModel: CreateMesocycleFragmentViewModel by viewModels()
     private lateinit var adapter: CreateMesocycleFragmentDragDropAdapter
+
+    companion object {
+        const val TAG = "CreateMesocycleFragment"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +51,7 @@ class CreateMesocycleFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_create_mesocycle, container, false)
 
-        setUpFromArgs()
+        setUpViewModel()
         setUpPickMesocycleTypeButton(view.createMesocycleFragmentPickMesocycleTypeButton)
         setUpNewTrainingFAB(view.createMesocycleFragmentNewTrainingFAB)
         setUpRecyclerView(view.createMesocycleFragmentRecyclerView)
@@ -66,23 +74,21 @@ class CreateMesocycleFragment : Fragment() {
 
     private fun menuSave() {
         if (validateDate()) {
-            val list = viewModel.macrocycleWithMesocycles.mesocycles.toMutableList()
-            list.add(viewModel.mesocycleAndMesocycleTypeWithMicrocycles)
-            viewModel.macrocycleWithMesocycles.mesocycles = list
+            mainActivityViewModel.macrocycleWithMesocycles!!.mesocycles.remove(mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles)
+            mainActivityViewModel.macrocycleWithMesocycles!!.mesocycles.add(viewModel.mesocycleAndMesocycleTypeWithMicrocycles)
+            mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles = null
             val action =
-                CreateMesocycleFragmentDirections.actionCreateMesocycleFragmentToCreateMacrocycleFragment(
-                    viewModel.macrocycleWithMesocycles
-                )
+                CreateMesocycleFragmentDirections.actionCreateMesocycleFragmentToCreateMacrocycleFragment()
             findNavController().navigate(action)
         }
     }
 
     private fun validateDate(): Boolean {
-        return checkName() && checkType() && checkMicrocycle()
+        return checkName() //&& checkType() && checkMicrocycle()
     }
 
     private fun checkMicrocycle(): Boolean {
-        return if (viewModel.mesocycleAndMesocycleTypeWithMicrocycles.microcycles.isEmpty()) {
+        return if (viewModel.mesocycleAndMesocycleTypeWithMicrocycles.microcycleWithTrainings.isEmpty()) {
             Toast.makeText(context, "Add microcycle", Toast.LENGTH_SHORT).show()
             false
         } else {
@@ -91,7 +97,7 @@ class CreateMesocycleFragment : Fragment() {
     }
 
     private fun checkType(): Boolean {
-        return if (viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycleType.name.isEmpty()) {
+        return if (viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycleType.mesocycleTypeName.isEmpty()) {
             Toast.makeText(context, "Pick mesocycle type", Toast.LENGTH_SHORT).show()
             false
         } else {
@@ -100,7 +106,7 @@ class CreateMesocycleFragment : Fragment() {
     }
 
     private fun checkName(): Boolean {
-        return if (viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycle.name.isEmpty()) {
+        return if (viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycle.mesocycleName.isEmpty()) {
             Toast.makeText(context, "Enter name", Toast.LENGTH_SHORT).show()
             false
         } else {
@@ -110,8 +116,7 @@ class CreateMesocycleFragment : Fragment() {
 
     private fun setUpRecyclerView(recyclerView: DragDropSwipeRecyclerView) {
         adapter = CreateMesocycleFragmentDragDropAdapter(
-            viewModel.mesocycleAndMesocycleTypeWithMicrocycles.microcycles,
-            viewModel
+            viewModel.mesocycleAndMesocycleTypeWithMicrocycles.microcycleWithTrainings,
         )
 
         with(recyclerView) {
@@ -133,12 +138,10 @@ class CreateMesocycleFragment : Fragment() {
             ): Boolean {
                 return when (direction) {
                     OnItemSwipeListener.SwipeDirection.RIGHT_TO_LEFT -> {
-                        Toast.makeText(context, "Right to Left", Toast.LENGTH_SHORT).show()
-                        false
+                        swipeRightToLeft(item)
                     }
                     OnItemSwipeListener.SwipeDirection.LEFT_TO_RIGHT -> {
-                        Toast.makeText(context, "Left to Right", Toast.LENGTH_SHORT).show()
-                        true
+                        swipeLeftToRight(item)
                     }
                     else -> {
                         false
@@ -147,8 +150,29 @@ class CreateMesocycleFragment : Fragment() {
             }
         }
 
+    private fun swipeLeftToRight(item: MicrocycleWithTrainings): Boolean {
+        mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles =
+            viewModel.mesocycleAndMesocycleTypeWithMicrocycles
+        mainActivityViewModel.microcycleWithTrainings = item
+
+        val action =
+            CreateMesocycleFragmentDirections.actionCreateMesocycleFragmentToCreateMicrocycleFragment()
+        findNavController().navigate(action)
+        return true
+    }
+
+    private fun swipeRightToLeft(item: MicrocycleWithTrainings): Boolean {
+        viewModel.mesocycleAndMesocycleTypeWithMicrocycles.microcycleWithTrainings.remove(item)
+        updateAdapterDataSet(viewModel.mesocycleAndMesocycleTypeWithMicrocycles.microcycleWithTrainings)
+        return false
+    }
+
+    private fun updateAdapterDataSet(newDataSet: List<MicrocycleWithTrainings>) {
+        adapter.updateDataSet(newDataSet)
+    }
+
     private fun setUpNameEditText(editText: EditText) {
-        editText.setText(viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycle.name)
+        editText.setText(viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycle.mesocycleName)
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -159,7 +183,8 @@ class CreateMesocycleFragment : Fragment() {
                 before: Int,
                 count: Int
             ) {
-                viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycle.name = "$sequence"
+                viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycle.mesocycleName =
+                    "$sequence"
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -167,26 +192,24 @@ class CreateMesocycleFragment : Fragment() {
         })
     }
 
-    private fun setUpFromArgs() {
-        args.macrocycleWithMesocycles.let {
-            viewModel.macrocycleWithMesocycles = it
-            viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycle.macrocycleId =
-                it.macrocycle.macrocycleId
-        }
-        args.mesocycleAndMesocycleTypeWithMicrocycles?.let {
-            viewModel.mesocycleAndMesocycleTypeWithMicrocycles = it
-            viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycle.name = it.mesocycle.name
-            viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycleType = it.mesocycleType
-        }
+    private fun setUpViewModel() {
+        viewModel.mesocycleAndMesocycleTypeWithMicrocycles =
+            if (mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles == null) {
+                MesocycleAndMesocycleTypeWithMicrocycles(
+                    Mesocycle("", 0, 0),
+                    MesocycleType("")
+                )
+            } else {
+                mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles!!
+            }
     }
 
     private fun setUpNewTrainingFAB(fab: FloatingActionButton) {
         fab.setOnClickListener {
+            mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles =
+                viewModel.mesocycleAndMesocycleTypeWithMicrocycles
             val action =
-                CreateMesocycleFragmentDirections.actionCreateMesocycleFragmentToCreateMicrocycleFragment(
-                    viewModel.macrocycleWithMesocycles,
-                    viewModel.mesocycleAndMesocycleTypeWithMicrocycles
-                )
+                CreateMesocycleFragmentDirections.actionCreateMesocycleFragmentToCreateMicrocycleFragment()
             findNavController().navigate(action)
         }
     }
@@ -198,7 +221,7 @@ class CreateMesocycleFragment : Fragment() {
 
                 val nameList = mutableListOf<String>()
                 for (mesocycleType in it) {
-                    nameList.add(mesocycleType.name)
+                    nameList.add(mesocycleType.mesocycleTypeName)
                 }
 
                 with(builder) {
@@ -208,7 +231,8 @@ class CreateMesocycleFragment : Fragment() {
                         val position = (dialog as AlertDialog).listView.checkedItemPosition
                         if (position != -1) {
                             val selectedItem = viewModel.mesocycleTypeList.value!![position]
-                            createMesocycleFragmentMesocycleTypeName.text = selectedItem.name
+                            createMesocycleFragmentMesocycleTypeName.text =
+                                selectedItem.mesocycleTypeName
                             viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycleType =
                                 selectedItem
                         }

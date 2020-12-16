@@ -8,7 +8,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity(tableName = "macrocycle_table")
-data class Macrocycle(var name: String) : BaseEntity, Parcelable {
+data class Macrocycle(var macrocycleName: String) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var macrocycleId: Long = 0
+
+    override fun toString(): String = "($macrocycleId) $macrocycleName"
 }

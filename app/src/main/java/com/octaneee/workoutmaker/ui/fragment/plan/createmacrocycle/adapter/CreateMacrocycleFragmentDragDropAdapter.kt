@@ -3,7 +3,6 @@ package com.octaneee.workoutmaker.ui.fragment.plan.createmacrocycle.adapter
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.octaneee.workoutmaker.R
 import com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles
@@ -14,19 +13,15 @@ class CreateMacrocycleFragmentDragDropAdapter(dataSet: List<MesocycleAndMesocycl
     ) {
 
     inner class ViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
-        val itemName: TextView = itemView.findViewById(R.id.itemMesocycleName)
-        val itemTypeName: TextView = itemView.findViewById(R.id.itemMesocycleTypeName)
+        val name: TextView = itemView.findViewById(R.id.itemMesocycleName)
+        val typeName: TextView = itemView.findViewById(R.id.itemMesocycleTypeName)
+        val number: TextView = itemView.findViewById(R.id.itemMesocycleNumberTextView)
         val dragIcon: ImageView = itemView.findViewById(R.id.itemMesocycleDragIcon)
 
-        init {
-            itemView.setOnClickListener {
-                val position: Int = adapterPosition
-                Toast.makeText(
-                    itemView.context,
-                    "Click: ${dataSet[position].mesocycle.name}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        fun bind(item: MesocycleAndMesocycleTypeWithMicrocycles, position: Int) {
+            name.text = item.mesocycle.mesocycleName
+            typeName.text = item.mesocycleType.mesocycleTypeName
+            number.text = (position + 1).toString()
         }
     }
 
@@ -45,8 +40,7 @@ class CreateMacrocycleFragmentDragDropAdapter(dataSet: List<MesocycleAndMesocycl
         viewHolder: CreateMacrocycleFragmentDragDropAdapter.ViewHolder,
         position: Int
     ) {
-        viewHolder.itemName.text = dataSet[position].mesocycle.name
-        viewHolder.itemTypeName.text = dataSet[position].mesocycleType.name
+        viewHolder.bind(item, position)
     }
 
     fun updateDataSet(newDataSet: List<MesocycleAndMesocycleTypeWithMicrocycles>) {

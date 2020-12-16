@@ -15,12 +15,8 @@ import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
 import com.octaneee.workoutmaker.logic.utility.DrawableHelper
 import com.octaneee.workoutmaker.ui.fragment.plan.exerciselistsorttype.ExerciseListSortTypeFragment
 import com.octaneee.workoutmaker.ui.fragment.plan.exerciselistsorttype.ExerciseListSortTypeFragmentDirections
-import com.octaneee.workoutmaker.ui.fragment.plan.exerciselistsorttype.viewmodel.ExerciseListSortTypeFragmentViewModel
 
-class ExerciseListSortTypeFragmentRecyclerViewAdapter(
-    private var dataSet: List<*>,
-    private val viewModel: ExerciseListSortTypeFragmentViewModel
-) :
+class ExerciseListSortTypeFragmentRecyclerViewAdapter(private var dataSet: List<*>) :
     RecyclerView.Adapter<ExerciseListSortTypeFragmentRecyclerViewAdapter.ViewHolder>() {
 
     private var sortType: ExerciseListSortTypeFragment.SortType =
@@ -44,8 +40,6 @@ class ExerciseListSortTypeFragmentRecyclerViewAdapter(
                     ExerciseListSortTypeFragment.SortType.Equipment -> {
                         val item = dataSet[position] as Equipment
                         ExerciseListSortTypeFragmentDirections.actionExerciseListSortTypeFragmentToExerciseListFragment(
-                            viewModel.macrocycleWithMesocycles,
-                            viewModel.mesocycleAndMesocycleTypeWithMicrocycles,
                             null,
                             item,
                             null
@@ -54,8 +48,6 @@ class ExerciseListSortTypeFragmentRecyclerViewAdapter(
                     ExerciseListSortTypeFragment.SortType.ExerciseType -> {
                         val item = dataSet[position] as ExerciseType
                         ExerciseListSortTypeFragmentDirections.actionExerciseListSortTypeFragmentToExerciseListFragment(
-                            viewModel.macrocycleWithMesocycles,
-                            viewModel.mesocycleAndMesocycleTypeWithMicrocycles,
                             null,
                             null,
                             item
@@ -64,8 +56,6 @@ class ExerciseListSortTypeFragmentRecyclerViewAdapter(
                     ExerciseListSortTypeFragment.SortType.Muscle -> {
                         val item = dataSet[position] as Muscle
                         ExerciseListSortTypeFragmentDirections.actionExerciseListSortTypeFragmentToExerciseListFragment(
-                            viewModel.macrocycleWithMesocycles,
-                            viewModel.mesocycleAndMesocycleTypeWithMicrocycles,
                             item,
                             null,
                             null
@@ -87,15 +77,15 @@ class ExerciseListSortTypeFragmentRecyclerViewAdapter(
         when (sortType) {
             ExerciseListSortTypeFragment.SortType.Equipment -> {
                 val item = dataSet[position] as Equipment
-                holder.bind(item.name, item.drawable)
+                holder.bind(item.equipmentName, item.drawable)
             }
             ExerciseListSortTypeFragment.SortType.ExerciseType -> {
                 val item = dataSet[position] as ExerciseType
-                holder.bind(item.name, item.drawable)
+                holder.bind(item.exerciseTypeName, item.drawable)
             }
             ExerciseListSortTypeFragment.SortType.Muscle -> {
                 val item = dataSet[position] as Muscle
-                holder.bind(item.name, item.drawable)
+                holder.bind(item.muscleName, item.drawable)
             }
         }
     }

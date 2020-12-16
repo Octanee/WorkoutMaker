@@ -6,38 +6,22 @@ import android.widget.TextView
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.octaneee.workoutmaker.R
 import com.octaneee.workoutmaker.data.model.relation.MicrocycleWithTrainings
-import com.octaneee.workoutmaker.ui.fragment.plan.createmesocycle.CreateMesocycleFragmentDirections
-import com.octaneee.workoutmaker.ui.fragment.plan.createmesocycle.viewmodel.CreateMesocycleFragmentViewModel
 
-class CreateMesocycleFragmentDragDropAdapter(
-    dataSet: List<MicrocycleWithTrainings>,
-    val viewModel: CreateMesocycleFragmentViewModel
-) :
+class CreateMesocycleFragmentDragDropAdapter(dataSet: List<MicrocycleWithTrainings>) :
     DragDropSwipeAdapter<MicrocycleWithTrainings, CreateMesocycleFragmentDragDropAdapter.ViewHolder>(
         dataSet
     ) {
 
     inner class ViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
-        val dragIcon: ImageView = itemView.findViewById(R.id.itemTrainingDragIcon)
-        val textView: TextView = itemView.findViewById(R.id.itemTrainingTextView)
-        val number: TextView = itemView.findViewById(R.id.itemTrainingNumberTextView)
+        val dragIcon: ImageView = itemView.findViewById(R.id.itemMicrocycleDragIcon)
+        val name: TextView = itemView.findViewById(R.id.itemMicrocycleNameTextView)
+        val number: TextView = itemView.findViewById(R.id.itemMicrocycleNumberTextView)
+        val numberOfDays: TextView = itemView.findViewById(R.id.itemMicrocycleNumberOfDaysTextView)
 
-        init {
-            itemView.setOnClickListener {
-                val position = adapterPosition
-                val item = dataSet[position]
-
-                val action =
-                    CreateMesocycleFragmentDirections.actionCreateMesocycleFragmentToCreateMicrocycleFragment(
-                        viewModel.macrocycleWithMesocycles,
-                        viewModel.mesocycleAndMesocycleTypeWithMicrocycles,
-                        item
-                    )
-            }
-        }
-
-        fun bind(item: MicrocycleWithTrainings) {
-
+        fun bind(item: MicrocycleWithTrainings, position: Int) {
+            name.text = item.microcycle.microcycleName
+            numberOfDays.text = item.microcycle.numberOfDays.toString()
+            number.text = (position + 1).toString()
         }
     }
 
@@ -56,6 +40,11 @@ class CreateMesocycleFragmentDragDropAdapter(
         viewHolder: ViewHolder,
         position: Int
     ) {
-        viewHolder.bind(item)
+        viewHolder.bind(item, position)
+    }
+
+    fun updateDataSet(newDataSet: List<MicrocycleWithTrainings>) {
+        dataSet = newDataSet
+        notifyDataSetChanged()
     }
 }

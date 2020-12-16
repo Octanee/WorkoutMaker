@@ -7,15 +7,18 @@ import android.view.*
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.data.model.relation.TrainingWithSets
+import com.octaneee.workoutmaker.data.model.entity.Microcycle
+import com.octaneee.workoutmaker.data.model.relation.MicrocycleWithTrainings
+import com.octaneee.workoutmaker.data.model.relation.TrainingWithSetAndExercises
+import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
 import com.octaneee.workoutmaker.ui.fragment.plan.createmicrocycle.adapter.CreateMicrocycleFragmentDragDropAdapter
 import com.octaneee.workoutmaker.ui.fragment.plan.createmicrocycle.viewmodel.CreateMicrocycleFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_create_microcycle.view.*
@@ -23,8 +26,8 @@ import kotlinx.android.synthetic.main.fragment_create_microcycle.view.*
 
 class CreateMicrocycleFragment : Fragment() {
 
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
     private val viewModel: CreateMicrocycleFragmentViewModel by viewModels()
-    private val args: CreateMicrocycleFragmentArgs by navArgs()
     private lateinit var adapter: CreateMicrocycleFragmentDragDropAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,14 +42,15 @@ class CreateMicrocycleFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_create_microcycle, container, false)
 
-        setUpFromArgs()
+        setUpViewModel()
         setUpRecyclerView(view.createMicrocycleFragmentRecyclerView)
-        setUpAddTrainingFAB(view.createMicrocycleFragmentAddTrainingFAB)
-        setUpNumberOfDaysEditText(view.createMicrocycleFragmentNumberOfDaysEditText)
+        setUpFAB(view.createMicrocycleFragmentAddTrainingFAB)
+        setUpEditText(view.createMicrocycleFragmentNumberOfDaysEditText)
+
         return view
     }
 
-    private fun setUpNumberOfDaysEditText(editText: EditText) {
+    private fun setUpEditText(editText: EditText) {
         editText.setText(viewModel.microcycleWithTrainings.microcycle.numberOfDays.toString())
 
         editText.addTextChangedListener(object : TextWatcher {
@@ -86,15 +90,12 @@ class CreateMicrocycleFragment : Fragment() {
 
     private fun menuSave() {
         if (validateData()) {
-            val list =
-                viewModel.mesocycleAndMesocycleTypeWithMicrocycles.microcycles.toMutableList()
-            list.add(viewModel.microcycleWithTrainings)
-            viewModel.mesocycleAndMesocycleTypeWithMicrocycles.microcycles = list
+            mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles!!.microcycleWithTrainings.add(
+                viewModel.microcycleWithTrainings
+            )
+            mainActivityViewModel.microcycleWithTrainings = null
             val action =
-                CreateMicrocycleFragmentDirections.actionCreateMicrocycleFragmentToCreateMesocycleFragment(
-                    viewModel.macrocycleWithMesocycles,
-                    viewModel.mesocycleAndMesocycleTypeWithMicrocycles,
-                )
+                CreateMicrocycleFragmentDirections.actionCreateMicrocycleFragmentToCreateMesocycleFragment()
             findNavController().navigate(action)
         }
     }
@@ -104,7 +105,7 @@ class CreateMicrocycleFragment : Fragment() {
     }
 
     private fun checkTrainings(): Boolean {
-        return if (viewModel.microcycleWithTrainings.trainings.isEmpty()) {
+        return if (viewModel.microcycleWithTrainings.trainingWithSetAndExercises.isEmpty()) {
             Toast.makeText(context, "Add training", Toast.LENGTH_SHORT).show()
             false
         } else {
@@ -119,38 +120,29 @@ class CreateMicrocycleFragment : Fragment() {
         } else {
             true
         }
-
     }
 
-    private fun setUpAddTrainingFAB(fab: FloatingActionButton) {
+    private fun setUpFAB(fab: FloatingActionButton) {
         fab.setOnClickListener {
+            mainActivityViewModel.microcycleWithTrainings = viewModel.microcycleWithTrainings
             val action =
-                CreateMicrocycleFragmentDirections.actionCreateMicrocycleFragmentToCreateTrainingFragment(
-                    viewModel.macrocycleWithMesocycles,
-                    viewModel.mesocycleAndMesocycleTypeWithMicrocycles,
-                    viewModel.microcycleWithTrainings
-                )
+                CreateMicrocycleFragmentDirections.actionCreateMicrocycleFragmentToCreateTrainingFragment()
             findNavController().navigate(action)
         }
     }
 
-    private fun setUpFromArgs() {
-        args.macrocycleWithMesocycles.let {
-            viewModel.macrocycleWithMesocycles = it
-        }
-        args.mesocycleAndMesocycleTypeWithMicrocycles.let {
-            viewModel.mesocycleAndMesocycleTypeWithMicrocycles = it
-            viewModel.microcycleWithTrainings.microcycle.mesocycleId = it.mesocycle.mesocycleId
-        }
-        args.microcycleWithTrainings?.let {
-            viewModel.microcycleWithTrainings = it
-        }
+    private fun setUpViewModel() {
+        viewModel.microcycleWithTrainings =
+            if (mainActivityViewModel.microcycleWithTrainings == null) {
+                MicrocycleWithTrainings(Microcycle("", 0, 7))
+            } else {
+                mainActivityViewModel.microcycleWithTrainings!!
+            }
     }
 
     private fun setUpRecyclerView(recyclerView: DragDropSwipeRecyclerView) {
         adapter = CreateMicrocycleFragmentDragDropAdapter(
-            viewModel.microcycleWithTrainings.trainings,
-            viewModel
+            viewModel.microcycleWithTrainings.trainingWithSetAndExercises
         )
 
         with(recyclerView) {
@@ -164,20 +156,18 @@ class CreateMicrocycleFragment : Fragment() {
     }
 
     private fun onItemSwipeListener() =
-        object : OnItemSwipeListener<TrainingWithSets> {
+        object : OnItemSwipeListener<TrainingWithSetAndExercises> {
             override fun onItemSwiped(
                 position: Int,
                 direction: OnItemSwipeListener.SwipeDirection,
-                item: TrainingWithSets
+                item: TrainingWithSetAndExercises
             ): Boolean {
                 return when (direction) {
                     OnItemSwipeListener.SwipeDirection.RIGHT_TO_LEFT -> {
-                        Toast.makeText(context, "Right to Left", Toast.LENGTH_SHORT).show()
-                        false
+                        swipeRightToLeft(item)
                     }
                     OnItemSwipeListener.SwipeDirection.LEFT_TO_RIGHT -> {
-                        Toast.makeText(context, "Left to Right", Toast.LENGTH_SHORT).show()
-                        true
+                        swipeLeftToRight(item)
                     }
                     else -> {
                         false
@@ -185,4 +175,23 @@ class CreateMicrocycleFragment : Fragment() {
                 }
             }
         }
+
+    private fun swipeLeftToRight(item: TrainingWithSetAndExercises): Boolean {
+        mainActivityViewModel.microcycleWithTrainings = viewModel.microcycleWithTrainings
+        mainActivityViewModel.trainingWithSetAndExercise = item
+        val action =
+            CreateMicrocycleFragmentDirections.actionCreateMicrocycleFragmentToCreateTrainingFragment()
+        findNavController().navigate(action)
+        return true
+    }
+
+    private fun swipeRightToLeft(item: TrainingWithSetAndExercises): Boolean {
+        viewModel.microcycleWithTrainings.trainingWithSetAndExercises.remove(item)
+        updateAdapterDataSet(viewModel.microcycleWithTrainings.trainingWithSetAndExercises)
+        return false
+    }
+
+    private fun updateAdapterDataSet(newDataSet: List<TrainingWithSetAndExercises>) {
+        adapter.updateDataSet(newDataSet)
+    }
 }

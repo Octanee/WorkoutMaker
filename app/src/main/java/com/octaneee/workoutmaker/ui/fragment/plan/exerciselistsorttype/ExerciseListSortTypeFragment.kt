@@ -1,7 +1,6 @@
 package com.octaneee.workoutmaker.ui.fragment.plan.exerciselistsorttype
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,7 +29,6 @@ class ExerciseListSortTypeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        Log.d(TAG, "onCreate: ")
     }
 
     override fun onCreateView(
@@ -38,13 +36,11 @@ class ExerciseListSortTypeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        Log.d(TAG, "onCreateView: ")
         return inflater.inflate(R.layout.fragment_exercise_list_sort_type, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated: ")
 
         viewModel.equipmentListLiveData.observe(viewLifecycleOwner, {
             viewModel.equipmentList = it
@@ -117,7 +113,6 @@ class ExerciseListSortTypeFragment : Fragment() {
     }
 
     private fun setUpExerciseListSortTypeFragmentRecyclerView() {
-        Log.d(TAG, "setUpExerciseListSortTypeFragmentRecyclerView: ")
         val recyclerView = exerciseListSortTypeFragmentRecyclerView
 
         val list = when (viewModel.sortType) {
@@ -127,7 +122,7 @@ class ExerciseListSortTypeFragment : Fragment() {
         }
 
         exerciseListSortTypeFragmentRecyclerViewAdapter =
-            ExerciseListSortTypeFragmentRecyclerViewAdapter(list, viewModel)
+            ExerciseListSortTypeFragmentRecyclerViewAdapter(list)
 
         with(recyclerView) {
             adapter = exerciseListSortTypeFragmentRecyclerViewAdapter

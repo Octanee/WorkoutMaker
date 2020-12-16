@@ -11,4 +11,6 @@ class UserRepository(private val dao: UserDao) : BaseRepository<User>(dao) {
     fun getUser(userId: Long): LiveData<UserAndMacrocycle> {
         return dao.getUser(userId)
     }
+
+
 }

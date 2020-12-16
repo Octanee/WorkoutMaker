@@ -32,11 +32,13 @@ import kotlinx.android.parcel.Parcelize
 )
 @Parcelize
 data class Exercise(
-    val name: String,
+    val exerciseName: String,
     val exerciseTypeId: Long,
     val equipmentId: Long,
     val muscleId: Long
 ) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var exerciseId: Long = 0
+
+    override fun toString(): String = "($exerciseId) $exerciseName"
 }

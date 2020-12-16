@@ -35,7 +35,7 @@ class ExerciseListFragmentDragDropAdapter(
                 val position: Int = adapterPosition
                 Toast.makeText(
                     itemView.context,
-                    "Click: ${dataSet[position].exercise.name}",
+                    "Click: ${dataSet[position].exercise.exerciseName}",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -61,21 +61,21 @@ class ExerciseListFragmentDragDropAdapter(
         when (type) {
             PRIMARY_MUSCLE -> bind(
                 viewHolder,
-                item.exercise.name,
+                item.exercise.exerciseName,
                 DrawableHelper.getDrawable("ic_gym", context)!!,
-                item.exerciseType.name
+                item.exerciseType.exerciseTypeName
             )
             EXERCISE_TYPE -> bind(
                 viewHolder,
-                item.exercise.name,
+                item.exercise.exerciseName,
                 DrawableHelper.getDrawable(item.primaryMuscle.drawable, context)!!,
-                item.equipment.name
+                item.equipment.equipmentName
             )
             EQUIPMENT -> bind(
                 viewHolder,
-                item.exercise.name,
+                item.exercise.exerciseName,
                 DrawableHelper.getDrawable(item.primaryMuscle.drawable, context)!!,
-                item.exerciseType.name
+                item.exerciseType.exerciseTypeName
             )
         }
     }

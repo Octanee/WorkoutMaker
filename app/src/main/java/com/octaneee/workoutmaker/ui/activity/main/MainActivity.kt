@@ -22,14 +22,36 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: ")
         setContentView(R.layout.activity_main)
         setupBottomNavigationView()
-        //viewModel.prePopulate(applicationContext)
+
+        //viewModel.populateDatabase(applicationContext)
+
+        //observeTrainingWithSetAndExercises()
+        //observeMacrocycles()
     }
 
+    private fun observeMacrocycles() {
+        Log.d(TAG, "observeMacrocycles: Start")
+        viewModel.macrocycles.observe(this, {
+            Log.d(TAG, "observeMacrocycles: Observe")
+            for (macrocycle in it) {
+                Log.d(TAG, macrocycle.toString())
+            }
+        })
+        Log.d(TAG, "observeMacrocycles: End")
+    }
+
+    private fun observeTrainingWithSetAndExercises() {
+        viewModel.trainingWithSetAndExercisesList.observe(this, {
+            for (training in it) {
+                Log.d(TAG, training.toString())
+            }
+        })
+    }
+
+
     private fun setupBottomNavigationView() {
-        Log.d(TAG, "setupBottomNavigationView: ")
         val navController = findNavController(R.id.navHostFragment)
 
         val appBarConfiguration = AppBarConfiguration(
@@ -47,7 +69,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.navHostFragment)
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return findNavController(R.id.navHostFragment).navigateUp()
     }
 }

@@ -18,6 +18,7 @@ import com.octaneee.workoutmaker.logic.utility.Constant
         Exercise::class,
         ExerciseType::class,
         Macrocycle::class,
+        Measurement::class,
         Mesocycle::class,
         MesocycleType::class,
         Microcycle::class,
@@ -31,7 +32,7 @@ import com.octaneee.workoutmaker.logic.utility.Constant
         ExerciseMuscleCrossRef::class,
         ExerciseNoteCrossRef::class,
     ],
-    version = 16,
+    version = 21,
     exportSchema = false
 )
 @TypeConverters(Converter::class)
@@ -56,5 +57,7 @@ abstract class WorkoutMakerDatabase : RoomDatabase(), WorkoutMakerDatabaseDao {
                 .fallbackToDestructiveMigration()
                 .build()
         }
+
+
     }
 }

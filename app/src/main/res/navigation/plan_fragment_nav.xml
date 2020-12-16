@@ -27,11 +27,6 @@
         <action
             android:id="@+id/action_createMacrocycleFragment_to_createMesocycleFragment"
             app:destination="@id/createMesocycleFragment" />
-        <argument
-            android:name="macrocycleWithMesocycles"
-            android:defaultValue="@null"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MacrocycleWithMesocycles"
-            app:nullable="true" />
 
     </fragment>
     <fragment
@@ -54,14 +49,6 @@
         <action
             android:id="@+id/action_createMesocycleFragment_to_createMacrocycleFragment"
             app:destination="@id/createMacrocycleFragment" />
-        <argument
-            android:name="macrocycleWithMesocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MacrocycleWithMesocycles" />
-        <argument
-            android:name="mesocycleAndMesocycleTypeWithMicrocycles"
-            android:defaultValue="@null"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles"
-            app:nullable="true" />
         <action
             android:id="@+id/action_createMesocycleFragment_to_createMicrocycleFragment"
             app:destination="@id/createMicrocycleFragment" />
@@ -73,45 +60,34 @@
         android:label="fragment_create_training"
         tools:layout="@layout/fragment_create_training">
         <action
-            android:id="@+id/action_createTrainingFragment_to_addExerciseToTrainingFragment"
-            app:destination="@id/addExerciseToTrainingFragment" />
+            android:id="@+id/action_createTrainingFragment_to_addSetsToTrainingFragment"
+            app:destination="@id/addSetsToTrainingFragment" />
         <action
             android:id="@+id/action_createTrainingFragment_to_createMicrocycleFragment"
             app:destination="@id/createMicrocycleFragment" />
         <argument
-            android:name="macrocycleWithMesocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MacrocycleWithMesocycles" />
-        <argument
-            android:name="mesocycleAndMesocycleTypeWithMicrocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles" />
-        <argument
-            android:name="microcycleWithTrainings"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MicrocycleWithTrainings" />
-        <argument
-            android:name="trainingWithSets"
+            android:name="trainingWithSetAndExercises"
             android:defaultValue="@null"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.TrainingWithSets"
+            app:argType="com.octaneee.workoutmaker.data.model.relation.TrainingWithSetAndExercises"
             app:nullable="true" />
 
     </fragment>
     <fragment
-        android:id="@+id/addExerciseToTrainingFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.addexercisetotraining.AddExerciseToTrainingFragment"
-        android:label="Add exercise"
-        tools:layout="@layout/fragment_add_exercise_to_training">
+        android:id="@+id/addSetsToTrainingFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.addsetstotraining.AddSetsToTrainingFragment"
+        android:label="Add sets"
+        tools:layout="@layout/fragment_add_sets_to_training">
         <action
-            android:id="@+id/action_addExerciseToTrainingFragment_to_createTrainingFragment"
+            android:id="@+id/action_addSetsToTrainingFragment_to_createTrainingFragment"
             app:destination="@id/createTrainingFragment" />
-        <argument
-            android:name="macrocycleWithMesocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MacrocycleWithMesocycles" />
         <action
-            android:id="@+id/action_addExerciseToTrainingFragment_to_exerciseListSortTypeFragment"
+            android:id="@+id/action_addSetsToTrainingFragment_to_exerciseListSortTypeFragment"
             app:destination="@id/exerciseListSortTypeFragment" />
         <argument
-            android:name="mesocycleAndMesocycleTypeWithMicrocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles" />
-
+            android:name="wholeExercise"
+            android:defaultValue="@null"
+            app:argType="com.octaneee.workoutmaker.data.model.relation.WholeExercise"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/exerciseListFragment"
@@ -119,17 +95,11 @@
         android:label="Exercise list"
         tools:layout="@layout/fragment_exercise_list">
         <action
-            android:id="@+id/action_exerciseListFragment_to_addExerciseToTrainignFragment"
-            app:destination="@id/addExerciseToTrainingFragment" />
+            android:id="@+id/action_exerciseListFragment_to_addSetsToTrainingFragment"
+            app:destination="@id/addSetsToTrainingFragment" />
         <action
             android:id="@+id/action_exerciseListFragment_to_createExerciseFragment"
             app:destination="@id/createExerciseFragment" />
-        <argument
-            android:name="macrocycleWithMesocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MacrocycleWithMesocycles" />
-        <argument
-            android:name="mesocycleAndMesocycleTypeWithMicrocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles" />
         <argument
             android:name="muscle"
             android:defaultValue="@null"
@@ -156,12 +126,6 @@
             android:id="@+id/action_createExerciseFragment_to_exerciseListFragment"
             app:destination="@id/exerciseListFragment" />
         <argument
-            android:name="macrocycleWithMesocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MacrocycleWithMesocycles" />
-        <argument
-            android:name="mesocycleAndMesocycleTypeWithMicrocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles" />
-        <argument
             android:name="muscle"
             app:argType="com.octaneee.workoutmaker.data.model.entity.Muscle"
             app:nullable="true" />
@@ -182,12 +146,6 @@
         <action
             android:id="@+id/action_exerciseListSortTypeFragment_to_exerciseListFragment"
             app:destination="@id/exerciseListFragment" />
-        <argument
-            android:name="macrocycleWithMesocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MacrocycleWithMesocycles" />
-        <argument
-            android:name="mesocycleAndMesocycleTypeWithMicrocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles" />
     </fragment>
     <fragment
         android:id="@+id/createMicrocycleFragment"
@@ -200,16 +158,5 @@
         <action
             android:id="@+id/action_createMicrocycleFragment_to_createTrainingFragment"
             app:destination="@id/createTrainingFragment" />
-        <argument
-            android:name="macrocycleWithMesocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MacrocycleWithMesocycles" />
-        <argument
-            android:name="mesocycleAndMesocycleTypeWithMicrocycles"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles" />
-        <argument
-            android:name="microcycleWithTrainings"
-            android:defaultValue="@null"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.MicrocycleWithTrainings"
-            app:nullable="true" />
     </fragment>
 </navigation>

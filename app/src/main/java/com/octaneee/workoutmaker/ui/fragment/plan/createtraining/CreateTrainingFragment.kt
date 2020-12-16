@@ -2,19 +2,29 @@ package com.octaneee.workoutmaker.ui.fragment.plan.createtraining
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.octaneee.workoutmaker.R
+import com.octaneee.workoutmaker.data.model.entity.Training
+import com.octaneee.workoutmaker.data.model.relation.SetAndExercise
+import com.octaneee.workoutmaker.data.model.relation.TrainingWithSetAndExercises
+import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
+import com.octaneee.workoutmaker.ui.fragment.plan.createtraining.adapter.CreateTrainingFragmentDragDropAdapter
 import com.octaneee.workoutmaker.ui.fragment.plan.createtraining.viewmodel.CreateTrainingFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_create_training.view.*
 
 class CreateTrainingFragment : Fragment() {
 
-    private val args: CreateTrainingFragmentArgs by navArgs()
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
     private val viewModel: CreateTrainingFragmentViewModel by viewModels()
+    private lateinit var adapter: CreateTrainingFragmentDragDropAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +38,9 @@ class CreateTrainingFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_create_training, container, false)
 
-        setUpFromArgs()
-        setUpAddExerciseToTrainingFAB(view.createTrainingFragmentAddExerciseToTrainingFAB)
+        setUpViewModel()
+        setUpFAB(view.createTrainingFragmentAddExerciseToTrainingFAB)
+        setUpRecyclerView(view.createTrainingFragmentRecyclerView)
 
         return view
     }
@@ -48,15 +59,12 @@ class CreateTrainingFragment : Fragment() {
 
     private fun menuSave() {
         if (validateDate()) {
-            val list = viewModel.microcycleWithTrainings.trainings.toMutableList()
-            list.add(viewModel.trainingWithString)
-            viewModel.microcycleWithTrainings.trainings = list
+            mainActivityViewModel.microcycleWithTrainings!!.trainingWithSetAndExercises.add(
+                viewModel.trainingWithSetAndExercises
+            )
+            mainActivityViewModel.trainingWithSetAndExercise = null
             val action =
-                CreateTrainingFragmentDirections.actionCreateTrainingFragmentToCreateMicrocycleFragment(
-                    viewModel.macrocycleWithMesocycles,
-                    viewModel.mesocycleAndMesocycleTypeWithMicrocycles,
-                    viewModel.microcycleWithTrainings
-                )
+                CreateTrainingFragmentDirections.actionCreateTrainingFragmentToCreateMicrocycleFragment()
             findNavController().navigate(action)
         }
     }
@@ -66,24 +74,102 @@ class CreateTrainingFragment : Fragment() {
     }
 
     private fun checkSets(): Boolean {
-        TODO("Not yet implemented")
+        return if (viewModel.trainingWithSetAndExercises.setAndExercises.isEmpty()) {
+            Toast.makeText(context, "Add Set", Toast.LENGTH_SHORT).show()
+            false
+        } else {
+            true
+        }
     }
 
     private fun checkDayOfMicrocycle(): Boolean {
-        TODO("Not yet implemented")
+        return if (viewModel.trainingWithSetAndExercises.training.dayOfMicrocycle <= 0) {
+            Toast.makeText(context, "Enter day of microcycle", Toast.LENGTH_SHORT).show()
+            false
+        } else {
+            true
+        }
     }
 
     private fun checkName(): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    private fun setUpFromArgs() {
-        TODO("Not yet implemented")
-    }
-
-    private fun setUpAddExerciseToTrainingFAB(fab: FloatingActionButton) {
-        fab.setOnClickListener {
-            findNavController().navigate(R.id.action_createTrainingFragment_to_addExerciseToTrainingFragment)
+        return if (viewModel.trainingWithSetAndExercises.training.trainingName.isEmpty()) {
+            Toast.makeText(context, "Enter training name", Toast.LENGTH_SHORT).show()
+            false
+        } else {
+            true
         }
+    }
+
+    private fun setUpViewModel() {
+        viewModel.trainingWithSetAndExercises =
+            if (mainActivityViewModel.trainingWithSetAndExercise == null) {
+                TrainingWithSetAndExercises(Training("", 0, 7))
+            } else {
+                mainActivityViewModel.trainingWithSetAndExercise!!
+            }
+    }
+
+    private fun setUpFAB(fab: FloatingActionButton) {
+        fab.setOnClickListener {
+            mainActivityViewModel.trainingWithSetAndExercise = viewModel.trainingWithSetAndExercises
+            val action =
+                CreateTrainingFragmentDirections.actionCreateTrainingFragmentToAddSetsToTrainingFragment()
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun setUpRecyclerView(recyclerView: DragDropSwipeRecyclerView) {
+        adapter = CreateTrainingFragmentDragDropAdapter(
+            viewModel.trainingWithSetAndExercises.setAndExercises,
+        )
+
+        with(recyclerView) {
+            adapter = this@CreateTrainingFragment.adapter
+            layoutManager = LinearLayoutManager(context)
+            orientation =
+                DragDropSwipeRecyclerView.ListOrientation.VERTICAL_LIST_WITH_VERTICAL_DRAGGING
+            swipeListener = onItemSwipeListener()
+            longPressToStartDragging = true
+        }
+    }
+
+
+    private fun onItemSwipeListener() = object : OnItemSwipeListener<SetAndExercise> {
+        override fun onItemSwiped(
+            position: Int,
+            direction: OnItemSwipeListener.SwipeDirection,
+            item: SetAndExercise
+        ): Boolean {
+            return when (direction) {
+                OnItemSwipeListener.SwipeDirection.LEFT_TO_RIGHT -> {
+                    swipeListenerLeftToRight(item)
+                }
+                OnItemSwipeListener.SwipeDirection.RIGHT_TO_LEFT -> {
+                    swipeListenerRightToLeft(item)
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+    }
+
+    private fun swipeListenerRightToLeft(item: SetAndExercise): Boolean {
+        viewModel.trainingWithSetAndExercises.setAndExercises.remove(item)
+        updateAdapterDataSet(viewModel.trainingWithSetAndExercises.setAndExercises)
+        return true
+    }
+
+    private fun swipeListenerLeftToRight(item: SetAndExercise): Boolean {
+        mainActivityViewModel.trainingWithSetAndExercise = viewModel.trainingWithSetAndExercises
+        mainActivityViewModel.setAndExercisesList.add(item)
+        val action =
+            CreateTrainingFragmentDirections.actionCreateTrainingFragmentToAddSetsToTrainingFragment()
+        findNavController().navigate(action)
+        return true
+    }
+
+    private fun updateAdapterDataSet(newDataSet: List<SetAndExercise>) {
+        adapter.updateDataSet(newDataSet)
     }
 }

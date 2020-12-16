@@ -16,6 +16,13 @@ data class MacrocycleWithMesocycles(
         entity = Mesocycle::class,
         entityColumn = "macrocycleId"
     )
-    var mesocycles: List<MesocycleAndMesocycleTypeWithMicrocycles> = listOf()
-) : Parcelable
+    var mesocycles: MutableList<MesocycleAndMesocycleTypeWithMicrocycles> = mutableListOf()
+) : Parcelable {
+
+    override fun toString(): String {
+        return "$macrocycle $mesocycles"
+    }
+}
+
+
 

@@ -8,7 +8,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "set_type_table")
 @Parcelize
-data class SetType(val name: String) : BaseEntity, Parcelable {
+data class SetType(val setTypeName: String) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var setTypeId: Long = 0
+
+    override fun toString(): String = "($setTypeId) $setTypeName"
 }

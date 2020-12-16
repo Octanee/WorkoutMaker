@@ -1,14 +1,17 @@
 package com.octaneee.workoutmaker.data.model.entity.crossref
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 import com.octaneee.workoutmaker.data.model.entity.Exercise
 import com.octaneee.workoutmaker.data.model.entity.Note
 import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(
     tableName = "exercise_note_cross_ref",
-    primaryKeys = ["exerciseId", "noteId"],
     foreignKeys = [
         ForeignKey(
             entity = Exercise::class,
@@ -27,4 +30,7 @@ import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
 data class ExerciseNoteCrossRef(
     val exerciseId: Long,
     val noteId: Long
-) : BaseEntity
+) : BaseEntity, Parcelable {
+    @PrimaryKey(autoGenerate = true)
+    var exerciseNoteCrossRefId: Long = 0
+}

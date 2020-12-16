@@ -11,4 +11,6 @@ import kotlinx.android.parcel.Parcelize
 data class Note(var note: String) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var noteId: Long = 0
+
+    override fun toString(): String = "($noteId) $note"
 }

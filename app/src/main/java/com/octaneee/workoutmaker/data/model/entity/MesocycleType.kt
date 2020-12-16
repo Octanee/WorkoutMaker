@@ -8,7 +8,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "mesocycle_type_table")
 @Parcelize
-data class MesocycleType(val name: String) : BaseEntity, Parcelable {
+data class MesocycleType(val mesocycleTypeName: String) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var mesocycleTypeId: Long = 0
+    override fun toString(): String = "($mesocycleTypeId) $mesocycleTypeName"
 }

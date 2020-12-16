@@ -20,10 +20,12 @@ import kotlinx.android.parcel.Parcelize
 )
 @Parcelize
 data class Training(
-    val name: String,
-    val microcycleId: Long,
+    val trainingName: String,
+    var microcycleId: Long?,
     val dayOfMicrocycle: Int
 ) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var trainingId: Long = 0
+
+    override fun toString(): String = "($trainingId) $trainingName"
 }

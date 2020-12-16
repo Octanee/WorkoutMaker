@@ -18,8 +18,13 @@ import kotlinx.android.parcel.Parcelize
         )]
 )
 @Parcelize
-data class User(val name: String, val height: Int) : BaseEntity, Parcelable {
+data class User(
+    val userName: String,
+    val height: Int,
+    var macrocycleId: Long? = null
+) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var userId: Long = 0
-    var macrocycleId: Long? = null
+
+    override fun toString(): String = "($userId) $userName"
 }

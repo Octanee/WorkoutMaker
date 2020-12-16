@@ -32,12 +32,12 @@ class BodyFragment : Fragment() {
         return view
     }
 
-    private fun rotateFigure(manFigureFront: ImageView?, manFigureBack: ImageView?) {
-        manFigureBack?.isVisible = !manFigureBack?.isVisible!!
-        manFigureFront?.isVisible = !manFigureFront?.isVisible!!
+    private fun rotateFigure(manFigureFront: ImageView, manFigureBack: ImageView) {
+        manFigureBack.isVisible = !manFigureBack.isVisible
+        manFigureFront.isVisible = !manFigureFront.isVisible
     }
 
-    private fun setImageView(manFigureFront: ImageView?, manFigureBack: ImageView?) {
+    private fun setImageView(manFigureFront: ImageView, manFigureBack: ImageView) {
         setDrawableToImage(
             manFigureFront,
             DrawableHelper.getLayerDrawable(DrawableHelper.ManFigure.FRONT, requireContext()),
@@ -52,11 +52,11 @@ class BodyFragment : Fragment() {
     }
 
     private fun setDrawableToImage(
-        imageView: ImageView?,
+        imageView: ImageView,
         layerDrawable: LayerDrawable?,
         visible: Boolean
     ) {
-        imageView?.setImageDrawable(layerDrawable)
-        imageView?.isVisible = visible
+        imageView.setImageDrawable(layerDrawable)
+        imageView.isVisible = visible
     }
 }

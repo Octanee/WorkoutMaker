@@ -90,7 +90,7 @@
             app:behind_swiped_item_icon_margin="16dp"
             app:behind_swiped_item_icon_secondary="@drawable/ic_edit"
             app:divider="@drawable/divider"
-            app:item_layout="@layout/item_mesocycle"
+            app:item_layout="@layout/item_microcycle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

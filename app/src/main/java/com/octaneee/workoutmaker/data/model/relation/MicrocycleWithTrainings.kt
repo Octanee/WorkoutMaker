@@ -13,8 +13,13 @@ data class MicrocycleWithTrainings(
     val microcycle: Microcycle,
     @Relation(
         parentColumn = "microcycleId",
-        entity = Training::class,
-        entityColumn = "microcycleId"
+        entityColumn = "microcycleId",
+        entity = Training::class
     )
-    var trainings: List<TrainingWithSets> = listOf()
-) : Parcelable
+    val trainingWithSetAndExercises: MutableList<TrainingWithSetAndExercises> = mutableListOf()
+) : Parcelable {
+
+    override fun toString(): String {
+        return "$microcycle $trainingWithSetAndExercises"
+    }
+}

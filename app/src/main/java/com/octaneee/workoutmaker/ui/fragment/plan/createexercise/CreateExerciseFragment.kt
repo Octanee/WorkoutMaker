@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.fragment_create_exercise.view.*
 class CreateExerciseFragment : Fragment() {
 
     private val viewModel: CreateExerciseFragmentViewModel by viewModels()
-    private lateinit var createExerciseFragmentDragDropAdapter: CreateExerciseFragmentDragDropAdapter
+    private lateinit var adapter: CreateExerciseFragmentDragDropAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,16 +43,16 @@ class CreateExerciseFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_create_exercise, container, false)
 
-        setUpCreateExerciseFragmentNameEditText(view.createExerciseFragmentNameEditText)
-        setUpCreateExerciseFragmentPrimaryMuscleButton(view.createExerciseFragmentPrimaryMuscleButton)
-        setUpCreateExerciseFragmentAdditionalMusclesButton(view.createExerciseFragmentAdditionalMusclesButton)
-        setUpCreateExerciseFragmentExerciseTypeButton(view.createExerciseFragmentExerciseTypeButton)
-        setUpCreateExerciseFragmentEquipmentButton(view.createExerciseFragmentEquipmentButton)
-        setUpCreateExerciseFragmentNoteListRecyclerView(view.createExerciseFragmentNoteListRecyclerView)
-        setUpCreateExerciseFragmentAddNoteButton(view.createExerciseFragmentAddNoteButton)
+        setUpNameEditText(view.createExerciseFragmentNameEditText)
+        setUpPrimaryMuscleButton(view.createExerciseFragmentPrimaryMuscleButton)
+        setUpAdditionalMusclesButton(view.createExerciseFragmentAdditionalMusclesButton)
+        setUpExerciseTypeButton(view.createExerciseFragmentExerciseTypeButton)
+        setUpEquipmentButton(view.createExerciseFragmentEquipmentButton)
+        setUpListNoteRecyclerView(view.createExerciseFragmentNoteListRecyclerView)
+        setUpAddNoteButton(view.createExerciseFragmentAddNoteButton)
 
         viewModel.noteList.observe(viewLifecycleOwner, {
-            createExerciseFragmentDragDropAdapter.updateDataSet(it)
+            adapter.updateDataSet(it)
         })
         return view
     }
@@ -71,7 +71,7 @@ class CreateExerciseFragment : Fragment() {
 
     private fun menuSave() {
         if (validation()) {
-            viewModel.saveExercise(createExerciseFragmentDragDropAdapter.dataSet)
+            viewModel.saveExercise(adapter.dataSet)
 //            val action =
 //                CreateExerciseFragmentDirections.actionCreateExerciseFragmentToExerciseListFragment(
 //                    null,
@@ -122,7 +122,7 @@ class CreateExerciseFragment : Fragment() {
         }
     }
 
-    private fun setUpCreateExerciseFragmentNameEditText(editText: EditText) {
+    private fun setUpNameEditText(editText: EditText) {
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -143,7 +143,7 @@ class CreateExerciseFragment : Fragment() {
 
     }
 
-    private fun setUpCreateExerciseFragmentPrimaryMuscleButton(button: Button) {
+    private fun setUpPrimaryMuscleButton(button: Button) {
         viewModel.muscleList.observe(viewLifecycleOwner, { muscleList ->
             button.setOnClickListener {
                 createExerciseFragmentPrimaryMuscleButtonOnClick(muscleList)
@@ -161,7 +161,7 @@ class CreateExerciseFragment : Fragment() {
         val builder = AlertDialog.Builder(context)
         val names = mutableListOf<String>()
         for (muscle in list) {
-            names.add(muscle.name)
+            names.add(muscle.muscleName)
         }
 
         val checkedIndex =
@@ -176,7 +176,7 @@ class CreateExerciseFragment : Fragment() {
                     val selectedItem = list[position]
                     viewModel.primaryMuscle = selectedItem
                     createExerciseFragmentPrimaryMuscleNameTextView.text =
-                        selectedItem.name
+                        selectedItem.muscleName
                 }
             }
             setNegativeButton("Cancel", null)
@@ -192,7 +192,7 @@ class CreateExerciseFragment : Fragment() {
             }
     }
 
-    private fun setUpCreateExerciseFragmentAdditionalMusclesButton(button: Button) {
+    private fun setUpAdditionalMusclesButton(button: Button) {
         viewModel.muscleList.observe(viewLifecycleOwner, { muscleList ->
             button.setOnClickListener {
                 createExerciseFragmentAdditionalMusclesButtonOnClick(muscleList)
@@ -213,7 +213,7 @@ class CreateExerciseFragment : Fragment() {
         val selectedList = mutableListOf<Boolean>()
 
         for (muscle in list) {
-            names.add(muscle.name)
+            names.add(muscle.muscleName)
             if (viewModel.additionalMuscles.contains(muscle)) {
                 selectedList.add(true)
             } else {
@@ -258,7 +258,7 @@ class CreateExerciseFragment : Fragment() {
         dialog.show()
     }
 
-    private fun setUpCreateExerciseFragmentExerciseTypeButton(button: Button) {
+    private fun setUpExerciseTypeButton(button: Button) {
         viewModel.exerciseTypeList.observe(viewLifecycleOwner, { exerciseTypeList ->
             button.setOnClickListener {
                 createExerciseFragmentExerciseTypeButtonOnClick(exerciseTypeList)
@@ -271,7 +271,7 @@ class CreateExerciseFragment : Fragment() {
         val builder = AlertDialog.Builder(context)
         val names = mutableListOf<String>()
         for (exerciseType in list) {
-            names.add(exerciseType.name)
+            names.add(exerciseType.exerciseTypeName)
         }
         val checkedIndex =
             if (viewModel.exerciseType != null) list.indexOf(viewModel.exerciseType) else -1
@@ -285,7 +285,7 @@ class CreateExerciseFragment : Fragment() {
                     val selectedItem = list[position]
                     viewModel.exerciseType = selectedItem
                     createExerciseFragmentExerciseTypeNameTextView.text =
-                        selectedItem.name
+                        selectedItem.exerciseTypeName
                 }
             }
             setNegativeButton("Cancel", null)
@@ -301,7 +301,7 @@ class CreateExerciseFragment : Fragment() {
             }
     }
 
-    private fun setUpCreateExerciseFragmentEquipmentButton(button: Button) {
+    private fun setUpEquipmentButton(button: Button) {
         viewModel.equipmentList.observe(viewLifecycleOwner, { equipmentList ->
             button.setOnClickListener {
                 createExerciseFragmentEquipmentButtonOnClick(equipmentList)
@@ -314,7 +314,7 @@ class CreateExerciseFragment : Fragment() {
         val builder = AlertDialog.Builder(context)
         val names = mutableListOf<String>()
         for (equipment in list) {
-            names.add(equipment.name)
+            names.add(equipment.equipmentName)
         }
         val checkedIndex =
             if (viewModel.equipment != null) list.indexOf(viewModel.equipment) else -1
@@ -328,7 +328,7 @@ class CreateExerciseFragment : Fragment() {
                     val selectedItem = list[position]
                     viewModel.equipment = selectedItem
                     createExerciseFragmentEquipmentNameTextView.text =
-                        selectedItem.name
+                        selectedItem.equipmentName
                 }
             }
             setNegativeButton("Cancel", null)
@@ -344,7 +344,7 @@ class CreateExerciseFragment : Fragment() {
             }
     }
 
-    private fun setUpCreateExerciseFragmentAddNoteButton(button: Button) {
+    private fun setUpAddNoteButton(button: Button) {
         button.setOnClickListener {
             createExerciseFragmentAddNoteButtonOnClick()
         }
@@ -374,13 +374,13 @@ class CreateExerciseFragment : Fragment() {
         dialog.show()
     }
 
-    private fun setUpCreateExerciseFragmentNoteListRecyclerView(recyclerView: DragDropSwipeRecyclerView) {
-        createExerciseFragmentDragDropAdapter =
+    private fun setUpListNoteRecyclerView(recyclerView: DragDropSwipeRecyclerView) {
+        adapter =
             CreateExerciseFragmentDragDropAdapter(viewModel.noteList.value!!.toList())
 
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = createExerciseFragmentDragDropAdapter
+            adapter = this@CreateExerciseFragment.adapter
             orientation =
                 DragDropSwipeRecyclerView.ListOrientation.VERTICAL_LIST_WITH_VERTICAL_DRAGGING
             swipeListener = onItemSwipeListener()

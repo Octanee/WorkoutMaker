@@ -10,6 +10,84 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/createTrainingFragmentNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Training Name"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/createTrainingFragmentNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/paradise_pink"
+            android:ems="10"
+            android:hint="Enter name"
+            android:inputType="number"
+            android:textColor="@color/cultured"
+            android:textColorHighlight="@color/paradise_pink"
+            android:textColorLink="@color/paradise_pink"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createTrainingFragmentNameTextView" />
+
+        <TextView
+            android:id="@+id/createTrainingFragmentDayOfMicrocycleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Day of Microcycle"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createTrainingFragmentNameEditText" />
+
+        <EditText
+            android:id="@+id/createTrainingFragmentDayOfMicrocycleEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/paradise_pink"
+            android:ems="10"
+            android:hint="Enter day of microcycle"
+            android:inputType="number"
+            android:textColor="@color/cultured"
+            android:textColorHighlight="@color/paradise_pink"
+            android:textColorLink="@color/paradise_pink"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createTrainingFragmentDayOfMicrocycleTextView" />
+
+        <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+            android:id="@+id/createTrainingFragmentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:behind_swiped_item_bg_color="@color/swipe_delete"
+            app:behind_swiped_item_bg_color_secondary="@color/swipe_edit"
+            app:behind_swiped_item_icon="@drawable/ic_delete"
+            app:behind_swiped_item_icon_margin="16dp"
+            app:behind_swiped_item_icon_secondary="@drawable/ic_edit"
+            app:divider="@drawable/divider"
+            app:item_layout="@layout/item_set"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createTrainingFragmentDayOfMicrocycleEditText" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/createTrainingFragmentAddExerciseToTrainingFAB"
@@ -19,13 +97,13 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/paradise_pink"
             android:clickable="true"
+            android:contentDescription="AddExercise"
             android:focusable="true"
             android:src="@drawable/ic_add"
             app:borderWidth="0dp"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="AddExercise"
             app:tint="@color/cultured" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

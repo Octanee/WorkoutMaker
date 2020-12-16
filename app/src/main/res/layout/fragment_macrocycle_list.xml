@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.plan.macrocyclelist.MacrocycleListFragment">
+
+    <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+        android:id="@+id/macrocycleListFragmentRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behind_swiped_item_bg_color="@color/swipe_delete"
+        app:behind_swiped_item_bg_color_secondary="@color/swipe_edit"
+        app:behind_swiped_item_icon="@drawable/ic_delete"
+        app:behind_swiped_item_icon_margin="16dp"
+        app:behind_swiped_item_icon_secondary="@drawable/ic_edit"
+        app:divider="@drawable/divider"
+        app:item_layout="@layout/item_macrocycle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
 
 
 </FrameLayout>

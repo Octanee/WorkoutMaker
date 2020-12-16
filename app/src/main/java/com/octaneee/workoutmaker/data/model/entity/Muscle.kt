@@ -8,7 +8,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "muscle_table")
 @Parcelize
-data class Muscle(val name: String, val drawable: String) : BaseEntity, Parcelable {
+data class Muscle(val muscleName: String, val drawable: String) : BaseEntity, Parcelable {
     @PrimaryKey(autoGenerate = true)
     var muscleId: Long = 0
+
+    override fun toString(): String = "($muscleId) $muscleName"
 }

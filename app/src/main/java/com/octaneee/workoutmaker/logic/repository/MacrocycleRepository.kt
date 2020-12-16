@@ -8,11 +8,12 @@ import com.octaneee.workoutmaker.logic.repository.base.BaseRepository
 
 class MacrocycleRepository(private val dao: MacrocycleDao) : BaseRepository<Macrocycle>(dao) {
 
-    fun getFullMacrocycle(macrocycleId: Long): LiveData<MacrocycleWithMesocycles> {
-        return dao.getFullMacrocycle(macrocycleId)
+
+    fun getMacrocycles(): LiveData<List<Macrocycle>> {
+        return dao.getMacrocycles()
     }
 
-    fun getMacrocycleById(macrocycleId: Long): Macrocycle {
+    fun getMacrocycleById(macrocycleId: Long): LiveData<MacrocycleWithMesocycles> {
         return dao.getMacrocycleById(macrocycleId)
     }
 }
