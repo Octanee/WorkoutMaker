@@ -15,8 +15,6 @@ import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.data.model.entity.Microcycle
-import com.octaneee.workoutmaker.data.model.relation.MicrocycleWithTrainings
 import com.octaneee.workoutmaker.data.model.relation.TrainingWithSetAndExercises
 import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
 import com.octaneee.workoutmaker.ui.fragment.plan.createmicrocycle.adapter.CreateMicrocycleFragmentDragDropAdapter
@@ -90,10 +88,10 @@ class CreateMicrocycleFragment : Fragment() {
 
     private fun menuSave() {
         if (validateData()) {
-            mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles!!.microcycleWithTrainings.add(
-                viewModel.microcycleWithTrainings
-            )
-            mainActivityViewModel.microcycleWithTrainings = null
+//            mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles!!.microcycleWithTrainings.add(
+//                viewModel.microcycleWithTrainings
+//            )
+//            mainActivityViewModel.microcycleWithTrainings = null
             val action =
                 CreateMicrocycleFragmentDirections.actionCreateMicrocycleFragmentToCreateMesocycleFragment()
             findNavController().navigate(action)
@@ -124,7 +122,7 @@ class CreateMicrocycleFragment : Fragment() {
 
     private fun setUpFAB(fab: FloatingActionButton) {
         fab.setOnClickListener {
-            mainActivityViewModel.microcycleWithTrainings = viewModel.microcycleWithTrainings
+            // mainActivityViewModel.microcycleWithTrainings = viewModel.microcycleWithTrainings
             val action =
                 CreateMicrocycleFragmentDirections.actionCreateMicrocycleFragmentToCreateTrainingFragment()
             findNavController().navigate(action)
@@ -132,12 +130,12 @@ class CreateMicrocycleFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        viewModel.microcycleWithTrainings =
-            if (mainActivityViewModel.microcycleWithTrainings == null) {
-                MicrocycleWithTrainings(Microcycle("", 0, 7))
-            } else {
-                mainActivityViewModel.microcycleWithTrainings!!
-            }
+//        viewModel.microcycleWithTrainings =
+//            if (mainActivityViewModel.microcycleWithTrainings == null) {
+//                MicrocycleWithTrainings(Microcycle("", 0, 7))
+//            } else {
+//                mainActivityViewModel.microcycleWithTrainings!!
+//            }
     }
 
     private fun setUpRecyclerView(recyclerView: DragDropSwipeRecyclerView) {
@@ -177,8 +175,8 @@ class CreateMicrocycleFragment : Fragment() {
         }
 
     private fun swipeLeftToRight(item: TrainingWithSetAndExercises): Boolean {
-        mainActivityViewModel.microcycleWithTrainings = viewModel.microcycleWithTrainings
-        mainActivityViewModel.trainingWithSetAndExercise = item
+//        mainActivityViewModel.microcycleWithTrainings = viewModel.microcycleWithTrainings
+//        mainActivityViewModel.trainingWithSetAndExercise = item
         val action =
             CreateMicrocycleFragmentDirections.actionCreateMicrocycleFragmentToCreateTrainingFragment()
         findNavController().navigate(action)

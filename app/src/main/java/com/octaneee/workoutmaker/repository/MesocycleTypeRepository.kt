@@ -1,11 +1,12 @@
-package com.octaneee.workoutmaker.logic.repository
+package com.octaneee.workoutmaker.repository
 
 import androidx.lifecycle.LiveData
 import com.octaneee.workoutmaker.data.dao.MesocycleTypeDao
 import com.octaneee.workoutmaker.data.model.entity.MesocycleType
-import com.octaneee.workoutmaker.logic.repository.base.BaseRepository
+import com.octaneee.workoutmaker.repository.base.BaseRepository
+import javax.inject.Inject
 
-class MesocycleTypeRepository(private val dao: MesocycleTypeDao) :
+class MesocycleTypeRepository @Inject constructor(private val dao: MesocycleTypeDao) :
     BaseRepository<MesocycleType>(dao) {
 
     fun getMesocycleTypeList(): LiveData<List<MesocycleType>> {

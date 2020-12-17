@@ -1,86 +1,51 @@
 package com.octaneee.workoutmaker.ui.activity.main.viewmodel
 
-import android.app.Application
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.data.database.WorkoutMakerDatabase
 import com.octaneee.workoutmaker.data.model.entity.*
 import com.octaneee.workoutmaker.data.model.entity.Set
 import com.octaneee.workoutmaker.data.model.entity.crossref.ExerciseMuscleCrossRef
 import com.octaneee.workoutmaker.data.model.entity.crossref.ExerciseNoteCrossRef
-import com.octaneee.workoutmaker.data.model.relation.*
-import com.octaneee.workoutmaker.logic.repository.*
-import com.octaneee.workoutmaker.logic.repository.crossref.ExerciseMuscleCrossRefRepository
-import com.octaneee.workoutmaker.logic.repository.crossref.ExerciseNoteCrossRefRepository
+import com.octaneee.workoutmaker.repository.*
+import com.octaneee.workoutmaker.repository.crossref.ExerciseMuscleCrossRefRepository
+import com.octaneee.workoutmaker.repository.crossref.ExerciseNoteCrossRefRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
 
-class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
+class MainActivityViewModel @ViewModelInject constructor(
+    val userRepository: UserRepository,
+    val exerciseMuscleCrossRefRepository: ExerciseMuscleCrossRefRepository,
+    val exerciseNoteCrossRefRepository: ExerciseNoteCrossRefRepository,
+    val equipmentRepository: EquipmentRepository,
+    val exerciseRepository: ExerciseRepository,
+    val exerciseTypeRepository: ExerciseTypeRepository,
+    val macrocycleRepository: MacrocycleRepository,
+    val measurementRepository: MeasurementRepository,
+    val mesocycleRepository: MesocycleRepository,
+    val mesocycleTypeRepository: MesocycleTypeRepository,
+    val microcycleRepository: MicrocycleRepository,
+    val muscleRepository: MuscleRepository,
+    val noteRepository: NoteRepository,
+    val setRepository: SetRepository,
+    val setLogRepository: SetLogRepository,
+    val setTypeRepository: SetTypeRepository,
+    val trainingRepository: TrainingRepository,
+) : ViewModel() {
 
-    private val userRepository =
-        UserRepository(WorkoutMakerDatabase.getDatabase(application).getUserDao())
 
-    var macrocycleWithMesocycles: MacrocycleWithMesocycles? = null
-    var mesocycleAndMesocycleTypeWithMicrocycles: MesocycleAndMesocycleTypeWithMicrocycles? = null
-    var microcycleWithTrainings: MicrocycleWithTrainings? = null
-    var trainingWithSetAndExercise: TrainingWithSetAndExercises? = null
-    var setAndExercisesList: MutableList<SetAndExercise> = mutableListOf()
+    val user = userRepository.getUser(1)
 
-    val userAndMacrocycle = userRepository.getUser(1)
 
-    fun setCurrentMacrocycle(macrocycleId: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            userAndMacrocycle.value?.let {
-                val newUser = it.user
-                newUser.macrocycleId = macrocycleId
-                userRepository.update(newUser)
-            }
-        }
-    }
-
-    private val exerciseMuscleCrossRefRepository = ExerciseMuscleCrossRefRepository(
-        WorkoutMakerDatabase.getDatabase(application).getExerciseMuscleCrossRefDao()
-    )
-    private val exerciseNoteCrossRefRepository = ExerciseNoteCrossRefRepository(
-        WorkoutMakerDatabase.getDatabase(application).getExerciseNoteCrossRefDao()
-    )
-    private val equipmentRepository =
-        EquipmentRepository(WorkoutMakerDatabase.getDatabase(application).getEquipmentDao())
-    private val exerciseRepository =
-        ExerciseRepository(WorkoutMakerDatabase.getDatabase(application).getExerciseDao())
-    private val exerciseTypeRepository =
-        ExerciseTypeRepository(WorkoutMakerDatabase.getDatabase(application).getExerciseTypeDao())
-    private val macrocycleRepository =
-        MacrocycleRepository(WorkoutMakerDatabase.getDatabase(application).getMacrocycleDao())
-    private val measurementRepository =
-        MeasurementRepository(WorkoutMakerDatabase.getDatabase(application).getMeasurementDao())
-    private val mesocycleRepository =
-        MesocycleRepository(WorkoutMakerDatabase.getDatabase(application).getMesocycleDao())
-    private val mesocycleTypeRepository =
-        MesocycleTypeRepository(WorkoutMakerDatabase.getDatabase(application).getMesocycleTypeDao())
-    private val microcycleRepository =
-        MicrocycleRepository(WorkoutMakerDatabase.getDatabase(application).getMicrocycleDao())
-    private val muscleRepository =
-        MuscleRepository(WorkoutMakerDatabase.getDatabase(application).getMuscleDao())
-    private val noteRepository =
-        NoteRepository(WorkoutMakerDatabase.getDatabase(application).getNoteDao())
-    private val setRepository =
-        SetRepository(WorkoutMakerDatabase.getDatabase(application).getSetDao())
-    private val setLogRepository =
-        SetLogRepository(WorkoutMakerDatabase.getDatabase(application).getSetLogDao())
-    private val setTypeRepository =
-        SetTypeRepository(WorkoutMakerDatabase.getDatabase(application).getSetTypeDao())
-    private val trainingRepository =
-        TrainingRepository(WorkoutMakerDatabase.getDatabase(application).getTrainingDao())
-
+    // Populate database
 
     fun populateDatabase(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.d("PopulateDatabase", "Start")
+            Timber.i("Start")
             val exerciseMuscleCrossRefs = mutableListOf<ExerciseMuscleCrossRef>()
             val exerciseNoteCrossRefs = mutableListOf<ExerciseNoteCrossRef>()
             val equipments = mutableListOf<Equipment>()
@@ -108,7 +73,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 )
             }
             val equipmentId = equipmentRepository.insert(equipments)
-            Log.d("PopulateDatabase", "Added Equipment")
+            Timber.i("Added Equipment")
 
             for (i in 1..5) {
                 exerciseTypes.add(
@@ -119,19 +84,19 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 )
             }
             val exerciseTypeId = exerciseTypeRepository.insert(exerciseTypes)
-            Log.d("PopulateDatabase", "Added ExerciseType")
+            Timber.i("Added ExerciseType")
 
             for (i in 1..5) {
                 macrocycles.add(Macrocycle("Macrocycle $i"))
             }
             val macrocycleId = macrocycleRepository.insert(macrocycles)
-            Log.d("PopulateDatabase", "Added Macrocycle")
+            Timber.i("Added Macrocycle")
 
             for (i in 1..5) {
                 mesocycleTypes.add(MesocycleType("MesocycleType $i"))
             }
             val mesocycleTypeId = mesocycleTypeRepository.insert(mesocycleTypes)
-            Log.d("PopulateDatabase", "Added MeasocycleType")
+            Timber.i("Added MeasocycleType")
 
             for (i in 1..20) {
                 muscles.add(
@@ -142,19 +107,19 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 )
             }
             val muscleId = muscleRepository.insert(muscles)
-            Log.d("PopulateDatabase", "Added Muscle")
+            Timber.i("Added Muscle")
 
             for (i in 1..100) {
                 notes.add(Note("Note $i"))
             }
             val noteId = noteRepository.insert(notes)
-            Log.d("PopulateDatabase", "Added Note")
+            Timber.i("Added Note")
 
             for (i in 1..5) {
                 setTypes.add(SetType("SetType $i"))
             }
             val setTypeId = setTypeRepository.insert(setTypes)
-            Log.d("PopulateDatabase", "Added SetType")
+            Timber.i("Added SetType")
 
             for (i in 1..30) {
                 exercises.add(
@@ -167,7 +132,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 )
             }
             val exerciseId = exerciseRepository.insert(exercises)
-            Log.d("PopulateDatabase", "Added Exercise")
+            Timber.i("Added Exercise")
 
             for (i in 1..20) {
                 mesocycles.add(
@@ -179,31 +144,31 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 )
             }
             val mesocycleId = mesocycleRepository.insert(mesocycles)
-            Log.d("PopulateDatabase", "Added Mesocycle")
+            Timber.i("Added Mesocycle")
 
             for (i in 1..50) {
                 microcycles.add(Microcycle("Microcycle $i", mesocycleId.random(), (5..10).random()))
             }
             val microcycleId = microcycleRepository.insert(microcycles)
-            Log.d("PopulateDatabase", "Added Microcycle")
+            Timber.i("Added Microcycle")
 
             for (i in 1..50) {
                 trainings.add(Training("Training $i", microcycleId.random(), (1..7).random()))
             }
             val trainingId = trainingRepository.insert(trainings)
-            Log.d("PopulateDatabase", "Added Training")
+            Timber.i("Added Training")
 
             for (i in 1..5) {
                 users.add(User("User $i", 180, macrocycleId.random()))
             }
             val userId = userRepository.insert(users)
-            Log.d("PopulateDatabase", "Added User")
+            Timber.i("Added User")
 
             for (i in 1..20) {
                 measurements.add(Measurement(userId.random(), Calendar.getInstance().time))
             }
             val measurementId = measurementRepository.insert(measurements)
-            Log.d("PopulateDatabase", "Added Measurement")
+            Timber.i("Added Measurement")
 
             for (i in 1..100) {
                 exerciseMuscleCrossRefs.add(
@@ -215,7 +180,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             }
             val exerciseMuscleCrossRefId =
                 exerciseMuscleCrossRefRepository.insert(exerciseMuscleCrossRefs)
-            Log.d("PopulateDatabase", "Added ExerciseMuscleCrossRef")
+            Timber.i("Added ExerciseMuscleCrossRef")
 
             for (i in 1..100) {
                 exerciseNoteCrossRefs.add(
@@ -227,7 +192,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
             }
             val exerciseNoteCrossRefId =
                 exerciseNoteCrossRefRepository.insert(exerciseNoteCrossRefs)
-            Log.d("PopulateDatabase", "Added ExerciseNoteCrossRef")
+            Timber.i("Added ExerciseNoteCrossRef")
 
             for (i in 1..100) {
                 sets.add(
@@ -240,7 +205,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 )
             }
             val setId = setRepository.insert(sets)
-            Log.d("PopulateDatabase", "Added Set")
+            Timber.i("Added Set")
 
             for (i in 1..50) {
                 setLogs.add(
@@ -253,12 +218,9 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                 )
             }
             val setLogId = setLogRepository.insert(setLogs)
-            Log.d("PopulateDatabase", "Added SetLog")
+            Timber.i("Added SetLog")
 
-            Log.d("PopulateDatabase", "END")
+            Timber.i("END")
         }
     }
-
-    val trainingWithSetAndExercisesList = trainingRepository.getTrainingWithSetAndExercises()
-    val macrocycles = macrocycleRepository.getMacrocycles()
 }

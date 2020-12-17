@@ -12,7 +12,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.octaneee.workoutmaker.R
 import com.octaneee.workoutmaker.data.model.entity.Macrocycle
-import com.octaneee.workoutmaker.logic.utility.disableDragDirection
+import com.octaneee.workoutmaker.other.disableDragDirection
 import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
 import com.octaneee.workoutmaker.ui.fragment.plan.macrocyclelist.adapter.MacrocycleListFragmentAdapter
 import com.octaneee.workoutmaker.ui.fragment.plan.macrocyclelist.viewmodel.MacrocycleListFragmentViewModel
@@ -43,9 +43,9 @@ class MacrocycleListFragment : Fragment() {
     private fun setUpRecyclerView(recyclerView: DragDropSwipeRecyclerView) {
         adapter = MacrocycleListFragmentAdapter(listOf(), mainActivityViewModel)
 
-        viewModel.macrocycles.observe(viewLifecycleOwner, {
-            updateAdapterDataSet(it)
-        })
+//        viewModel.macrocycles.observe(viewLifecycleOwner, {
+//            updateAdapterDataSet(it)
+//        })
 
         with(recyclerView) {
             adapter = this@MacrocycleListFragment.adapter
@@ -79,12 +79,12 @@ class MacrocycleListFragment : Fragment() {
 
     private fun swipeLeftToRight(item: Macrocycle): Boolean {
 
-        viewModel.getMacrocycleWithMesocyclesById(item.macrocycleId).observe(viewLifecycleOwner, {
-            mainActivityViewModel.macrocycleWithMesocycles = it
-            val action =
-                MacrocycleListFragmentDirections.actionMacrocycleListFragmentToCreateMacrocycleFragment()
-            findNavController().navigate(action)
-        })
+//        viewModel.getMacrocycleWithMesocyclesById(item.macrocycleId).observe(viewLifecycleOwner, {
+//            mainActivityViewModel.macrocycleWithMesocycles = it
+//            val action =
+//                MacrocycleListFragmentDirections.actionMacrocycleListFragmentToCreateMacrocycleFragment()
+//            findNavController().navigate(action)
+//        })
 
         return true
     }
@@ -94,7 +94,7 @@ class MacrocycleListFragment : Fragment() {
         with(builder) {
             setTitle("Delete ${item.macrocycleName}?")
             setPositiveButton("Delete") { _, _ ->
-                viewModel.deleteMacrocycle(item)
+                // viewModel.deleteMacrocycle(item)
             }
             setNegativeButton("Cancel", null)
             setCancelable(false)

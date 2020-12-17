@@ -12,7 +12,7 @@ import com.octaneee.workoutmaker.data.model.entity.Equipment
 import com.octaneee.workoutmaker.data.model.entity.ExerciseType
 import com.octaneee.workoutmaker.data.model.entity.Muscle
 import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
-import com.octaneee.workoutmaker.logic.utility.DrawableHelper
+import com.octaneee.workoutmaker.other.DrawableHelper
 import com.octaneee.workoutmaker.ui.fragment.plan.exerciselistsorttype.ExerciseListSortTypeFragment
 import com.octaneee.workoutmaker.ui.fragment.plan.exerciselistsorttype.ExerciseListSortTypeFragmentDirections
 

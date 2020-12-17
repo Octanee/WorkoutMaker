@@ -12,9 +12,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.data.model.entity.Training
 import com.octaneee.workoutmaker.data.model.relation.SetAndExercise
-import com.octaneee.workoutmaker.data.model.relation.TrainingWithSetAndExercises
 import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
 import com.octaneee.workoutmaker.ui.fragment.plan.createtraining.adapter.CreateTrainingFragmentDragDropAdapter
 import com.octaneee.workoutmaker.ui.fragment.plan.createtraining.viewmodel.CreateTrainingFragmentViewModel
@@ -59,10 +57,10 @@ class CreateTrainingFragment : Fragment() {
 
     private fun menuSave() {
         if (validateDate()) {
-            mainActivityViewModel.microcycleWithTrainings!!.trainingWithSetAndExercises.add(
-                viewModel.trainingWithSetAndExercises
-            )
-            mainActivityViewModel.trainingWithSetAndExercise = null
+//            mainActivityViewModel.microcycleWithTrainings!!.trainingWithSetAndExercises.add(
+//                viewModel.trainingWithSetAndExercises
+//            )
+//            mainActivityViewModel.trainingWithSetAndExercise = null
             val action =
                 CreateTrainingFragmentDirections.actionCreateTrainingFragmentToCreateMicrocycleFragment()
             findNavController().navigate(action)
@@ -101,17 +99,17 @@ class CreateTrainingFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        viewModel.trainingWithSetAndExercises =
-            if (mainActivityViewModel.trainingWithSetAndExercise == null) {
-                TrainingWithSetAndExercises(Training("", 0, 7))
-            } else {
-                mainActivityViewModel.trainingWithSetAndExercise!!
-            }
+//        viewModel.trainingWithSetAndExercises =
+//            if (mainActivityViewModel.trainingWithSetAndExercise == null) {
+//                TrainingWithSetAndExercises(Training("", 0, 7))
+//            } else {
+//                mainActivityViewModel.trainingWithSetAndExercise!!
+//            }
     }
 
     private fun setUpFAB(fab: FloatingActionButton) {
         fab.setOnClickListener {
-            mainActivityViewModel.trainingWithSetAndExercise = viewModel.trainingWithSetAndExercises
+//            mainActivityViewModel.trainingWithSetAndExercise = viewModel.trainingWithSetAndExercises
             val action =
                 CreateTrainingFragmentDirections.actionCreateTrainingFragmentToAddSetsToTrainingFragment()
             findNavController().navigate(action)
@@ -161,8 +159,8 @@ class CreateTrainingFragment : Fragment() {
     }
 
     private fun swipeListenerLeftToRight(item: SetAndExercise): Boolean {
-        mainActivityViewModel.trainingWithSetAndExercise = viewModel.trainingWithSetAndExercises
-        mainActivityViewModel.setAndExercisesList.add(item)
+//        mainActivityViewModel.trainingWithSetAndExercise = viewModel.trainingWithSetAndExercises
+//        mainActivityViewModel.setAndExercisesList.add(item)
         val action =
             CreateTrainingFragmentDirections.actionCreateTrainingFragmentToAddSetsToTrainingFragment()
         findNavController().navigate(action)

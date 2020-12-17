@@ -42,18 +42,18 @@ class ExerciseListSortTypeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.equipmentListLiveData.observe(viewLifecycleOwner, {
-            viewModel.equipmentList = it
-            updateRecyclerView()
-        })
-        viewModel.muscleListLiveData.observe(viewLifecycleOwner, {
-            viewModel.muscleList = it
-            updateRecyclerView()
-        })
-        viewModel.exerciseTypeListLiveData.observe(viewLifecycleOwner, {
-            viewModel.exerciseTypeList = it
-            updateRecyclerView()
-        })
+//        viewModel.equipmentListLiveData.observe(viewLifecycleOwner, {
+//            viewModel.equipmentList = it
+//            updateRecyclerView()
+//        })
+//        viewModel.muscleListLiveData.observe(viewLifecycleOwner, {
+//            viewModel.muscleList = it
+//            updateRecyclerView()
+//        })
+//        viewModel.exerciseTypeListLiveData.observe(viewLifecycleOwner, {
+//            viewModel.exerciseTypeList = it
+//            updateRecyclerView()
+//        })
         setUpExerciseListSortTypeFragmentRecyclerView()
     }
 

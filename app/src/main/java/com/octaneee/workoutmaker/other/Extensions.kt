@@ -1,4 +1,4 @@
-package com.octaneee.workoutmaker.logic.utility
+package com.octaneee.workoutmaker.other
 
 import androidx.lifecycle.MutableLiveData
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView

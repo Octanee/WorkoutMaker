@@ -1,7 +1,6 @@
 package com.octaneee.workoutmaker.ui.fragment.plan.macrocyclelist.adapter
 
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
@@ -17,14 +16,13 @@ class MacrocycleListFragmentAdapter(
     DragDropSwipeAdapter<Macrocycle, MacrocycleListFragmentAdapter.ViewHolder>(dataSet) {
 
     inner class ViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
-        val dragIcon: ImageView = itemView.findViewById(R.id.itemMacrocycleDragIcon)
-        val number: TextView = itemView.findViewById(R.id.itemMacrocycleNumberTextView)
+        val number: TextView = itemView.findViewById(R.id.itemMacrocycleNameTextView)
         val name: TextView = itemView.findViewById(R.id.itemMacrocycleNameTextView)
 
         init {
             itemView.setOnClickListener {
                 val macrocycleId = dataSet[adapterPosition].macrocycleId
-                mainActivityViewModel.setCurrentMacrocycle(macrocycleId)
+                // mainActivityViewModel.setCurrentMacrocycle(macrocycleId)
                 val action =
                     MacrocycleListFragmentDirections.actionMacrocycleListFragmentToPlanFragment()
                 itemView.findNavController().navigate(action)
@@ -43,8 +41,8 @@ class MacrocycleListFragmentAdapter(
         item: Macrocycle,
         viewHolder: ViewHolder,
         position: Int
-    ): View {
-        return viewHolder.dragIcon
+    ): View? {
+        return null
     }
 
     override fun onBindViewHolder(

@@ -11,10 +11,6 @@ import kotlinx.android.synthetic.main.fragment_add_sets_to_training.view.*
 
 class AddSetsToTrainingFragment : Fragment() {
 
-    companion object {
-        const val TAG = "AddExerciseToTraining"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)

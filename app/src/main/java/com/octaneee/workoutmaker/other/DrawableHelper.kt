@@ -1,4 +1,4 @@
-package com.octaneee.workoutmaker.logic.utility
+package com.octaneee.workoutmaker.other
 
 import android.content.Context
 import android.graphics.drawable.Drawable

@@ -1,4 +1,4 @@
-package com.octaneee.workoutmaker.logic.repository.base
+package com.octaneee.workoutmaker.repository.base
 
 import com.octaneee.workoutmaker.data.dao.base.BaseDao
 import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity

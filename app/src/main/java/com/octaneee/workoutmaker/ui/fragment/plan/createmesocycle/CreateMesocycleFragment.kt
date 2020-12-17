@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
-import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,12 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.data.model.entity.Mesocycle
-import com.octaneee.workoutmaker.data.model.entity.MesocycleType
-import com.octaneee.workoutmaker.data.model.relation.MesocycleAndMesocycleTypeWithMicrocycles
 import com.octaneee.workoutmaker.data.model.relation.MicrocycleWithTrainings
 import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
 import com.octaneee.workoutmaker.ui.fragment.plan.createmesocycle.adapter.CreateMesocycleFragmentDragDropAdapter
@@ -74,9 +68,9 @@ class CreateMesocycleFragment : Fragment() {
 
     private fun menuSave() {
         if (validateDate()) {
-            mainActivityViewModel.macrocycleWithMesocycles!!.mesocycles.remove(mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles)
-            mainActivityViewModel.macrocycleWithMesocycles!!.mesocycles.add(viewModel.mesocycleAndMesocycleTypeWithMicrocycles)
-            mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles = null
+//            mainActivityViewModel.macrocycleWithMesocycles!!.mesocycles.remove(mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles)
+//            mainActivityViewModel.macrocycleWithMesocycles!!.mesocycles.add(viewModel.mesocycleAndMesocycleTypeWithMicrocycles)
+//            mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles = null
             val action =
                 CreateMesocycleFragmentDirections.actionCreateMesocycleFragmentToCreateMacrocycleFragment()
             findNavController().navigate(action)
@@ -151,9 +145,9 @@ class CreateMesocycleFragment : Fragment() {
         }
 
     private fun swipeLeftToRight(item: MicrocycleWithTrainings): Boolean {
-        mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles =
-            viewModel.mesocycleAndMesocycleTypeWithMicrocycles
-        mainActivityViewModel.microcycleWithTrainings = item
+//        mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles =
+//            viewModel.mesocycleAndMesocycleTypeWithMicrocycles
+//        mainActivityViewModel.microcycleWithTrainings = item
 
         val action =
             CreateMesocycleFragmentDirections.actionCreateMesocycleFragmentToCreateMicrocycleFragment()
@@ -193,21 +187,21 @@ class CreateMesocycleFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        viewModel.mesocycleAndMesocycleTypeWithMicrocycles =
-            if (mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles == null) {
-                MesocycleAndMesocycleTypeWithMicrocycles(
-                    Mesocycle("", 0, 0),
-                    MesocycleType("")
-                )
-            } else {
-                mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles!!
-            }
+        //       viewModel.mesocycleAndMesocycleTypeWithMicrocycles =
+//            if (mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles == null) {
+//                MesocycleAndMesocycleTypeWithMicrocycles(
+//                    Mesocycle("", 0, 0),
+//                    MesocycleType("")
+//                )
+//            } else {
+//                mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles!!
+//            }
     }
 
     private fun setUpNewTrainingFAB(fab: FloatingActionButton) {
         fab.setOnClickListener {
-            mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles =
-                viewModel.mesocycleAndMesocycleTypeWithMicrocycles
+//            mainActivityViewModel.mesocycleAndMesocycleTypeWithMicrocycles =
+//                viewModel.mesocycleAndMesocycleTypeWithMicrocycles
             val action =
                 CreateMesocycleFragmentDirections.actionCreateMesocycleFragmentToCreateMicrocycleFragment()
             findNavController().navigate(action)
@@ -216,39 +210,39 @@ class CreateMesocycleFragment : Fragment() {
 
     private fun setUpPickMesocycleTypeButton(button: Button) {
         button.setOnClickListener {
-            viewModel.mesocycleTypeList.observe(viewLifecycleOwner, {
-                val builder = MaterialAlertDialogBuilder(requireContext())
-
-                val nameList = mutableListOf<String>()
-                for (mesocycleType in it) {
-                    nameList.add(mesocycleType.mesocycleTypeName)
-                }
-
-                with(builder) {
-                    setTitle("Pick mesocycle type:")
-                    setSingleChoiceItems(nameList.toTypedArray(), -1) { _, _ -> }
-                    setPositiveButton("Submit") { dialog, _ ->
-                        val position = (dialog as AlertDialog).listView.checkedItemPosition
-                        if (position != -1) {
-                            val selectedItem = viewModel.mesocycleTypeList.value!![position]
-                            createMesocycleFragmentMesocycleTypeName.text =
-                                selectedItem.mesocycleTypeName
-                            viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycleType =
-                                selectedItem
-                        }
-                    }
-                    setNegativeButton("Cancel", null)
-                    setCancelable(false)
-                }
-
-                val dialog = builder.create()
-                dialog.show()
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
-                dialog.listView.onItemClickListener =
-                    AdapterView.OnItemClickListener { _, _, position, _ ->
-                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = position != -1
-                    }
-            })
+//            viewModel.mesocycleTypeList.observe(viewLifecycleOwner, {
+//                val builder = MaterialAlertDialogBuilder(requireContext())
+//
+//                val nameList = mutableListOf<String>()
+//                for (mesocycleType in it) {
+//                    nameList.add(mesocycleType.mesocycleTypeName)
+//                }
+//
+//                with(builder) {
+//                    setTitle("Pick mesocycle type:")
+//                    setSingleChoiceItems(nameList.toTypedArray(), -1) { _, _ -> }
+//                    setPositiveButton("Submit") { dialog, _ ->
+//                        val position = (dialog as AlertDialog).listView.checkedItemPosition
+//                        if (position != -1) {
+//                            val selectedItem = viewModel.mesocycleTypeList.value!![position]
+//                            createMesocycleFragmentMesocycleTypeName.text =
+//                                selectedItem.mesocycleTypeName
+//                            viewModel.mesocycleAndMesocycleTypeWithMicrocycles.mesocycleType =
+//                                selectedItem
+//                        }
+//                    }
+//                    setNegativeButton("Cancel", null)
+//                    setCancelable(false)
+//                }
+//
+//                val dialog = builder.create()
+//                dialog.show()
+//                dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
+//                dialog.listView.onItemClickListener =
+//                    AdapterView.OnItemClickListener { _, _, position, _ ->
+//                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = position != -1
+//                    }
+            //})
         }
     }
 

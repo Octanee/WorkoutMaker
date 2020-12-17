@@ -15,7 +15,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListene
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.octaneee.workoutmaker.R
 import com.octaneee.workoutmaker.data.model.relation.ExerciseHolder
-import com.octaneee.workoutmaker.logic.utility.disableDragDirection
+import com.octaneee.workoutmaker.other.disableDragDirection
 import com.octaneee.workoutmaker.ui.fragment.plan.exerciselist.adapter.ExerciseListFragmentDragDropAdapter
 import com.octaneee.workoutmaker.ui.fragment.plan.exerciselist.viewmodel.ExerciseListFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_exercise_list.view.*
@@ -49,20 +49,20 @@ class ExerciseListFragment : Fragment() {
     }
 
     private fun setUpExerciseList() {
-        args.equipment?.let {
-            viewModel.setExerciseList(it)
-            exerciseListFragmentDragDropAdapter.type = ExerciseListFragmentDragDropAdapter.EQUIPMENT
-        }
-        args.muscle?.let {
-            viewModel.setExerciseList(it)
-            exerciseListFragmentDragDropAdapter.type =
-                ExerciseListFragmentDragDropAdapter.PRIMARY_MUSCLE
-        }
-        args.exerciseType?.let {
-            viewModel.setExerciseList(it)
-            exerciseListFragmentDragDropAdapter.type =
-                ExerciseListFragmentDragDropAdapter.EXERCISE_TYPE
-        }
+//        args.equipment?.let {
+//            viewModel.setExerciseList(it)
+//            exerciseListFragmentDragDropAdapter.type = ExerciseListFragmentDragDropAdapter.EQUIPMENT
+//        }
+//        args.muscle?.let {
+//            viewModel.setExerciseList(it)
+//            exerciseListFragmentDragDropAdapter.type =
+//                ExerciseListFragmentDragDropAdapter.PRIMARY_MUSCLE
+//        }
+//        args.exerciseType?.let {
+//            viewModel.setExerciseList(it)
+//            exerciseListFragmentDragDropAdapter.type =
+//                ExerciseListFragmentDragDropAdapter.EXERCISE_TYPE
+//        }
     }
 
     private fun setUpCreateTrainingFragmentNewExerciseFAB(fab: FloatingActionButton) {

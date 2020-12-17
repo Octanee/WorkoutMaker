@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.logic.utility.DrawableHelper
+import com.octaneee.workoutmaker.other.DrawableHelper
 
 class BodyFragment : Fragment() {
 

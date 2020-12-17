@@ -21,7 +21,7 @@ import com.octaneee.workoutmaker.data.model.entity.Equipment
 import com.octaneee.workoutmaker.data.model.entity.ExerciseType
 import com.octaneee.workoutmaker.data.model.entity.Muscle
 import com.octaneee.workoutmaker.data.model.entity.Note
-import com.octaneee.workoutmaker.logic.utility.notifyObserver
+import com.octaneee.workoutmaker.other.notifyObserver
 import com.octaneee.workoutmaker.ui.fragment.plan.createexercise.adapter.CreateExerciseFragmentDragDropAdapter
 import com.octaneee.workoutmaker.ui.fragment.plan.createexercise.viewmodel.CreateExerciseFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_create_exercise.*
@@ -71,7 +71,7 @@ class CreateExerciseFragment : Fragment() {
 
     private fun menuSave() {
         if (validation()) {
-            viewModel.saveExercise(adapter.dataSet)
+            // viewModel.saveExercise(adapter.dataSet)
 //            val action =
 //                CreateExerciseFragmentDirections.actionCreateExerciseFragmentToExerciseListFragment(
 //                    null,
@@ -144,11 +144,11 @@ class CreateExerciseFragment : Fragment() {
     }
 
     private fun setUpPrimaryMuscleButton(button: Button) {
-        viewModel.muscleList.observe(viewLifecycleOwner, { muscleList ->
-            button.setOnClickListener {
-                createExerciseFragmentPrimaryMuscleButtonOnClick(muscleList)
-            }
-        })
+//        viewModel.muscleList.observe(viewLifecycleOwner, { muscleList ->
+//            button.setOnClickListener {
+//                createExerciseFragmentPrimaryMuscleButtonOnClick(muscleList)
+//            }
+//        })
     }
 
     private fun createExerciseFragmentPrimaryMuscleButtonOnClick(muscleList: List<Muscle>) {
@@ -193,11 +193,11 @@ class CreateExerciseFragment : Fragment() {
     }
 
     private fun setUpAdditionalMusclesButton(button: Button) {
-        viewModel.muscleList.observe(viewLifecycleOwner, { muscleList ->
-            button.setOnClickListener {
-                createExerciseFragmentAdditionalMusclesButtonOnClick(muscleList)
-            }
-        })
+//        viewModel.muscleList.observe(viewLifecycleOwner, { muscleList ->
+//            button.setOnClickListener {
+//                createExerciseFragmentAdditionalMusclesButtonOnClick(muscleList)
+//            }
+//        })
     }
 
     private fun createExerciseFragmentAdditionalMusclesButtonOnClick(muscleList: List<Muscle>) {
@@ -259,11 +259,11 @@ class CreateExerciseFragment : Fragment() {
     }
 
     private fun setUpExerciseTypeButton(button: Button) {
-        viewModel.exerciseTypeList.observe(viewLifecycleOwner, { exerciseTypeList ->
-            button.setOnClickListener {
-                createExerciseFragmentExerciseTypeButtonOnClick(exerciseTypeList)
-            }
-        })
+//        viewModel.exerciseTypeList.observe(viewLifecycleOwner, { exerciseTypeList ->
+//            button.setOnClickListener {
+//                createExerciseFragmentExerciseTypeButtonOnClick(exerciseTypeList)
+//            }
+//        })
     }
 
     private fun createExerciseFragmentExerciseTypeButtonOnClick(exerciseTypeList: List<ExerciseType>) {
@@ -302,11 +302,11 @@ class CreateExerciseFragment : Fragment() {
     }
 
     private fun setUpEquipmentButton(button: Button) {
-        viewModel.equipmentList.observe(viewLifecycleOwner, { equipmentList ->
-            button.setOnClickListener {
-                createExerciseFragmentEquipmentButtonOnClick(equipmentList)
-            }
-        })
+//        viewModel.equipmentList.observe(viewLifecycleOwner, { equipmentList ->
+//            button.setOnClickListener {
+//                createExerciseFragmentEquipmentButtonOnClick(equipmentList)
+//            }
+//        })
     }
 
     private fun createExerciseFragmentEquipmentButtonOnClick(equipmentList: List<Equipment>) {

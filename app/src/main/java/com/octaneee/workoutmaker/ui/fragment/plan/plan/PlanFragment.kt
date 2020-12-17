@@ -10,12 +10,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.octaneee.workoutmaker.R
 import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
 import com.octaneee.workoutmaker.ui.fragment.plan.plan.viewmodel.PlanFragmentViewModel
-import kotlinx.android.synthetic.main.fragment_plan.view.*
 
 class PlanFragment : Fragment() {
 
@@ -33,22 +31,22 @@ class PlanFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_plan, container, false)
 
-        mainActivityViewModel.userAndMacrocycle.observe(viewLifecycleOwner, Observer {
-            viewModel.macrocycleWithMesocycles = it.macrocycleWithMesocycles
-            if (viewModel.macrocycleWithMesocycles != null) {
-                setMacrocycleConstraintLayout(
-                    view.planFragmentCurrentMacrocycleConstraintLayout,
-                    view.planFragmentNoMacrocycleConstraintLayout,
-                    view.planFragmentCurrentMacrocycleNameTextView
-                )
-            } else {
-                setNoMacrocycleConstraintLayout(
-                    view.planFragmentCurrentMacrocycleConstraintLayout,
-                    view.planFragmentNoMacrocycleConstraintLayout,
-                    view.planFragmentCreateMacrocycleButton
-                )
-            }
-        })
+//        mainActivityViewModel.userAndMacrocycle.observe(viewLifecycleOwner, Observer {
+//            viewModel.macrocycleWithMesocycles = it.macrocycleWithMesocycles
+//            if (viewModel.macrocycleWithMesocycles != null) {
+//                setMacrocycleConstraintLayout(
+//                    view.planFragmentCurrentMacrocycleConstraintLayout,
+//                    view.planFragmentNoMacrocycleConstraintLayout,
+//                    view.planFragmentCurrentMacrocycleNameTextView
+//                )
+//            } else {
+//                setNoMacrocycleConstraintLayout(
+//                    view.planFragmentCurrentMacrocycleConstraintLayout,
+//                    view.planFragmentNoMacrocycleConstraintLayout,
+//                    view.planFragmentCreateMacrocycleButton
+//                )
+//            }
+//        })
 
         return view
     }
@@ -95,7 +93,7 @@ class PlanFragment : Fragment() {
             Toast.makeText(context, "Pick a macrocycle", Toast.LENGTH_LONG).show()
             return
         }
-        mainActivityViewModel.macrocycleWithMesocycles = viewModel.macrocycleWithMesocycles
+        //mainActivityViewModel.macrocycleWithMesocycles = viewModel.macrocycleWithMesocycles
         val action =
             PlanFragmentDirections.actionPlanFragmentToCreateMacrocycleFragment()
         findNavController().navigate(action)
@@ -117,7 +115,7 @@ class PlanFragment : Fragment() {
             setTitle("Delete Macrocycle")
             setMessage("Are you sure you want to delete this macrocycle?")
             setPositiveButton("Yes") { _, _ ->
-                viewModel.macrocycleWithMesocycles?.let { viewModel.deleteMacrocycle(it.macrocycle) }
+                //viewModel.macrocycleWithMesocycles?.let { viewModel.deleteMacrocycle(it.macrocycle) }
             }
             setNegativeButton("No", null)
             setIcon(R.drawable.ic_delete)

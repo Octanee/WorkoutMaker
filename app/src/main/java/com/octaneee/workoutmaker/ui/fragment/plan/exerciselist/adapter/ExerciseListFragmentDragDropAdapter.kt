@@ -10,7 +10,7 @@ import android.widget.Toast
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.octaneee.workoutmaker.R
 import com.octaneee.workoutmaker.data.model.relation.ExerciseHolder
-import com.octaneee.workoutmaker.logic.utility.DrawableHelper
+import com.octaneee.workoutmaker.other.DrawableHelper
 
 class ExerciseListFragmentDragDropAdapter(
     dataSet: List<ExerciseHolder>,
