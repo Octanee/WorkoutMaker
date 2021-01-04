@@ -1,6 +1,13 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="Theme.WorkoutMaker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+    <style name="Theme.WorkoutMaker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/xiketic</item>
+        <item name="colorSecondary">@color/oxford_blue</item>
+        <item name="colorAccent">@color/paradise_pink</item>
+        <item name="android:textViewStyle">@style/MaterialTextView</item>
+        <item name="toolbarStyle">@style/Toolbar</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigation</item>
+        <item name="materialButtonStyle">@style/MaterialButton</item>
     </style>
+
 </resources>

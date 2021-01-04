@@ -1,58 +1,66 @@
 package com.octaneee.workoutmaker.ui.fragment.plan.plan
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.view.*
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.ui.activity.main.viewmodel.MainActivityViewModel
-import com.octaneee.workoutmaker.ui.fragment.plan.plan.viewmodel.PlanFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_plan.*
 
-class PlanFragment : Fragment() {
+@AndroidEntryPoint
+class PlanFragment : Fragment(R.layout.fragment_plan) {
 
-    private val viewModel: PlanFragmentViewModel by viewModels()
-    private val mainActivityViewModel: MainActivityViewModel by activityViewModels()
+    private val viewModel: PlanViewModel by viewModels()
+    private lateinit var editMenuItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_plan, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-//        mainActivityViewModel.userAndMacrocycle.observe(viewLifecycleOwner, Observer {
-//            viewModel.macrocycleWithMesocycles = it.macrocycleWithMesocycles
-//            if (viewModel.macrocycleWithMesocycles != null) {
-//                setMacrocycleConstraintLayout(
-//                    view.planFragmentCurrentMacrocycleConstraintLayout,
-//                    view.planFragmentNoMacrocycleConstraintLayout,
-//                    view.planFragmentCurrentMacrocycleNameTextView
-//                )
-//            } else {
-//                setNoMacrocycleConstraintLayout(
-//                    view.planFragmentCurrentMacrocycleConstraintLayout,
-//                    view.planFragmentNoMacrocycleConstraintLayout,
-//                    view.planFragmentCreateMacrocycleButton
-//                )
-//            }
-//        })
+        setupMacrocycle()
 
-        return view
+        planFragmentShowButton.setOnClickListener {
+            findNavController().navigate(R.id.action_planFragment_to_macrocycleListFragment)
+        }
+    }
+
+    private fun setupMacrocycle() {
+        viewModel.currentMacrocycleId.observe(viewLifecycleOwner) {
+            planFragmentNoMacrocycleConstraintLayout.visibility = View.VISIBLE
+            it?.let {
+                viewModel.setupCurrentMacrocycle(it)
+                viewModel.currentMacrocycle?.observe(viewLifecycleOwner) { macrocycle ->
+                    macrocycle?.let {
+                        planFragmentNoMacrocycleConstraintLayout.visibility = View.GONE
+                        planFragmentCurrentMacrocycleConstraintLayout.visibility =
+                            View.VISIBLE
+                        planFragmentCurrentMacrocycleNameTextView.text =
+                            macrocycle.macrocycleName
+                        editMenuItem.isVisible = true
+                    }
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.plan_fragment_menu, menu)
+        menu.forEach {
+            if (it.itemId == R.id.planFragmentMenuEdit) {
+                editMenuItem = it
+                editMenuItem.isVisible = false
+            }
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -60,68 +68,18 @@ class PlanFragment : Fragment() {
         when (item.itemId) {
             R.id.planFragmentMenuEdit -> menuEdit()
             R.id.planFragmentMenuChange -> menuChange()
-            R.id.planFragmentMenuDelete -> menuDelete()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setMacrocycleConstraintLayout(
-        macrocycleConstraintLayout: ConstraintLayout,
-        noMacrocycleConstraintLayout: ConstraintLayout,
-        nameTextView: TextView
-    ) {
-        macrocycleConstraintLayout.visibility = View.VISIBLE
-        noMacrocycleConstraintLayout.visibility = View.GONE
-        nameTextView.text = viewModel.macrocycleWithMesocycles!!.macrocycle.macrocycleName
-    }
-
-    private fun setNoMacrocycleConstraintLayout(
-        macrocycleConstraintLayout: ConstraintLayout,
-        noMacrocycleConstraintLayout: ConstraintLayout,
-        button: Button
-    ) {
-        macrocycleConstraintLayout.visibility = View.GONE
-        noMacrocycleConstraintLayout.visibility = View.VISIBLE
-        button.setOnClickListener {
-            val action = PlanFragmentDirections.actionPlanFragmentToMacrocycleListFragment()
-            findNavController().navigate(action)
-        }
-    }
-
     private fun menuEdit() {
-        if (viewModel.macrocycleWithMesocycles == null) {
-            Toast.makeText(context, "Pick a macrocycle", Toast.LENGTH_LONG).show()
-            return
-        }
-        //mainActivityViewModel.macrocycleWithMesocycles = viewModel.macrocycleWithMesocycles
         val action =
-            PlanFragmentDirections.actionPlanFragmentToCreateMacrocycleFragment()
+            PlanFragmentDirections.actionPlanFragmentToMesocycleListFragment(viewModel.currentMacrocycle!!.value!!.macrocycleId)
         findNavController().navigate(action)
-
     }
 
     private fun menuChange() {
-        val action = PlanFragmentDirections.actionPlanFragmentToMacrocycleListFragment()
-        findNavController().navigate(action)
-    }
-
-    private fun menuDelete() {
-        if (viewModel.macrocycleWithMesocycles == null) {
-            Toast.makeText(context, "Pick a macrocycle", Toast.LENGTH_LONG).show()
-            return
-        }
-        val builder = AlertDialog.Builder(activity)
-        with(builder) {
-            setTitle("Delete Macrocycle")
-            setMessage("Are you sure you want to delete this macrocycle?")
-            setPositiveButton("Yes") { _, _ ->
-                //viewModel.macrocycleWithMesocycles?.let { viewModel.deleteMacrocycle(it.macrocycle) }
-            }
-            setNegativeButton("No", null)
-            setIcon(R.drawable.ic_delete)
-            show()
-
-        }
+        findNavController().navigate(R.id.action_planFragment_to_macrocycleListFragment)
     }
 }
 

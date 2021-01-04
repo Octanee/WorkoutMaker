@@ -9,9 +9,7 @@
     <item
         android:id="@+id/planFragmentMenuChange"
         android:icon="@drawable/ic_autorenew"
-        android:title="Change" />
-    <item
-        android:id="@+id/planFragmentMenuDelete"
-        android:icon="@drawable/ic_delete"
-        android:title="Delete" />
+        android:title="Change"
+        app:showAsAction="ifRoom" />
+
 </menu>

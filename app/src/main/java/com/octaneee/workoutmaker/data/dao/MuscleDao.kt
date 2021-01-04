@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import com.octaneee.workoutmaker.data.dao.base.BaseDao
-import com.octaneee.workoutmaker.data.model.entity.Muscle
+import com.octaneee.workoutmaker.model.entity.Muscle
 
 @Dao
 interface MuscleDao : BaseDao<Muscle> {

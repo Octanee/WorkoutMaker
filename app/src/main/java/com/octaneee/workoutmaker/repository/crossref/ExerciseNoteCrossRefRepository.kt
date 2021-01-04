@@ -1,7 +1,7 @@
 package com.octaneee.workoutmaker.repository.crossref
 
 import com.octaneee.workoutmaker.data.dao.crossref.ExerciseNoteCrossRefDao
-import com.octaneee.workoutmaker.data.model.entity.crossref.ExerciseNoteCrossRef
+import com.octaneee.workoutmaker.model.entity.crossref.ExerciseNoteCrossRef
 import com.octaneee.workoutmaker.repository.base.BaseRepository
 import javax.inject.Inject
 

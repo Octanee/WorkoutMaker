@@ -1,7 +1,7 @@
 package com.octaneee.workoutmaker.data.dao.base
 
 import androidx.room.*
-import com.octaneee.workoutmaker.data.model.entity.base.BaseEntity
+import com.octaneee.workoutmaker.model.entity.base.BaseEntity
 
 @Dao
 interface BaseDao<T : BaseEntity> {
@@ -11,6 +11,12 @@ interface BaseDao<T : BaseEntity> {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(entities: List<T>): List<Long>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrUpdate(entity: T): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrUpdate(entities: List<T>): List<Long>
 
     @Update
     suspend fun update(entity: T)

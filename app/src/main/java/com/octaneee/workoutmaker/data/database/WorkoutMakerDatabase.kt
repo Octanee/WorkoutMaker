@@ -7,10 +7,12 @@ import com.octaneee.workoutmaker.data.converter.Converter
 import com.octaneee.workoutmaker.data.dao.*
 import com.octaneee.workoutmaker.data.dao.crossref.ExerciseMuscleCrossRefDao
 import com.octaneee.workoutmaker.data.dao.crossref.ExerciseNoteCrossRefDao
-import com.octaneee.workoutmaker.data.model.entity.*
-import com.octaneee.workoutmaker.data.model.entity.Set
-import com.octaneee.workoutmaker.data.model.entity.crossref.ExerciseMuscleCrossRef
-import com.octaneee.workoutmaker.data.model.entity.crossref.ExerciseNoteCrossRef
+import com.octaneee.workoutmaker.data.dao.crossref.TrainingExerciseCrossRefDao
+import com.octaneee.workoutmaker.model.entity.*
+import com.octaneee.workoutmaker.model.entity.Set
+import com.octaneee.workoutmaker.model.entity.crossref.ExerciseMuscleCrossRef
+import com.octaneee.workoutmaker.model.entity.crossref.ExerciseNoteCrossRef
+import com.octaneee.workoutmaker.model.entity.crossref.TrainingExerciseCrossRef
 
 @Database(
     entities = [
@@ -28,11 +30,11 @@ import com.octaneee.workoutmaker.data.model.entity.crossref.ExerciseNoteCrossRef
         SetLog::class,
         SetType::class,
         Training::class,
-        User::class,
         ExerciseMuscleCrossRef::class,
         ExerciseNoteCrossRef::class,
+        TrainingExerciseCrossRef::class
     ],
-    version = 1,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(Converter::class)
@@ -40,6 +42,7 @@ abstract class WorkoutMakerDatabase : RoomDatabase() {
 
     abstract fun getExerciseMuscleCrossRefDao(): ExerciseMuscleCrossRefDao
     abstract fun getExerciseNoteCrossRefDao(): ExerciseNoteCrossRefDao
+    abstract fun getTrainingExerciseCrossRefDao(): TrainingExerciseCrossRefDao
 
     abstract fun getEquipmentDao(): EquipmentDao
     abstract fun getExerciseDao(): ExerciseDao
@@ -55,5 +58,4 @@ abstract class WorkoutMakerDatabase : RoomDatabase() {
     abstract fun getSetLogDao(): SetLogDao
     abstract fun getSetTypeDao(): SetTypeDao
     abstract fun getTrainingDao(): TrainingDao
-    abstract fun getUserDao(): UserDao
 }

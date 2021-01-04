@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.plan.plan.PlanFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/planFragmentCurrentMacrocycleConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/planFragmentCurrentMacrocycleNameTextView"
@@ -30,7 +30,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/planFragmentNoMacrocycleConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/planFragmentNoMacrocycleTextView"
@@ -45,7 +46,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/planFragmentCreateMacrocycleButton"
+            android:id="@+id/planFragmentShowButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/paradise_pink"

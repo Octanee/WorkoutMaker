@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.setup.setup.SetupFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/setupFragmentNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="16dp"
+            android:text="User name:"
+            android:textAlignment="textStart"
+            android:textColor="@color/cultured"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/setupFragmentNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Name"
+            android:singleLine="true"
+            android:textColorHighlight="@color/paradise_pink"
+            android:textColorLink="@color/paradise_pink"
+            android:textCursorDrawable="@drawable/cursor"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setupFragmentNameTextView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/setupFragmentHeightTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Height:"
+            android:textAlignment="textStart"
+            android:textColor="@color/cultured"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setupFragmentNameEditText" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/setupFragmentHeightEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Height"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColorHighlight="@color/paradise_pink"
+            android:textColorLink="@color/paradise_pink"
+            android:textCursorDrawable="@drawable/cursor"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setupFragmentHeightTextView" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/setupFragmentSaveButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/paradise_pink"
+            android:text="Save"
+            android:textColor="@color/cultured"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setupFragmentHeightEditText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

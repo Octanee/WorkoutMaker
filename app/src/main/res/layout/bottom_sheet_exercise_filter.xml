@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetExerciseFilter"
+    style="@style/BottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/bottomSheetExerciseFilterDragIcon"
+        style="@style/BottomSheetDragIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="DragIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/bottomSheetExerciseFilterRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:checkedButton="@id/bottomSheetExerciseFilterMuscleRadioButton"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetExerciseFilterDragIcon">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/bottomSheetExerciseFilterMuscleRadioButton"
+            style="@style/FilterRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:text="Muscle" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/bottomSheetExerciseFilterExerciseTypeRadioButton"
+            style="@style/FilterRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:text="Exercise Type" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/bottomSheetExerciseFilterEquipmentRadioButton"
+            style="@style/FilterRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:text="Equipment" />
+    </RadioGroup>
+
+    <View
+        android:id="@+id/bottomSheetExerciseFilterDivider1"
+        style="@style/Divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetExerciseFilterRadioGroup" />
+
+    <TextView
+        android:id="@+id/bottomSheetExerciseFilterMuscleTextView"
+        style="@style/BottomSheetTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Muscle:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetExerciseFilterDivider1" />
+
+    <Spinner
+        android:id="@+id/bottomSheetExerciseFilterMuscleSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottomSheetExerciseFilterMuscleTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bottomSheetExerciseFilterMuscleTextView"
+        app:layout_constraintTop_toTopOf="@id/bottomSheetExerciseFilterMuscleTextView" />
+
+    <View
+        android:id="@+id/bottomSheetExerciseFilterDivider2"
+        style="@style/Divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetExerciseFilterMuscleTextView" />
+
+    <TextView
+        android:id="@+id/bottomSheetExerciseFilterExerciseTypeTextView"
+        style="@style/BottomSheetTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Exercise Type:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetExerciseFilterDivider2" />
+
+    <Spinner
+        android:id="@+id/bottomSheetExerciseFilterExerciseTypeSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottomSheetExerciseFilterExerciseTypeTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bottomSheetExerciseFilterExerciseTypeTextView"
+        app:layout_constraintTop_toTopOf="@id/bottomSheetExerciseFilterExerciseTypeTextView" />
+
+    <View
+        android:id="@+id/bottomSheetExerciseFilterDivider3"
+        style="@style/Divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetExerciseFilterExerciseTypeTextView" />
+
+    <TextView
+        android:id="@+id/bottomSheetExerciseFilterEquipmentTextView"
+        style="@style/BottomSheetTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Equipment:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetExerciseFilterDivider3" />
+
+    <Spinner
+        android:id="@+id/bottomSheetExerciseFilterEquipmentSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottomSheetExerciseFilterEquipmentTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bottomSheetExerciseFilterEquipmentTextView"
+        app:layout_constraintTop_toTopOf="@id/bottomSheetExerciseFilterEquipmentTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bottomSheetExerciseFilterApplyButton"
+        style="@style/MaterialButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetExerciseFilterEquipmentTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

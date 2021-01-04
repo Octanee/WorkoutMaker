@@ -11,152 +11,92 @@
         tools:layout="@layout/fragment_plan">
         <action
             android:id="@+id/action_planFragment_to_macrocycleListFragment"
-            app:destination="@id/macrocycleListFragment" />
+            app:destination="@id/macrocycleListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
         <action
-            android:id="@+id/action_planFragment_to_createMacrocycleFragment"
-            app:destination="@id/createMacrocycleFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/createMacrocycleFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.createmacrocycle.CreateMacrocycleFragment"
-        android:label="Create Macrocycle"
-        tools:layout="@layout/fragment_create_macrocycle">
-        <action
-            android:id="@+id/action_createMacrocycleFragment_to_macrocycleListFragment"
-            app:destination="@id/macrocycleListFragment" />
-        <action
-            android:id="@+id/action_createMacrocycleFragment_to_createMesocycleFragment"
-            app:destination="@id/createMesocycleFragment" />
-
+            android:id="@+id/action_planFragment_to_mesocycleListFragment"
+            app:destination="@id/mesocycleListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/macrocycleListFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.macrocyclelist.MacrocycleListFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.macrocycle_list.MacrocycleListFragment"
         android:label="Macrocycle list"
         tools:layout="@layout/fragment_macrocycle_list">
         <action
             android:id="@+id/action_macrocycleListFragment_to_planFragment"
-            app:destination="@id/planFragment" />
+            app:destination="@id/planFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
         <action
-            android:id="@+id/action_macrocycleListFragment_to_createMacrocycleFragment"
-            app:destination="@id/createMacrocycleFragment" />
+            android:id="@+id/action_macrocycleListFragment_to_mesocycleListFragment"
+            app:destination="@id/mesocycleListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/createMesocycleFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.createmesocycle.CreateMesocycleFragment"
-        android:label="fragment_create_mesocycle"
-        tools:layout="@layout/fragment_create_mesocycle">
-        <action
-            android:id="@+id/action_createMesocycleFragment_to_createMacrocycleFragment"
-            app:destination="@id/createMacrocycleFragment" />
-        <action
-            android:id="@+id/action_createMesocycleFragment_to_createMicrocycleFragment"
-            app:destination="@id/createMicrocycleFragment" />
-
-    </fragment>
-    <fragment
-        android:id="@+id/createTrainingFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.createtraining.CreateTrainingFragment"
-        android:label="fragment_create_training"
-        tools:layout="@layout/fragment_create_training">
-        <action
-            android:id="@+id/action_createTrainingFragment_to_addSetsToTrainingFragment"
-            app:destination="@id/addSetsToTrainingFragment" />
-        <action
-            android:id="@+id/action_createTrainingFragment_to_createMicrocycleFragment"
-            app:destination="@id/createMicrocycleFragment" />
+        android:id="@+id/mesocycleListFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.mesocycle_list.MesocycleListFragment"
+        tools:layout="@layout/fragment_mesocycle_list">
         <argument
-            android:name="trainingWithSetAndExercises"
-            android:defaultValue="@null"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.TrainingWithSetAndExercises"
-            app:nullable="true" />
-
+            android:name="macrocycleId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_mesocycleListFragment_to_microcycleListFragment"
+            app:destination="@id/microcycleListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/addSetsToTrainingFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.addsetstotraining.AddSetsToTrainingFragment"
-        android:label="Add sets"
-        tools:layout="@layout/fragment_add_sets_to_training">
-        <action
-            android:id="@+id/action_addSetsToTrainingFragment_to_createTrainingFragment"
-            app:destination="@id/createTrainingFragment" />
-        <action
-            android:id="@+id/action_addSetsToTrainingFragment_to_exerciseListSortTypeFragment"
-            app:destination="@id/exerciseListSortTypeFragment" />
+        android:id="@+id/microcycleListFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.microcycle_list.MicrocycleListFragment"
+        tools:layout="@layout/fragment_microcycle_list">
         <argument
-            android:name="wholeExercise"
-            android:defaultValue="@null"
-            app:argType="com.octaneee.workoutmaker.data.model.relation.WholeExercise"
-            app:nullable="true" />
+            android:name="mesocycleId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_microcycleListFragment_to_trainingListFragment"
+            app:destination="@id/trainingListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainingListFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.training_list.TrainingListFragment"
+        tools:layout="@layout/fragment_training_list">
+        <argument
+            android:name="microcycleId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_setListFragment"
+            app:destination="@id/setListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/setListFragment"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.set_list.SetListFragment"
+        tools:layout="@layout/fragment_set_list">
+        <argument
+            android:name="trainingId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_setListFragment_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseListFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.exerciselist.ExerciseListFragment"
-        android:label="Exercise list"
+        android:name="com.octaneee.workoutmaker.ui.fragment.plan.exercise_list.ExerciseListFragment"
+        android:label="Exercise List"
         tools:layout="@layout/fragment_exercise_list">
-        <action
-            android:id="@+id/action_exerciseListFragment_to_addSetsToTrainingFragment"
-            app:destination="@id/addSetsToTrainingFragment" />
-        <action
-            android:id="@+id/action_exerciseListFragment_to_createExerciseFragment"
-            app:destination="@id/createExerciseFragment" />
         <argument
-            android:name="muscle"
-            android:defaultValue="@null"
-            app:argType="com.octaneee.workoutmaker.data.model.entity.Muscle"
-            app:nullable="true" />
-        <argument
-            android:name="equipment"
-            android:defaultValue="@null"
-            app:argType="com.octaneee.workoutmaker.data.model.entity.Equipment"
-            app:nullable="true" />
-        <argument
-            android:name="exerciseType"
-            android:defaultValue="@null"
-            app:argType="com.octaneee.workoutmaker.data.model.entity.ExerciseType"
-            app:nullable="true" />
-
-    </fragment>
-    <fragment
-        android:id="@+id/createExerciseFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.createexercise.CreateExerciseFragment"
-        android:label="Create exercise"
-        tools:layout="@layout/fragment_create_exercise">
+            android:name="trainingId"
+            app:argType="long" />
         <action
-            android:id="@+id/action_createExerciseFragment_to_exerciseListFragment"
-            app:destination="@id/exerciseListFragment" />
-        <argument
-            android:name="muscle"
-            app:argType="com.octaneee.workoutmaker.data.model.entity.Muscle"
-            app:nullable="true" />
-        <argument
-            android:name="equipment"
-            app:argType="com.octaneee.workoutmaker.data.model.entity.Equipment"
-            app:nullable="true" />
-        <argument
-            android:name="exerciseType"
-            app:argType="com.octaneee.workoutmaker.data.model.entity.ExerciseType"
-            app:nullable="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/exerciseListSortTypeFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.exerciselistsorttype.ExerciseListSortTypeFragment"
-        android:label="Exercise list type"
-        tools:layout="@layout/fragment_exercise_list_sort_type">
-        <action
-            android:id="@+id/action_exerciseListSortTypeFragment_to_exerciseListFragment"
-            app:destination="@id/exerciseListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/createMicrocycleFragment"
-        android:name="com.octaneee.workoutmaker.ui.fragment.plan.createmicrocycle.CreateMicrocycleFragment"
-        android:label="fragment_create_microcycle"
-        tools:layout="@layout/fragment_create_microcycle">
-        <action
-            android:id="@+id/action_createMicrocycleFragment_to_createMesocycleFragment"
-            app:destination="@id/createMesocycleFragment" />
-        <action
-            android:id="@+id/action_createMicrocycleFragment_to_createTrainingFragment"
-            app:destination="@id/createTrainingFragment" />
+            android:id="@+id/action_exerciseListFragment_to_setListFragment"
+            app:destination="@id/setListFragment"
+            app:popUpTo="@id/trainingListFragment" />
     </fragment>
 </navigation>

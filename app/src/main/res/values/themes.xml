@@ -1,10 +1,12 @@
 <resources>
 
-    <style name="Theme.WorkoutMaker" parent="Theme.MaterialComponents">
+    <style name="Theme.WorkoutMaker" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/xiketic</item>
         <item name="colorSecondary">@color/oxford_blue</item>
         <item name="colorAccent">@color/paradise_pink</item>
-        <item name="android:textColor">@color/cultured</item>
+        <item name="android:textViewStyle">@style/MaterialTextView</item>
+        <item name="toolbarStyle">@style/Toolbar</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigation</item>
     </style>
 
 </resources>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemCreateSetItem"
+    style="@style/SetItemCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/itemCreateSetItemNumberTextView"
+            style="@style/ItemNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/itemCreateSetItemDivider"
+            style="@style/Divider"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itemCreateSetItemNumberTextView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/itemCreateSetItemMinimumEditText"
+            style="@style/EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:hint="Min"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@id/itemCreateSetItemDivider"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemCreateSetItemRepsTextView"
+            style="@style/ItemPrimaryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="@id/itemCreateSetItemMinimumEditText"
+            app:layout_constraintStart_toEndOf="@id/itemCreateSetItemMinimumEditText"
+            app:layout_constraintTop_toTopOf="@id/itemCreateSetItemMinimumEditText" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/itemCreateSetItemMaximumEditText"
+            style="@style/EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:hint="Max"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@id/itemCreateSetItemMinimumEditText"
+            app:layout_constraintStart_toEndOf="@id/itemCreateSetItemRepsTextView"
+            app:layout_constraintTop_toTopOf="@id/itemCreateSetItemMinimumEditText" />
+
+        <ImageView
+            android:id="@+id/itemCreateSetItemRestTimeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:src="@drawable/ic_timer"
+            app:layout_constraintBottom_toBottomOf="@id/itemCreateSetItemRestTimeEditText"
+            app:layout_constraintStart_toEndOf="@id/itemCreateSetItemDivider"
+            app:layout_constraintTop_toTopOf="@id/itemCreateSetItemRestTimeEditText" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/itemCreateSetItemRestTimeEditText"
+            style="@style/EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:hint="Time"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textAlignment="textEnd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itemCreateSetItemRestTimeIcon"
+            app:layout_constraintTop_toBottomOf="@id/itemCreateSetItemMinimumEditText" />
+
+        <ImageView
+            android:id="@+id/itemSetDragIcon"
+            style="@style/ItemDragIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Drag indicator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
