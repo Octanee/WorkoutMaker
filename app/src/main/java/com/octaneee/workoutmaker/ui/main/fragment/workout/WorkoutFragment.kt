@@ -70,10 +70,9 @@ class WorkoutFragment : Fragment(), ItemListener {
 
     private fun setupStartButton() {
         workoutFragmentStartButton.setOnClickListener {
-            viewModel.workoutManager.startWorkout(viewModel.trainingWithExercises.value!!)
+            viewModel.workoutManager.setTrainingWithExercises(viewModel.trainingWithExercises.value!!)
 
             findNavController().navigate(R.id.currentWorkoutActivity)
-            requireActivity().finish()
         }
     }
 

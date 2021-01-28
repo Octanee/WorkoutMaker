@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/currentWorkoutExerciseListFragment"
         android:name="com.octaneee.workoutmaker.ui.current_workout.fragment.exercise_list.CurrentWorkoutExerciseListFragment"
-        android:label="fragment_current_workout"
         tools:layout="@layout/fragment_current_workout_exercise_list">
         <action
             android:id="@+id/action_workoutExerciseListFragment_to_exerciseSeriesListFragment"
@@ -17,7 +16,6 @@
     <fragment
         android:id="@+id/exerciseSeriesListFragment"
         android:name="com.octaneee.workoutmaker.ui.current_workout.fragment.series_list.CurrentWorkoutExerciseSeriesListFragment"
-        android:label="fragment_exercise_series_list"
         tools:layout="@layout/fragment_current_workout_exercise_series_list">
         <action
             android:id="@+id/action_exerciseSeriesListFragment_to_workoutExerciseListFragment"
@@ -28,6 +26,5 @@
     <activity
         android:id="@+id/mainActivityWorkout"
         android:name="com.octaneee.workoutmaker.ui.main.activity.MainActivity"
-        android:label="activity_main"
         tools:layout="@layout/activity_main" />
 </navigation>

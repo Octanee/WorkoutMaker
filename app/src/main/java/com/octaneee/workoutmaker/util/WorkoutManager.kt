@@ -1,8 +1,6 @@
 package com.octaneee.workoutmaker.util
 
-import android.content.Context
 import android.os.SystemClock
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.octaneee.workoutmaker.model.WorkoutExercise
 import com.octaneee.workoutmaker.model.WorkoutSeries
@@ -13,7 +11,8 @@ import com.octaneee.workoutmaker.other.extension.addAll
 
 class WorkoutManager {
 
-    var startTime: Long = 0
+    var startTime: MutableLiveData<Long> = MutableLiveData(0)
+    var isWorking: Boolean = false
 
     var training = MutableLiveData<Training>()
 
@@ -23,7 +22,7 @@ class WorkoutManager {
     val exercises = MutableLiveData<MutableList<WorkoutExercise>>()
     val logs = mutableListOf<SeriesLog>()
 
-    private fun setTrainingWithExercises(trainingWithExercises: TrainingWithExercises) {
+    fun setTrainingWithExercises(trainingWithExercises: TrainingWithExercises) {
         training.value = trainingWithExercises.training
 
         val tempExercises = mutableListOf<WorkoutExercise>()
@@ -59,13 +58,14 @@ class WorkoutManager {
         }
     }
 
-    fun startWorkout(trainingWithExercises: TrainingWithExercises) {
-        setTrainingWithExercises(trainingWithExercises)
-        startTime = SystemClock.elapsedRealtime()
+    fun startWorkout() {
+        isWorking = true
+        startTime.value = SystemClock.elapsedRealtime()
     }
 
-    fun stopWorkout(context: Context?) {
-        val workoutTime = SystemClock.elapsedRealtime() - startTime
-        Toast.makeText(context, "$workoutTime", Toast.LENGTH_SHORT).show()
+    fun stopWorkout() {
+        isWorking = false
+
+        //val workoutTime = SystemClock.elapsedRealtime() - startTime.value!!
     }
 }

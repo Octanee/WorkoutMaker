@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.octaneee.workoutmaker.R
 import com.octaneee.workoutmaker.adapter.WorkoutExerciseAdapter
+import com.octaneee.workoutmaker.ui.current_workout.activity.CurrentWorkoutActivity
 import com.octaneee.workoutmaker.util.ItemListener
 import com.octaneee.workoutmaker.util.ItemTouchHelperCallback
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +52,9 @@ class CurrentWorkoutExerciseListFragment :
 
     private fun setupChronometer() {
         chronometer = workoutExerciseListFragmentChronometer
-        chronometer.base = viewModel.workoutManager.startTime
+        viewModel.workoutManager.startTime.observe(viewLifecycleOwner) {
+            chronometer.base = it
+        }
         chronometer.start()
     }
 
@@ -68,11 +71,16 @@ class CurrentWorkoutExerciseListFragment :
     }
 
     private fun stopWorkout() {
-        viewModel.workoutManager.stopWorkout(context)
-        chronometer.stop()
+        stopWorkoutService()
+
 
         findNavController().navigate(R.id.mainActivityWorkout)
         requireActivity().finish()
+    }
+
+    private fun stopWorkoutService() {
+        val currentWorkoutActivity = activity as CurrentWorkoutActivity
+        currentWorkoutActivity.stopWorkoutService()
     }
 
     private fun setupRecyclerView() {
