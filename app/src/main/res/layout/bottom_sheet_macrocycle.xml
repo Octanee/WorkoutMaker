@@ -29,19 +29,90 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bottomSheetMacrocycleDragIcon" />
 
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/bottomSheetMacrocycleStartTextView"
+        style="@style/BottomSheetTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Start:"
+        app:layout_constraintBottom_toBottomOf="@id/bottomSheetMacrocycleStartDateTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bottomSheetMacrocycleStartDateTextView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/bottomSheetMacrocycleStartDateTextView"
+        style="@style/BottomSheetTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="@id/bottomSheetMacrocycleStartDateButton"
+        app:layout_constraintEnd_toStartOf="@id/bottomSheetMacrocycleStartDateButton"
+        app:layout_constraintStart_toEndOf="@+id/bottomSheetMacrocycleStartTextView"
+        app:layout_constraintTop_toTopOf="@id/bottomSheetMacrocycleStartDateButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bottomSheetMacrocycleStartDateButton"
+        style="@style/PickButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="Pick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetMacrocycleNameEditText" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/bottomSheetMacrocycleEndTextView"
+        style="@style/BottomSheetTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="End:"
+        app:layout_constraintBottom_toBottomOf="@id/bottomSheetMacrocycleEndDateTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bottomSheetMacrocycleEndDateTextView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/bottomSheetMacrocycleEndDateTextView"
+        style="@style/BottomSheetTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="@id/bottomSheetMacrocycleEndDateButton"
+        app:layout_constraintEnd_toStartOf="@id/bottomSheetMacrocycleEndDateButton"
+        app:layout_constraintStart_toEndOf="@+id/bottomSheetMacrocycleEndTextView"
+        app:layout_constraintTop_toTopOf="@id/bottomSheetMacrocycleEndDateButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bottomSheetMacrocycleEndDateButton"
+        style="@style/PickButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Pick"
+        app:layout_constraintBottom_toTopOf="@id/bottomSheetMacrocycleSaveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetMacrocycleStartDateButton" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bottomSheetMacrocycleSaveButton"
         style="@style/MaterialButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomSheetMacrocycleNameEditText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

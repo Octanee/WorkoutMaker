@@ -59,7 +59,7 @@ object DrawableHelper {
     fun getDrawableForMuscle(muscle: Muscle, context: Context): Drawable? {
         return ResourcesCompat.getDrawable(
             context.resources,
-            context.resources.getIdentifier(muscle.drawable, "drawable", context.packageName),
+            context.resources.getIdentifier(muscle.muscleDrawable, "drawable", context.packageName),
             null
         )
     }
@@ -90,9 +90,9 @@ object DrawableHelper {
             }
             val drawable = ResourcesCompat.getDrawable(context.resources, it, null)
 
-            if (drawable != null) {
-                DrawableCompat.setTint(drawable, context.resources.getColor(color, null))
-                layers.add(drawable)
+            drawable?.let { draw ->
+                DrawableCompat.setTint(draw, context.resources.getColor(color, null))
+                layers.add(draw)
             }
         }
 
@@ -100,6 +100,6 @@ object DrawableHelper {
     }
 
     private fun getRandomColor(): Int {
-        return colors.random()!!
+        return colors.random()
     }
 }

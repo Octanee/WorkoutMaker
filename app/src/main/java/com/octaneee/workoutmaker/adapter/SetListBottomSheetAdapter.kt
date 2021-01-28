@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.octaneee.workoutmaker.R
-import com.octaneee.workoutmaker.model.entity.Set
+import com.octaneee.workoutmaker.model.entity.Series
 import com.octaneee.workoutmaker.util.ItemListener
 import com.octaneee.workoutmaker.util.ItemTouchHelperAdapter
 import kotlinx.android.synthetic.main.item_create_set.view.*
@@ -15,7 +15,7 @@ class SetListBottomSheetAdapter(
     private val itemListener: SetListItemListener,
 ) : RecyclerView.Adapter<SetListBottomSheetAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
-    private var dataSet: List<Set> = listOf()
+    private var dataSet: List<Series> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -42,7 +42,7 @@ class SetListBottomSheetAdapter(
             }
         }
 
-        fun bind(item: Set) {
+        fun bind(item: Series) {
             number.text = (adapterPosition + 1).toString()
             minimum.setText(item.minimum?.toString() ?: "")
             maximum.setText(item.maximum?.toString() ?: "")
@@ -78,7 +78,7 @@ class SetListBottomSheetAdapter(
         }
     }
 
-    fun updateDataSet(newDataSet: List<Set>) {
+    fun updateDataSet(newDataSet: List<Series>) {
         dataSet = newDataSet
         notifyDataSetChanged()
     }

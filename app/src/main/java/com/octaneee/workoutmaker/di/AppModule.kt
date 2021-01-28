@@ -1,6 +1,7 @@
 package com.octaneee.workoutmaker.di
 
 import com.octaneee.workoutmaker.other.ApplicationScope
+import com.octaneee.workoutmaker.util.WorkoutManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +19,9 @@ object AppModule {
     @ApplicationScope
     fun provideApplicationScope() = CoroutineScope(SupervisorJob())
 
+    @Singleton
+    @Provides
+    fun provideWorkoutManager() = WorkoutManager()
 
 }
 

@@ -14,6 +14,11 @@ fun <T> MutableLiveData<MutableList<T>>.addItemAt(index: Int, item: T) {
     this.value = oldValue
 }
 
+fun <T> MutableLiveData<MutableList<T>>.addAll(list: MutableList<T>) {
+    this.value = list
+    this.notifyDataSetChanged()
+}
+
 fun <T> MutableLiveData<MutableList<T>>.removeItemAt(index: Int) {
     if (!this.value.isNullOrEmpty()) {
         val oldValue = this.value

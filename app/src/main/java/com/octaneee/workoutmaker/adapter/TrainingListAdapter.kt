@@ -52,15 +52,13 @@ class TrainingListAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+    override fun onItemMove(fromPosition: Int, toPosition: Int) =
         itemListener.onItemMove(fromPosition, toPosition)
-    }
 
-    override fun onItemSwipedLeft(position: Int) {
-        itemListener.onItemSwipedLeft(position)
-    }
 
-    override fun onItemSwipeRight(position: Int) {
-        itemListener.onItemSwipeRight(position)
-    }
+    override fun onItemSwipedLeft(position: Int) = itemListener.onItemSwipedLeft(position)
+
+
+    override fun onItemSwipeRight(position: Int) = itemListener.onItemSwipeRight(position)
+
 }

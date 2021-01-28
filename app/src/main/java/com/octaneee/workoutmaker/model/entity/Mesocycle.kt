@@ -1,11 +1,9 @@
 package com.octaneee.workoutmaker.model.entity
 
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.octaneee.workoutmaker.model.entity.base.BaseEntity
-import kotlinx.android.parcel.Parcelize
 
 @Entity(
     tableName = "mesocycle_table",
@@ -23,12 +21,11 @@ import kotlinx.android.parcel.Parcelize
             onDelete = ForeignKey.SET_NULL
         )]
 )
-@Parcelize
 data class Mesocycle(
     var mesocycleName: String,
     var mesocycleTypeIdFk: Long,
     var macrocycleIdFk: Long
-) : BaseEntity, Parcelable {
+) : BaseEntity {
 
     @PrimaryKey(autoGenerate = true)
     var mesocycleId: Long = 0

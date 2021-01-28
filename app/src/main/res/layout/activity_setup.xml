@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.setup.SetupActivity">
+    tools:context=".ui.setup.activity.SetupActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/setupNavHostFragment"
@@ -17,6 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/setup_nav" />
+        app:navGraph="@navigation/setup_activity_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

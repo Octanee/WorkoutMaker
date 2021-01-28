@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.plan.mesocycle_list.MesocycleListFragment">
+    tools:context=".ui.main.fragment.plan.mesocycle_list.MesocycleListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mesocycleListFragmentRecyclerView"

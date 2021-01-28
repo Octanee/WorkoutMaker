@@ -22,6 +22,7 @@ class WorkoutDatabaseCallback @Inject constructor(
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
 
+        Timber.d("Callback onCreate")
         val equipmentRepository = database.get().getEquipmentDao()
         val exerciseRepository = database.get().getExerciseDao()
         val exerciseTypeRepository = database.get().getExerciseTypeDao()
@@ -30,13 +31,13 @@ class WorkoutDatabaseCallback @Inject constructor(
         val setTypeRepository = database.get().getSetTypeDao()
 
         applicationScope.launch {
-
+            Timber.d("Callback launch")
             val equipments = mutableListOf<Equipment>()
             val exercises = mutableListOf<Exercise>()
             val exerciseTypes = mutableListOf<ExerciseType>()
             val mesocycleTypes = mutableListOf<MesocycleType>()
             val muscles = mutableListOf<Muscle>()
-            val setTypes = mutableListOf<SetType>()
+            val setTypes = mutableListOf<SeriesType>()
 
             for (i in 1..10) {
                 equipments.add(
@@ -78,10 +79,10 @@ class WorkoutDatabaseCallback @Inject constructor(
             Timber.i("Added Muscle")
 
             for (i in 1..5) {
-                setTypes.add(SetType("SetType $i"))
+                setTypes.add(SeriesType("SeriesType $i"))
             }
             setTypeRepository.insert(setTypes)
-            Timber.i("Added SetType")
+            Timber.i("Added SeriesType")
 
             for (i in 1..30) {
                 exercises.add(
@@ -100,4 +101,11 @@ class WorkoutDatabaseCallback @Inject constructor(
         }
     }
 
+    private suspend fun insertEquipment() {
+        //val equipmentRepository = database.get().getEquipmentDao()
+        //val list = [Equipment("")]
+//        list.forEach {
+//            equipmentRepository.insert(it)
+//        }
+    }
 }

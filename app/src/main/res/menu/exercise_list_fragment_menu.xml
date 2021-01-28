@@ -7,11 +7,18 @@
         android:icon="@drawable/ic_search"
         android:title="Search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/exerciseListFragmentMenuFilter"
         android:icon="@drawable/ic_filter_list"
         android:title="Sort and filter"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/exerciseListFragmentMenuAdd"
+        android:icon="@drawable/ic_add"
+        android:title="Add"
+        app:showAsAction="always" />
+
 </menu>

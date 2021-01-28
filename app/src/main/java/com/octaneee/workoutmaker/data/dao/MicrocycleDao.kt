@@ -15,5 +15,6 @@ interface MicrocycleDao : BaseDao<Microcycle> {
     @Query("SELECT * FROM microcycle_table WHERE microcycleId = :microcycleId")
     fun getMicrocycle(microcycleId: Long): LiveData<Microcycle>
 
-
+    @Query("SELECT numberOfDays FROM microcycle_table WHERE microcycleId = :microcycleId")
+    fun getNumberOfDaysByMicrocycleId(microcycleId: Long): LiveData<Int>
 }

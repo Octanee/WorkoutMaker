@@ -50,6 +50,7 @@ class ExerciseListAdapter(
 
     fun updateDataSet(newDataSet: List<Exercise>) {
         dataSet = newDataSet as MutableList<Exercise>
+        fullDataSet.clear()
         fullDataSet.addAll(dataSet)
         notifyDataSetChanged()
     }
@@ -91,7 +92,8 @@ class ExerciseListAdapter(
 
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
             dataSet.clear()
-            dataSet.addAll(results.values as Collection<Exercise>)
+            val list = results.values as Collection<Exercise>
+            dataSet.addAll(list)
             notifyDataSetChanged()
         }
     }

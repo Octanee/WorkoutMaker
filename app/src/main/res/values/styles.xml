@@ -21,6 +21,15 @@
         <item name="itemTextColor">@color/main_nav_color</item>
     </style>
 
+    <style name="PrimaryTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AdditionalTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="ItemCardView" parent="Widget.MaterialComponents.CardView">
         <item name="strokeColor">?colorPrimary</item>
         <item name="strokeWidth">2dp</item>
@@ -28,27 +37,17 @@
         <item name="cardBackgroundColor">@color/background</item>
     </style>
 
-    <style name="ItemPrimaryTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">24sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+    <style name="ItemPrimaryTextView" parent="PrimaryTextView"></style>
 
-    <style name="ItemNumberTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">24sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+    <style name="ItemNumberTextView" parent="PrimaryTextView"></style>
 
-    <style name="ItemSecondTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">16sp</item>
-    </style>
+    <style name="ItemAdditionalTextView" parent="AdditionalTextView"></style>
 
-    <style name="ItemSpinner" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">16sp</item>
+    <style name="ItemSpinner" parent="AdditionalTextView">
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="ItemSpinnerDropDown" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">16sp</item>
+    <style name="ItemSpinnerDropDown" parent="AdditionalTextView">
         <item name="android:background">@color/background</item>
         <item name="android:gravity">center</item>
     </style>
@@ -71,8 +70,25 @@
         <item name="iconTint">@color/cultured</item>
     </style>
 
+    <style name="PickButton" parent="MaterialButton">
+
+    </style>
+
     <style name="Divider">
         <item name="android:background">?colorAccent</item>
+    </style>
+
+    <style name="RestTimeIcon">
+        <item name="tint">?colorAccent</item>
+        <item name="srcCompat">@drawable/ic_timer</item>
+    </style>
+
+    <style name="RestTimeTextView" parent="PrimaryTextView">
+        <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="BottomSheetRestTimeTextView" parent="RestTimeTextView">
+        <item name="android:textSize">48sp</item>
     </style>
 
     <style name="ItemDragIcon">
@@ -111,4 +127,13 @@
         <item name="tint">?colorAccent</item>
     </style>
 
+    <style name="Chronometer">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/cultured</item>
+    </style>
+
+    <style name="TimeIcon">
+        <item name="tint">?colorAccent</item>
+        <item name="srcCompat">@drawable/ic_time</item>
+    </style>
 </resources>

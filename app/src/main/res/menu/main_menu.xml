@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@id/plan_fragment_nav"
+        android:id="@id/plan_nav"
         android:icon="@drawable/ic_block"
         android:title="Plan"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@id/bodyFragment"
+        android:id="@id/body_nav"
         android:icon="@drawable/ic_body"
         android:title="Body"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@id/workoutFragment"
+        android:id="@id/workout_nav"
         android:icon="@drawable/ic_gym"
         android:title="Workout"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@id/statsFragment"
+        android:id="@id/stats_nav"
         android:icon="@drawable/ic_chart"
         android:title="Stats"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@id/settingsFragment"
+        android:id="@id/settings_nav"
         android:icon="@drawable/ic_settings"
         android:title="Settings"
         app:showAsAction="ifRoom" />

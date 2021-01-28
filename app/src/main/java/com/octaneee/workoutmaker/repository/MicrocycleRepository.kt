@@ -13,4 +13,6 @@ class MicrocycleRepository @Inject constructor(private val dao: MicrocycleDao) :
         dao.getMicrocycleListByMesocycleId(mesocycleId)
 
     fun getMicrocycle(microcycleId: Long): LiveData<Microcycle> = dao.getMicrocycle(microcycleId)
+    fun getNumberOfDaysByMicrocycleId(microcycleId: Long): LiveData<Int> =
+        dao.getNumberOfDaysByMicrocycleId(microcycleId)
 }

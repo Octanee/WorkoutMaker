@@ -1,11 +1,9 @@
 package com.octaneee.workoutmaker.model.entity
 
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.octaneee.workoutmaker.model.entity.base.BaseEntity
-import kotlinx.android.parcel.Parcelize
 
 @Entity(
     tableName = "exercise_table",
@@ -30,16 +28,17 @@ import kotlinx.android.parcel.Parcelize
         )
     ]
 )
-@Parcelize
 data class Exercise(
     val exerciseName: String,
-    val exerciseTypeIdFk: Long,
-    val equipmentIdFk: Long,
-    val muscleIdFk: Long
-) : BaseEntity, Parcelable {
+    var exerciseTypeIdFk: Long? = null,
+    var equipmentIdFk: Long? = null,
+    var muscleIdFk: Long? = null,
+    var isFavorite: Boolean = false
+) : BaseEntity {
 
     @PrimaryKey(autoGenerate = true)
     var exerciseId: Long = 0
+
 
     override fun toString(): String = exerciseName
 }

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemWorkoutSeries"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/itemWorkoutSeriesCardView"
+        style="@style/ItemCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesNumberTextView"
+                style="@style/ItemNumberTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/itemWorkoutSeriesDivider"
+                style="@style/Divider"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesNumberTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesRepsTextView"
+                style="@style/ItemPrimaryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Reps:"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesDivider"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesMinRepsTextView"
+                style="@style/ItemAdditionalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="2dp"
+                android:text="5"
+                app:layout_constraintBottom_toBottomOf="@id/itemWorkoutSeriesRepsTextView"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesRepsTextView" />
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesMinusRepsTextView"
+                style="@style/ItemAdditionalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="-"
+                app:layout_constraintBottom_toBottomOf="@id/itemWorkoutSeriesMinRepsTextView"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesMinRepsTextView"
+                app:layout_constraintTop_toTopOf="@id/itemWorkoutSeriesMinRepsTextView" />
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesMaxRepsTextView"
+                style="@style/ItemAdditionalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="8"
+                app:layout_constraintBottom_toBottomOf="@id/itemWorkoutSeriesMinRepsTextView"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesMinusRepsTextView"
+                app:layout_constraintTop_toTopOf="@id/itemWorkoutSeriesMinRepsTextView" />
+
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesWeightTextView"
+                style="@style/ItemPrimaryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Weight:"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesDivider"
+                app:layout_constraintTop_toBottomOf="@id/itemWorkoutSeriesMaxRepsTextView" />
+
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesWeightNumberTextView"
+                style="@style/ItemAdditionalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="2dp"
+                android:text="10"
+                app:layout_constraintBottom_toBottomOf="@id/itemWorkoutSeriesWeightTextView"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesWeightTextView" />
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesWeightUnitTextView"
+                style="@style/ItemAdditionalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="kg"
+                app:layout_constraintBottom_toBottomOf="@id/itemWorkoutSeriesWeightNumberTextView"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesWeightNumberTextView"
+                app:layout_constraintTop_toTopOf="@id/itemWorkoutSeriesWeightNumberTextView" />
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesRepsInReserveTextView"
+                style="@style/ItemPrimaryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Reps in reserve:"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesDivider"
+                app:layout_constraintTop_toBottomOf="@id/itemWorkoutSeriesWeightTextView" />
+
+            <TextView
+                android:id="@+id/itemWorkoutSeriesRepsInReserveNumberTextView"
+                style="@style/ItemAdditionalTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="2dp"
+                android:text="2"
+                app:layout_constraintBottom_toBottomOf="@id/itemWorkoutSeriesRepsInReserveTextView"
+                app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesRepsInReserveTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemWorkoutSeriesCardView">
+
+        <ImageView
+            android:id="@+id/itemWorkoutSeriesRestImageView"
+            style="@style/RestTimeIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemWorkoutSeriesRestTimeTextView"
+            style="@style/RestTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:text="120"
+            app:layout_constraintBottom_toBottomOf="@id/itemWorkoutSeriesRestImageView"
+            app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesRestImageView"
+            app:layout_constraintTop_toTopOf="@id/itemWorkoutSeriesRestImageView" />
+
+        <TextView
+            android:id="@+id/itemWorkoutSeriesRestUnitTextView"
+            style="@style/RestTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="s"
+            app:layout_constraintBottom_toBottomOf="@id/itemWorkoutSeriesRestTimeTextView"
+            app:layout_constraintStart_toEndOf="@id/itemWorkoutSeriesRestTimeTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

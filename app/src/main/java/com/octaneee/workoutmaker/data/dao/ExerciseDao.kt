@@ -3,8 +3,10 @@ package com.octaneee.workoutmaker.data.dao
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Transaction
 import com.octaneee.workoutmaker.data.dao.base.BaseDao
 import com.octaneee.workoutmaker.model.entity.Exercise
+import com.octaneee.workoutmaker.model.relations.FullExercise
 import com.octaneee.workoutmaker.other.ExerciseOrderType
 
 @Dao
@@ -55,4 +57,8 @@ interface ExerciseDao : BaseDao<Exercise> {
         exerciseTypeId: Long?,
         equipmentId: Long?,
     ): LiveData<List<Exercise>>
+
+    @Transaction
+    @Query("SELECT * FROM exercise_table WHERE exerciseId = :exerciseId")
+    fun getFullExerciseByExerciseId(exerciseId: Long): LiveData<FullExercise>
 }

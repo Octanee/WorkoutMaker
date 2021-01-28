@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/workout_nav"
+    app:startDestination="@id/workoutFragment">
+    <fragment
+        android:id="@+id/workoutFragment"
+        android:name="com.octaneee.workoutmaker.ui.main.fragment.workout.WorkoutFragment"
+        android:label="Workout"
+        tools:layout="@layout/fragment_workout" />
+    <activity
+        android:id="@+id/currentWorkoutActivity"
+        android:name="com.octaneee.workoutmaker.ui.current_workout.activity.CurrentWorkoutActivity"
+        android:label="activity_workout"
+        tools:layout="@layout/activity_workout" />
+</navigation>

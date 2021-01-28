@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/plan_nav"
+    app:startDestination="@id/planFragment">
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.octaneee.workoutmaker.ui.main.fragment.plan.plan.PlanFragment"
+        android:label="Plan"
+        tools:layout="@layout/fragment_plan">
+        <action
+            android:id="@+id/action_planFragment_to_macrocycleListFragment"
+            app:destination="@id/macrocycleListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_planFragment_to_mesocycleListFragment"
+            app:destination="@id/mesocycleListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/macrocycleListFragment"
+        android:name="com.octaneee.workoutmaker.ui.main.fragment.plan.macrocycle_list.MacrocycleListFragment"
+        android:label="Macrocycle list"
+        tools:layout="@layout/fragment_macrocycle_list">
+        <action
+            android:id="@+id/action_macrocycleListFragment_to_planFragment"
+            app:destination="@id/planFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_macrocycleListFragment_to_mesocycleListFragment"
+            app:destination="@id/mesocycleListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/mesocycleListFragment"
+        android:name="com.octaneee.workoutmaker.ui.main.fragment.plan.mesocycle_list.MesocycleListFragment"
+        tools:layout="@layout/fragment_mesocycle_list">
+        <argument
+            android:name="macrocycleId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_mesocycleListFragment_to_microcycleListFragment"
+            app:destination="@id/microcycleListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/microcycleListFragment"
+        android:name="com.octaneee.workoutmaker.ui.main.fragment.plan.microcycle_list.MicrocycleListFragment"
+        tools:layout="@layout/fragment_microcycle_list">
+        <argument
+            android:name="mesocycleId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_microcycleListFragment_to_trainingListFragment"
+            app:destination="@id/trainingListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainingListFragment"
+        android:name="com.octaneee.workoutmaker.ui.main.fragment.plan.training_list.TrainingListFragment"
+        tools:layout="@layout/fragment_training_list">
+        <argument
+            android:name="microcycleId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_setListFragment"
+            app:destination="@id/setListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/setListFragment"
+        android:name="com.octaneee.workoutmaker.ui.main.fragment.plan.set_list.SetListFragment"
+        tools:layout="@layout/fragment_set_list">
+        <argument
+            android:name="trainingId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_setListFragment_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment" />
+        <action
+            android:id="@+id/action_setListFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseListFragment"
+        android:name="com.octaneee.workoutmaker.ui.main.fragment.plan.exercise_list.ExerciseListFragment"
+        android:label="Exercise List"
+        tools:layout="@layout/fragment_exercise_list">
+        <argument
+            android:name="trainingId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_exerciseListFragment_to_setListFragment"
+            app:destination="@id/setListFragment"
+            app:popUpTo="@id/trainingListFragment" />
+        <action
+            android:id="@+id/action_exerciseListFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="com.octaneee.workoutmaker.ui.exercise.ExerciseFragment"
+        android:label="fragment_exercise"
+        tools:layout="@layout/fragment_exercise">
+        <argument
+            android:name="exerciseId"
+            app:argType="long" />
+    </fragment>
+</navigation>

@@ -48,6 +48,10 @@ object DataModule {
 
     @Singleton
     @Provides
+    fun provideBodyMeasurementDao(database: WorkoutMakerDatabase) = database.getBodyMeasurementDao()
+
+    @Singleton
+    @Provides
     fun provideEquipmentDao(database: WorkoutMakerDatabase) = database.getEquipmentDao()
 
     @Singleton
@@ -61,10 +65,6 @@ object DataModule {
     @Singleton
     @Provides
     fun provideMacrocycleDao(database: WorkoutMakerDatabase) = database.getMacrocycleDao()
-
-    @Singleton
-    @Provides
-    fun provideMeasurementDao(database: WorkoutMakerDatabase) = database.getMeasurementDao()
 
     @Singleton
     @Provides
@@ -105,4 +105,9 @@ object DataModule {
     @Provides
     fun provideTrainingDao(database: WorkoutMakerDatabase) =
         database.getTrainingDao()
+
+    @Singleton
+    @Provides
+    fun provideWeightMeasurementDao(database: WorkoutMakerDatabase) =
+        database.getWeightMeasurementDao()
 }
