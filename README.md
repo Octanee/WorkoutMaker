@@ -1,2 +1,4 @@
-# v1
+# Workout Maker
+
+Aplikacja stworzona na potrzeby pracy inżynierskiej.
  
